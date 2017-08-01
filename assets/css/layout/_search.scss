@@ -1,0 +1,21 @@
+.search-results {
+
+    .result-item {
+        margin-bottom: 20px;
+
+        ul.result-info {
+            @extend .pull-left;
+            font-size: 0.9em;
+            margin: 0 0 15px;
+            padding: 0;
+            color: #777;
+
+            li { 
+                display:inline; 
+                margin:0 15px 0 0;
+            }
+        }
+    }
+
+
+}

@@ -1,0 +1,161 @@
+$body-background: #f6f6f6;
+
+// Grid
+// $grid-responsive: true;
+// $grid-num-cols: 12;
+// $grid-gutters: .25;
+// $grid-content-width: 1000px;
+
+// Type
+$font-url: null;
+$font-family-body: "Microsoft YaHei","PingFang","Helvetica Neue","微軟正黑體", "Helvetica Neue","Arial", "sans-serif";
+$font-family-heading: $font-family-body;
+$font-size-body: 100%;
+$font-size-small: $font-size-body*0.8;
+$font-size-large: $font-size-body*1.2;
+$font-size-13: 0.8125em;
+$font-size-14: 0.875em;
+$font-size-15: 0.9375em;
+$font-size-16: 16px;
+$font-size-17: 1.0625em;
+$font-size-18: 1.125em;
+$line-height: 1.8;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-light: 300;
+// Colors
+$font-color: #222;
+$pri-color: #482929; //brown
+$sec-color: #ffd733; //yellow
+$bg-color: #F6EBD6; //Bread
+$box-shadow-color: #B0B0B0;
+$border-color: #E5E5E5;
+$coffee-color:#B89D86;
+$link-color: #482929; //brown
+$text-color: #482929; //brown
+$green-color:#82b547; //green
+$purple-color: #9893C2; //purple
+$whitegreen-color:#cadfb1; //white green
+$taro-color: #6769C9 ;
+$pink-color: #F4475C;
+$whitepink-color:#ff7171;
+$skyblue-color:#5b93e7;
+$darkblue-color:#4c6ba9;
+$grass-color:#5e8333;
+$orange-color: #F5A623;
+$brown-color:#482929; //brown
+//height
+$height-minuend-alltab: calc(100vh - 138px); //topNav secNav bottomNav 
+$height-minuend-twotab: calc(100vh - 94px);  //topNav bottomNav 
+$height-minuend-toptab: calc(100vh - 44px); //topNav 
+
+$height-minuend-alltab-webkit: -webkit-calc(100vh - 138px); //topNav secNav bottomNav 
+$height-minuend-twotab-webkit: -webkit-calc(100vh - 94px);  //topNav bottomNav 
+$height-minuend-toptab-webkit: -webkit-calc(100vh - 44px); //topNav 
+
+$text-grey-color :#9B9B9B; //grey
+$text-green-color :#6769C9; //green
+$text-dark-color :#4a4a4a; //grey
+$text-primary-color: #428bca;  //dark blue
+$text-secondary-color: #42c9c4; //green blue
+$text-success-color: #56cc3a; //green
+$text-emphasis-color: #f84e4a; //red
+$text-warning-color: #fbb040; //orange
+$text-error-color: #C60000;
+$text-white-color: #fff;
+
+$btn-whiteyellow-color:#fceb9e; //white yellow
+$btn-green-color:#82b547;
+$btn-blue-color: #4a90e2;
+$btn-purple-color: #6769C9;
+
+// Components - Buttons
+$btn-radius: 2px;
+$btn-circle-radius: 20px;
+$btn-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.125) inset;
+$btn-default-padding: 6px 12px;
+$btn-circle-padding: 5px 20px;
+$btn-circle-padding-sm: 3px 20px;
+$btn-default-font-size: 14px;
+$btn-sm-padding: 3px 10px;
+$btn-sm-font-size: 12px;
+$btn-lg-padding: 10px 20px;
+$btn-lg-font-size: 16px;
+$btn-default-color: #333;
+$btn-default-border: 1px solid #dedede;
+$btn-default-background: #fff;
+$btn-pri-color: $text-color;
+$btn-pri-background: $pri-color;
+$btn-pri-border: 1px solid darken($btn-pri-background, 5%);
+$btn-sec-color: $text-color;
+$btn-sec-background: $sec-color;
+$btn-sec-border: 1px solid darken($btn-sec-background, 5%);
+$btn-disabled-color: #fff;
+$btn-disabled-background: #ccc;
+$btn-disabled-border: 1px solid darken($btn-disabled-background, 5%);
+
+// Components - Form
+$form-input-radius: 4px;
+$form-input-padding: 6px 12px;
+$form-input-padding-lg: 10px 16px;
+$form-input-padding-sm: 4px 8px;
+$form-input-border: 1px solid #cbcbcb;
+$form-input-background: #fff;
+$form-input-color: #777;
+$form-input-group-height: 35px;
+$form-input-group-height-lg: 55px;
+$form-input-group-height-sm: 25px;
+
+// Components - Table
+$tb-cell-padding: 8px;
+$tb-border-color: #cbcbcb;
+$tb-background: #fff;
+$tb-striped-background: #f2f2f2;
+$tb-hover-background: #f5f5f5;
+
+// Components - Paginations
+$pag-counter-font-size: 11px;
+$pag-page-radius: 4px;
+$pag-page-font-size: 12px;
+$pag-page-border: 1px solid #ddd;
+$pag-page-padding: 4px 12px;
+$pag-page-color: $link-color;
+$pag-page-background: #fff;
+$pag-page-active-background: $pri-color;
+$pag-page-active-color: #fff;
+$pag-page-active-border-color:$pri-color;
+$pag-page-disabled-color: #999;
+$pag-page-disabled-background: #f5f5f5;
+$pag-page-disabled-border-color:#ccc;
+
+// Components - Alert
+$alert-radius: 4px;
+$alert-font-size: 1.0em;
+$alert-padding: 10px 30px 10px 10px;
+$alert-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+$alert-info-color: #3a87ad;
+$alert-info-background: #d9edf7;
+$alert-info-border: 1px solid #bce8f1;
+$alert-success-color: #468847;
+$alert-success-background: #dff0d8;
+$alert-success-border: 1px solid #d6e9c6;
+$alert-error-color: #b94a48;
+$alert-error-background: #f2dede;
+$alert-error-border: #eed3d7;
+$alert-warning-color: #c09853;
+$alert-warning-background: #fcf8e3;
+$alert-warning-border: #fbeed5;
+
+// Components - Tooltips
+$tooltips-background: #000;
+$tooltips-color: #fff;
+$tooltips-font-size: 11px;
+
+// Animations - array of animation set to be import, enter 'all' for importing all animations
+$import-animations: ('fade','bounceInDown','fadeInDown','bounceOutUp','fadeOutUp','slide','rotate' );
+
+
+// Site - Custom
+$header-default-height: 110px;
+$header-compact-height: 60px;

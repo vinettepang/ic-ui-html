@@ -1,0 +1,48 @@
+.label-solid{
+	padding: 4px 15px;
+  	border-radius: 4px;
+  	&.label-whiteyellow{
+	color: $pri-color;
+	background: $btn-whiteyellow-color;
+	}
+	&.label-whitegreen{
+		color: $pri-color;
+		background: $whitegreen-color;
+	}
+	&.border-rclr{
+		border-top-right-radius:0;
+		border-bottom-right-radius:0;
+	}
+}
+.label-border{
+	font-size: 14px;
+	padding: 3px 12px ;
+  	border-radius: 4px;
+  	background: none !important;
+  	&.label-brown{
+  		margin:0;
+  		padding: 3px 12px ;
+  		color: $brown-color;
+		border:1px solid $brown-color;
+	}
+	&.label-taro{
+		color: $taro-color;
+		border:1px solid $taro-color;
+	}
+}
+.ic-icon-middle{position: relative; vertical-align: middle;    margin-left: 6px;}
+.ic-icon-inline{position: absolute; top: 4px; right: -22px;}
+.ic-icon-badge-green {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: url("/Public/Home/images/assets/badge-green@2x.png") left top no-repeat transparent;
+	background-size: 16px 16px;
+}
+.ic-icon-badge-orange {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: url("/Public/Home/images/assets/badge-orange@2x.png") left top no-repeat transparent;
+	background-size: 16px 16px;
+}

@@ -1,0 +1,198 @@
+//common 
+//color
+ul,ol{
+  list-style: none;
+}
+.clearfloat{zoom:1} 
+.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0} 
+.relative{
+  position: relative;
+}
+.block{    display: block;}
+.absolutemiddle{
+  position: absolute;transform: translate(-50%, -50%);left: 50%;top: 50%;
+}
+.ftnormal{font-weight: normal !important;}
+.ftbold{font-weight: bold !important;}
+.ft14{font-size: 1.4rem !important; }
+.ft18{font-size: 1.8rem !important; }
+.ft20{font-size: 2.0rem !important; }
+
+.center{text-align: center;}
+.text-right{text-align: right;}
+.text-left{text-align: left;}
+
+.bg-green{background-color: $green-color !important;}
+.bg-purple{background-color: $purple-color !important;}
+.bg-brown{background: $pri-color;}
+.bg-taro{background: $taro-color;}
+.bg-orange{background: $orange-color;}
+.bg-white{background: #fff;}
+
+
+.text-sec{color: $sec-color !important;}
+.text-white{color: #fff !important;}
+.text-pink{color: $pink-color !important;}
+.text-taro{color: $taro-color !important;}
+.text-grey{color: $text-grey-color !important;}
+.text-whitepink{color: $whitepink-color;}
+
+.pdtop12{padding-top: 12px !important; }
+.pd30{padding: 30px !important; }
+.pdlt30{padding-left: 30px !important; }
+.pdrt50{padding-right: 50px !important; }
+.mgtop12{margin-top: 12px !important; }
+.mgrt24{margin-right:24px !important;}
+.mgbt10{margin-bottom: 10px !important; }
+.mgbt15{margin-bottom: 15px !important; }
+.mgclr{margin: 0 !important;}
+
+.emptydata-list{
+  padding: 130px 0;
+  text-align: center;
+  font-size: $font-size-14;
+  img{max-width: 140px;
+  }
+}
+//header bar
+.header-bar{
+  // height: 70px;
+  // line-height: 70px;
+  color: $pri-color;
+ // &.bg-purple {
+    height: 44px;
+    line-height: 44px;
+    ul{
+      height: 44px;
+      margin: 0;
+      // width: 750px;
+      // float: right;
+      li{
+        display: inline;
+        width: 100px;
+        padding: 7px 17px;
+        margin-right: 20px;
+        border-right:none;
+        //@include transition(all,.5s,fade);
+        &.current,&:hover{
+          border-bottom: 3px solid #fff;
+        }
+        a{
+          color: #fff;
+          font-size:16px;
+
+        }
+      }
+    }
+ // }
+  &.affix{
+    position: fixed;
+    width: 100%;
+    top:0;
+    z-index: 100;
+  }
+
+  .header-bar-section{
+    position: relative;
+  }
+
+  // ul {
+  //   margin: 0;
+  //   height: 70px;
+  //   li{
+  //     display: inline;
+      
+  //     padding: 0 30px;
+  //     border-right: 2px solid $pri-color;
+
+  //     &:last-child{
+  //       border-right:none;
+  //     }
+
+  //     a{
+  //       font-size: 24px;
+  //       @include transition(all,1s,ease-in-out);
+  //       &.current,&:hover{
+  //         color: #fff;
+  //       }
+  //     }
+  //   }
+  // }
+  .triangle-up{
+    position: absolute;
+    width: 0;
+    bottom: 0;
+    left: 70px;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #fff;
+  }
+}
+
+.hover-content,.hover-content-inline,.hover-content-table{
+  display: none;
+}
+
+/* pop up tip */
+.save_ok{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -73px 0 0 -73px;
+    width: 147px;
+    height: 147px;
+    border-radius: 80px;
+    background-color: #ffd733;
+    .save_ok_icon{
+        position: absolute;
+        top: 35px;
+        left: 50px;
+        display: block;
+        width: 47px;
+        height: 47px;
+        background: url(../../../static/client.jobsminer.cc/godimage/ot/success-tick.png) no-repeat center;
+    }
+    .save_ok_content{
+        position: absolute;
+        top: 95px;
+        left: 43px;
+    } 
+}
+
+.tab-content{
+  &>.tab-pane{
+      display:none
+  }
+  &>.active{
+      display:block
+  }
+ }
+.fade{
+    opacity:0;-webkit-transition:opacity .15s linear;
+    -o-transition:opacity .15s linear;
+    transition:opacity .15s linear;
+    &.in{
+    opacity:1
+  }
+}
+ ul.nav-switchtab{
+    padding: 0;
+    margin: 0;
+    li{
+        height: 44px;
+        line-height: 44px;
+        text-align: center;
+        @include transition(all,.5s,ease-in-out);
+        &.active,&:hover{
+            background-color: #FFD733;
+        }
+        a{
+            display: block;
+            i{
+                padding-right: 13px;
+            }
+        }
+    }
+}

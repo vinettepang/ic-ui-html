@@ -1,0 +1,196 @@
+body{
+        background-color: #ffffff;
+    }
+    .dn{
+        display: none;
+    }
+    input:-webkit-autofill{  
+        -webkit-box-shadow: 0 0 0px 1000px white inset;
+        border-bottom: 1px solid #E5E5E5!important;
+    }
+    .ic-login-form {
+        padding: 20px 0 40px 0;
+    }
+    .ic-login-form.mui-input-group:after{
+        height: 0;
+    }
+    .ic-login-form.mui-input-group:before {
+        height: 0;
+    }
+    .ic-btn{
+        font-size: 1.8rem;
+        height: 50px;
+        padding: 0;
+    }
+    .ic-btn-primary{
+
+        color: #482929;
+        border: 1px solid #FFD733;
+        background-color: #FFD733;
+    }
+    .mui-content .mui-input-group .mui-input-row{
+        height:auto !important;
+        position: relative;
+        overflow: inherit;
+    }
+    .mui-content .mui-input-group .mui-input-row:after{
+        height:0;
+    }
+    .ic-logo{
+        text-align: center;
+        padding: 47px 0 20px 0;
+    }
+    .ic-slider-login.mui-slider .mui-segmented-control .mui-control-item{
+        line-height: 60px;
+    }
+    form.ic-login-form .mui-input-row input[type=text], form.ic-login-form .mui-input-row input[type=password] {
+        border-bottom: 1px solid #E5E5E5;
+    }
+    form.ic-login-form .mui-input-row.false input[type=text], form.ic-login-form .mui-input-row.false input[type=password] {
+        border-bottom: 1px solid #C60000;
+    }
+    form.ic-login-form .mui-input-row.right input[type=text], form.ic-login-form .mui-input-row.right input[type=password] {
+        border-bottom: 1px solid #FFD733;
+    }
+    form.ic-login-form .mui-icon.mui-icon-eye{
+        top: 15px;
+        right: 12px;
+    }
+    form.ic-login-form .mui-icon.mui-icon-eye.mui-active{
+        color: #FFD733;
+    }
+    span.false{
+        padding: 8px 0 12px 20px;
+        font-size: 14px;
+        display: block;
+        color: #C60000;
+    }
+
+    .right span.false{
+        display: none !important;
+    }
+    .cb-error.false{
+        display: none;
+    }
+    .verifyimg{
+        width: 100px !important;
+        height: 33px;
+        position: absolute;
+        top:9px;
+        right: 10px;
+
+    }
+    .verifyimg-tip{
+        position: absolute;
+        top: -50px;
+        right: 0;
+        z-index: 5;
+        width: 130px;
+        text-align: center;
+        line-height: 45px;
+        height: 45px;
+        color: #fff;
+        font-size: 14px;
+        opacity: 0.9;
+        background-color: #6f3400;
+        border-radius: 2px;
+    }
+    .verifyimg-tip .tip-triangle {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid #6f3400;
+        bottom: -8px;
+        left: 50%;
+        margin-left: -4px;
+    }
+    a.sendverify{
+        position: absolute;
+        top:13px;
+        right: 10px;
+    }
+    .icon-tips{
+        position: absolute;
+        top: 15px;
+        right: 20px;
+    }
+    .ic-login-container .mui-button-row {
+        padding-top: 0;
+    }
+    .ic-login-container .mui-button-row .mui-btn-block{
+        margin-bottom: 14px;
+    }
+    .icon-tips i {
+        display: none;
+        width: 18px;
+        height: 18px;
+        overflow: hidden;
+        font-size: 1.8rem;
+    }
+    .false .icon-tips i.ui-1_simple-remove {
+        display: block;
+        color: #C60000;
+    }
+    .right .icon-tips i.ui-1_check {
+        display: block;
+        color: #FFD733;
+    }
+    .verifyimgtip {
+        display: none;
+        position: absolute;
+        top: -60px;
+        right: 0;
+        z-index: 999;
+        width: 130px;
+        text-align: center;
+        line-height: 45px;
+        height: 45px;
+        color: #fff;
+        font-size: 14px;
+        opacity: 0.9;
+        background-color: #6f3400;
+        border-radius: 2px;
+    }
+    .verifyimgtip .tiptri {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid #6f3400;
+        bottom: -8px;
+        left: 50%;
+        margin-left: -4px;
+    }
+    .ic-loginform-title{
+        font-size: 1.8rem;
+        height: 60px;
+        line-height: 60px;
+        width: 120px;
+        margin: 0 auto;
+        border-bottom: 3px solid #FFD733;
+        text-align: center;
+    }
+    p.reg-tip {
+        color: #482929;
+        margin: 0 -10px 12px -10px;
+        padding: 18px 35px 16px 35px;
+        background: #F6EBD6;
+        text-align: justify;
+    }
+    span.tip-light {
+        padding-right: 15px;
+    }
+    span.tip-light i {
+        background-image: url(../images/tip-light.png);
+        width: 12px;
+        height: 18px;
+        background-size: 12px 18px;
+        display: inline-block;
+    }
+    .login-tip{
+        color: #B89D86;
+        font-size: 1.2rem;
+    }

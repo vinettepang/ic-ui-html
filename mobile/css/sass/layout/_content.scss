@@ -1,0 +1,31 @@
+
+//index
+.home_top_nav{
+  background-color: $sec-color;
+  margin: 0;
+
+}
+.home_block{
+	position: relative;
+	height: calc((100vh - 74px)/4);
+	height: -webkit-calc((100vh - 74px)/4);
+	a{
+		display: block;
+	    width: 100%;
+	    height: 100%;
+	}
+	.title{
+		position: absolute;
+		top:24px;
+		left: 38px;
+		font-size: 2.4rem;
+		color: #fff;
+		letter-spacing: 0.4px;
+	}
+	.img{
+		max-height: 100px;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+}

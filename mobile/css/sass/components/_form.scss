@@ -1,0 +1,26 @@
+//chrome
+input:-webkit-autofill{  
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    border-bottom: 1px solid $border-color !important;
+}
+.mui-content{
+	.mui-input-group {
+		.mui-input-row {
+		    height: 50px;
+		    &:after{
+			    left: 0;
+			    background-color :$border-color ; 
+			}
+		}
+	}
+	input[type=color],input[type=date],input[type=datetime-local],
+	input[type=datetime],input[type=email],input[type=month],input[type=number],
+	input[type=password],input[type=search],input[type=tel],input[type=text],
+	input[type=time],input[type=url],input[type=week],select,textarea{
+	    font-size: 16px;
+	    height: 50px;
+	    padding: 13px 20px;
+	}
+}
+
+

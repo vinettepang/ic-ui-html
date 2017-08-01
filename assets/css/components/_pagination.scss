@@ -1,0 +1,93 @@
+.pagination {
+    text-align: center;
+
+    .counter {
+        margin: 10px 0;
+        font-size: $pag-counter-font-size;
+    }
+
+    ul {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        margin-bottom: 0;
+        margin-left: 0;
+        padding: 0;
+        font-size: $pag-page-font-size;
+        @include border-radius($pag-page-radius);
+
+        > {
+            li {
+                display: inline;
+
+                > {
+                    a, span {
+                        float: left;
+                        padding: $pag-page-padding;
+                        line-height: 20px;
+                        text-decoration: none;
+                        color: $pag-page-color;
+                        background-color: $pag-page-background;
+                        border: $pag-page-border;
+                        border-left-width: 0;
+                    }
+                    a {
+                        &:hover, 
+                        &:focus {
+                            background: lighten($pag-page-active-background, 20%);
+                            border-color: $pag-page-active-border-color;
+                            color: $pag-page-active-color;
+                        }
+
+                        &:active {
+                            background: $pag-page-active-background;
+                            border-color: $pag-page-active-border-color;
+                            color: $pag-page-active-color;
+                        }
+                    }
+                }
+            }
+
+            .active > {
+                a, span {
+                    background: $pag-page-active-background;
+                    color: $pag-page-active-color;
+                    border-color: $pag-page-active-border-color;
+                    cursor: default;
+                }
+            }
+
+            .disabled > {
+                a, span {
+                    color: $pag-page-disabled-color;
+                    cursor: default;
+                    background: $pag-page-disabled-background;
+                    border-color: $pag-page-disabled-border-color;
+                    
+                    &:hover, 
+                    &:focus,
+                    &:active {
+                        color: $pag-page-disabled-color;
+                        cursor: default;
+                        background: $pag-page-disabled-background;
+                        border-color: $pag-page-disabled-border-color;
+                    }
+                }
+            }
+
+            li {
+                &:first-child > {
+                    a, span {
+                        border-left-width: 1px;
+                        @include border-radius-separate($pag-page-radius, 0, $pag-page-radius, 0);
+                    }
+                }
+                &:last-child > {
+                    a, span {
+                        @include border-radius-separate(0, $pag-page-radius, 0, $pag-page-radius);
+                    }
+                }
+            }
+        }
+    }
+}

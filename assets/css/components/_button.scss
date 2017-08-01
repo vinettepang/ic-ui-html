@@ -1,0 +1,810 @@
+@import "../core/variables";
+@import "../helpers/helpers";
+@import "../helpers/mixins";
+.btn {
+    display: inline-block;
+    padding: $btn-default-padding;
+    margin: 0;
+    font-weight: normal;
+    font-size: $btn-default-font-size;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    color: $btn-default-color;
+    background: $btn-default-background;
+    border: $btn-default-border;
+    @include border-radius($btn-radius);
+
+    &:focus, 
+    &:active, 
+    &.active:focus {
+        outline: none;
+    }
+
+    &:hover {
+        color: $btn-default-color;
+        background: lighten($btn-default-background, 10%);
+        text-decoration: none;
+    }
+
+    &:focus, 
+    &:active,
+    &.active {
+        color: $btn-default-color;
+        background: darken($btn-default-background, 5%);
+        outline: 0;
+        //@include box-shadow($btn-box-shadow);
+    }
+
+    &.disabled, 
+    &[disabled] {
+        pointer-events: none;
+        cursor: not-allowed;
+        @include box-shadow(none);
+        @include opacity(0.45);
+    }
+    &.width120{
+        width: 120px;   
+    }
+    &.width150{
+        width: 150px;   
+    }
+    &.br4{
+        border-radius: 4px !important;
+    }
+    &.fullwidth{
+        width: 100%;
+        line-height: 40px;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+}
+
+.btn-circle{
+    display: inline-block;
+    padding: $btn-circle-padding;
+    margin: 0;
+    font-weight: normal;
+    font-size: $btn-default-font-size;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    color: $btn-default-color;
+    background: $btn-default-background;
+    border: $btn-default-border;
+    @include border-radius($btn-circle-radius);
+
+    &:focus, 
+    &:active, 
+    &.active:focus {
+        outline: none;
+    }
+
+    &:hover {
+        color: $btn-default-color;
+        background: lighten($btn-default-background, 10%);
+        text-decoration: none;
+    }
+
+    &:focus, 
+    &:active,
+    &.active {
+        color: $btn-default-color;
+        background: darken($btn-default-background, 5%);
+        outline: 0;
+        //@include box-shadow($btn-box-shadow);
+    }
+
+    &.disabled, 
+    &[disabled] {
+        pointer-events: none;
+        cursor: not-allowed;
+        @include box-shadow(none);
+        @include opacity(0.45);
+    }
+
+    //
+    &.brown-shadow{
+        border: 1px solid $pri-color !important;
+        box-shadow: 0px 2px 0px $pri-color !important;
+    }
+}
+.btn-bigger {
+    display: inline-block;
+    padding: 20px 140px;
+    margin: 0;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    color: $btn-default-color;
+    background: $btn-default-background;
+    border: $btn-default-border;
+    @include border-radius($btn-radius);
+
+    &:focus, 
+    &:active, 
+    &.active:focus {
+        outline: none;
+    }
+
+    &:hover {
+        color: $btn-default-color;
+        background: lighten($btn-default-background, 10%);
+        text-decoration: none;
+    }
+
+    &:focus, 
+    &:active,
+    &.active {
+        color: $btn-default-color;
+        background: darken($btn-default-background, 5%);
+        outline: 0;
+        //@include box-shadow($btn-box-shadow);
+    }
+
+    &.disabled, 
+    &[disabled] {
+        pointer-events: none;
+        cursor: not-allowed;
+        @include box-shadow(none);
+        @include opacity(0.45);
+    }
+}
+.btn-circle-sm{
+    display: inline-block;
+    padding: $btn-circle-padding-sm;
+    margin: 0;
+    font-weight: normal;
+    font-size: $btn-default-font-size;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    color: $btn-default-color;
+    background: $btn-default-background;
+    border: $btn-default-border;
+    @include border-radius($btn-circle-radius);
+
+    &:focus, 
+    &:active, 
+    &.active:focus {
+        outline: none;
+    }
+
+    &:hover {
+        color: $btn-default-color;
+        background: lighten($btn-default-background, 10%);
+        text-decoration: none;
+    }
+
+    &:focus, 
+    &:active,
+    &.active {
+        color: $btn-default-color;
+        background: darken($btn-default-background, 5%);
+        outline: 0;
+        //@include box-shadow($btn-box-shadow);
+    }
+
+    &.disabled, 
+    &[disabled] {
+        pointer-events: none;
+        cursor: not-allowed;
+        @include box-shadow(none);
+        @include opacity(0.45);
+    }
+}
+.btn-border{
+    display: inline-block;
+    padding: $btn-circle-padding;
+    margin: 0;
+    font-weight: normal;
+    font-size: $btn-default-font-size;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #3675b9;
+    // background: $btn-default-background;
+    border:1px solid #3675b9;
+    @include border-radius(4px);
+
+    &:focus, 
+    &:active, 
+    &.active:focus {
+        outline: none;
+    }
+
+    &:hover {
+        color: #fff;
+        background: darken(#3675b9, 5%);
+    }
+}
+
+.btn-mini{
+    display: inline-block;
+    padding: 4px 10px;
+    margin: 0;
+    font-weight: normal;
+    font-size: 13px !important;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    color: $btn-default-color;
+    background: $btn-default-background;
+    border: $btn-default-border;
+    @include border-radius($btn-radius);
+
+    &:focus, 
+    &:active, 
+    &.active:focus {
+        outline: none;
+    }
+
+    &:hover {
+        color: $btn-default-color;
+        background: lighten($btn-default-background, 10%);
+        text-decoration: none;
+    }
+
+    &:focus, 
+    &:active,
+    &.active {
+        color: $btn-default-color;
+        background: darken($btn-default-background, 5%);
+        outline: 0;
+        //@include box-shadow($btn-box-shadow);
+    }
+
+    &.disabled, 
+    &[disabled] {
+        pointer-events: none;
+        cursor: not-allowed;
+        @include box-shadow(none);
+        @include opacity(0.45);
+    }
+}
+.btn-primary {
+    color: #fff;
+    background: $btn-pri-background;
+    border: $btn-pri-border;
+
+    &:hover {
+        color: #fff;
+        background: lighten($btn-pri-background, 10%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: #fff;
+        background: darken($btn-pri-background, 5%);
+        //@include box-shadow($btn-box-shadow);
+    }
+}
+
+.btn-secondary {
+    color: $btn-sec-color;
+    background: $btn-sec-background;
+    border: $btn-sec-background !important;
+
+    &:hover {
+        color: $btn-sec-color;
+        background: #f5a623 !important;
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: $btn-sec-color;
+        background: #f5a623 !important;
+        //@include box-shadow($btn-box-shadow);
+    }
+}
+.btn-purple {
+    color: #fff;
+    background: $purple-color;
+    border: $purple-color;
+
+    &:hover {
+        color: #fff;
+        background: $purple-color;
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: #fff;
+        background: $purple-color;
+        //@include box-shadow($btn-box-shadow);
+    }
+}
+
+.btn-third {
+    color: $btn-sec-color;
+    background: $btn-whiteyellow-color;
+    border: $btn-whiteyellow-color;
+
+    &:hover {
+        color: $btn-sec-color;
+        background: lighten($btn-whiteyellow-color, 5%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: $btn-sec-color;
+        background: darken($btn-whiteyellow-color, 2%);
+       // @include box-shadow($btn-box-shadow);
+    }
+}
+.btn-darkblue {
+    color: #fff !important;
+    background: $darkblue-color;
+    border: $darkblue-color;
+
+    &:hover {
+        color: #fff !important;
+        background: lighten($darkblue-color, 5%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: #fff !important;
+        background: darken($darkblue-color, 2%);
+       // @include box-shadow($btn-box-shadow);
+    }
+}
+.btn-grass {
+    color: #fff;
+    background: $grass-color;
+    border: $grass-color;
+
+    &:hover {
+        color: #fff !important;
+        background: lighten($grass-color, 5%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: #fff !important;
+        background: darken($grass-color, 2%);
+       // @include box-shadow($btn-box-shadow);
+    }
+}
+
+.btn-secyellow {
+    color: $pri-color;
+    background: #f6ebd6;
+    // border: #f6ebd6;
+    &:hover {
+        color: #8a7a7a !important;
+        background: #f6ebd6;
+    }
+    &:focus,
+    &:active,
+    &.active {
+        color: #8a7a7a !important;
+        background: #f6ebd6;
+       // @include box-shadow($btn-box-shadow);
+    }
+}
+.btn-green {
+    color: $text-white-color !important;
+    background: $btn-green-color;
+    border: $btn-green-color;
+
+    &:hover {
+        color: $text-white-color !important;
+        background: #709445 !important;
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: $text-white-color !important;
+        background: #709445 !important;
+       // @include box-shadow($btn-box-shadow);
+    }
+    
+}
+.btn-skyblue {
+    color: $text-white-color !important;
+    background: $skyblue-color !important;
+    border: $skyblue-color !important;
+
+    &:hover {
+        color: $text-white-color !important;
+        background: #50759f !important;
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: $text-white-color !important;
+        background: #50759f !important;
+    }
+    
+}
+
+.btn-disabled {
+    cursor: default !important;
+    color: $btn-disabled-color !important;
+    background: $btn-disabled-background !important;
+    border: $btn-disabled-border !important;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+        color: $btn-disabled-color !important;
+        background: $btn-disabled-background !important;
+        @include box-shadow(none);
+    }
+}
+.btn-noborder{
+    cursor: default !important;
+    color: $pri-color;
+    background: none !important;
+    border: none !important;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+        text-decoration: none  !important;
+    }
+}
+
+.btn-sm {
+    font-size: $btn-sm-font-size;
+    padding: $btn-sm-padding;
+}
+.btn-sm-3-15 {
+    font-size: 14px;
+    padding: 3px 15px;
+}
+
+.btn-lg {
+    font-size: $btn-lg-font-size;
+    padding: $btn-lg-padding;
+}
+.btn-blue {
+    color:#fff !important;
+    background: $btn-blue-color;
+    border: $btn-blue-color;
+
+    &:hover {
+        color:#fff !important;
+        background: lighten($btn-blue-color, 5%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: $text-white-color !important;
+        background: darken($btn-blue-color, 2%);
+       // @include box-shadow($btn-box-shadow);
+    }
+}
+.btn-white {
+    color:$pri-color;
+    background: #fff;
+    border: #fff;
+
+    &:hover {
+        background: lighten(#fff, 5%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        background: darken(#fff, 2%);
+       // @include box-shadow($btn-box-shadow);
+    }
+}
+.btn-darkbrown {
+    color:#fff !important;
+    background: $pri-color;;
+    border: $pri-color;;
+
+    &:hover {
+        background: lighten($pri-color, 5%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        background: darken($pri-color, 2%);
+       // @include box-shadow($btn-box-shadow);
+    }
+}
+.btn-orange {
+    color:#fff !important;
+    background: #f5a623;
+    border: #f5a623;
+
+    &:hover {
+        color:#fff !important;
+        background: lighten(#f5a623, 5%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: $text-white-color !important;
+        background: darken(#f5a623, 2%);
+       // @include box-shadow($btn-box-shadow);
+    }
+}
+.btn-taro {
+    color:#fff !important;
+    background: $taro-color;
+    border: $taro-color;
+
+    &:hover {
+        background: lighten($taro-color, 5%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        background: darken($taro-color, 2%);
+       // @include box-shadow($btn-box-shadow);
+    }
+}
+
+.btn-whitegreen {
+    color:$pri-color !important;
+    background: $whitegreen-color;
+    border: $whitegreen-color;
+
+    &:hover {
+        background: lighten($whitegreen-color, 5%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        background: darken($whitegreen-color, 2%);
+       // @include box-shadow($btn-box-shadow);
+    }
+}
+.btn-darkengrey {
+    color: #fff;
+    background: $darkengrey-color;
+    border: $darkengrey-color;
+
+    &:hover {
+        color: #fff;
+        background: lighten($darkengrey-color, 10%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: #fff;
+        background: darken($darkengrey-color, 5%);
+        //@include box-shadow($btn-box-shadow);
+    }
+}
+.wechat-btn{
+    position: relative;
+    color:#fff !important;
+    background: #5CB947;
+    border: #5CB947;
+
+    &:hover {
+        background: lighten(#5CB947, 5%);
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        background: darken(#5CB947, 2%);
+       // @include box-shadow($btn-box-shadow);
+    }
+    i.icon-wechat{
+        position: absolute;
+        top: 15px;
+        left: 100px;
+        width: 23px;
+        height: 22px;
+        background: url(../../images/wechat.png);
+        background-size: 23px 22px;
+        display: block;   
+    }
+}
+.btn-group {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+
+    > .btn {
+        position: relative;
+        float: left;
+
+        &:hover, &:focus, &:active, &.active {
+          z-index: 2;
+        }
+    }
+
+    .btn + {
+        .btn, .btn-group {
+          margin-left: -1px;
+        }
+    }
+
+    .btn-group + {
+        .btn, .btn-group {
+            margin-left: -1px;
+        }
+    }
+
+    > {
+        .btn {
+            &:not(:first-child):not(:last-child) {
+                border-radius: 0;
+            }
+
+            &:first-child {
+                margin-left: 0;
+
+                &:not(:last-child) {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+            }
+
+            &:last-child:not(:first-child) {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+
+        .btn-group {
+            float: left;
+
+            &:not(:first-child):not(:last-child) > .btn {
+                border-radius: 0;
+            }
+
+            &:first-child > .btn:last-child {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            &:last-child > .btn:first-child {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+    }
+}
+.ic-btn-credit{
+    position: absolute; 
+    bottom: 45px;
+    right: 0;
+    width: 275px;
+    height: 68px;
+    background: $sec-color;
+    //border-radius: 100px;
+    cursor: pointer;
+    //z-index: 5; 
+    &:hover{
+        color: $pri-color;
+        background-color: lighten($sec-color, 8%);
+    }
+}
+.ic-btn-sign{
+    font-size: 17px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    line-height: 42px;
+    width: 188px;
+    height: 42px;
+    background: $sec-color;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin: 0 auto 20px auto;
+    //z-index: 5; 
+    &:hover{
+        color: $pri-color;
+        background-color: lighten($sec-color, 8%);
+    }
+    &:disabled{
+        color: #4A4A4A;
+        background: #E5E5E5;
+    }
+}
+.ic-btn-brown{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    background-color: $pri-color;
+    height: 40px;
+    width: 150px;
+    line-height: 40px;
+    border: none;
+    border-radius: 2px;
+
+    &:first-child{
+        margin-right: 20px;
+    }
+    &:enabled{
+        &:active{
+            color: #fff;
+            background-color: $pri-color;
+        }
+    }
+    &:hover,&:active{
+        color: #fff;
+        background-color: lighten($pri-color, 8%);
+        //background-color: $pri-color;
+    }
+    &.fullwidth{
+        width: 100%;
+        line-height: 40px;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+}
+button.btn-sign{
+    font-size: 16px !important;
+    background: #FFD733;
+    border-radius: 100px;
+    right: 45px !important;
+    width: 200px !important;
+    height: 46px !important;
+    top: 7px !important;
+    border:none !important;
+    text-align: left !important;
+    i.business_coins{
+        position: absolute;
+        left: 30px;
+        top: 14px;
+        font-size: 19px;
+    }
+    span{
+        padding-left: 48px;
+    }
+    &:disabled{
+        opacity: 1;
+        background: #E5E5E5  !important;
+    }
+}
+.sign-dot{
+    position: absolute;
+    top: 8px !important;
+    right: 40px !important;
+    width: 45px;
+    height: 4px;
+    em{
+        display: inline-block;
+        background: #fff;
+        height: 4px;
+        width: 4px;
+        margin-right: 3px;
+        border-radius: 50%;
+        &.full{
+            background: #482929;    
+        }
+    }
+}

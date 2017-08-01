@@ -1,0 +1,187 @@
+.label{
+    font-size: 1.4rem;
+    line-height: 14px;
+    text-align: center;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 10px;
+    &.label-brown{
+        background-color: $pri-color;
+    }
+    &.label-fixed-right{
+        position: absolute;
+        top:50%;
+        right: 0;
+        @include transform(translate(0,-50%));
+    }
+}
+//提示
+.ic-alert-success,.ic-alert-error {
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    z-index: 10;
+    display: none;
+    width: 100%;
+    height: 40px;
+    color: #FFF;
+    text-align: center;
+    letter-spacing: 0;
+    font-size: 16px;
+    line-height: 40px;
+    .ic-alert-box {
+        margin: 0 auto;
+        padding: 9px 23px;
+        border-radius: 100px;
+        background: #482929
+    }
+
+    .ic-alert-box i {
+        padding-right: 5px;
+        vertical-align: middle;
+        font-size: 24px
+    }
+}
+
+//对话框
+.ic-dialog{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 310px;
+    height: 207px;
+    background: #FFD733;
+    border-radius: 6px;
+    padding: 42px 30px 40px 30px;
+    box-shadow: 0 0 4px 0 #B89D86;
+    z-index: 10;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    p{
+        font-size:1.6rem;
+        font-weight: bold;
+        margin: 0 0 20px 0;
+    }
+    i,i.icon-close{
+        position: absolute;
+        top: 22px;
+        right: 22px;
+        font-weight: bold;
+        font-size: 1.8rem;
+    }
+    .ic-dialog-close{
+        position: absolute;
+        top:22px;
+        right: 22px;
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+    &.pdtop-close{
+        padding-top: 56px; 
+    }
+    &.ic-signup{
+        height: auto;
+        padding: 25px 30px 40px 30px;
+        img{
+            display: block;
+            max-width:122px;
+            padding-bottom: 15px; 
+            margin: 0 auto;
+        }
+        p{
+            margin-bottom: 24px;
+        }
+    }
+    &.ic-dialog-unlocked{
+        position: fixed;
+        height: auto;
+        padding: 56px 30px 68px 30px;
+        img{
+            display: block;
+            max-width:130px;
+            margin: 0 auto;
+            margin-bottom: 30px; 
+        }
+        p{
+            line-height: 22px;
+            margin: 0;
+        }
+    }
+    &.ic-dialog-downloadfile{
+        position: fixed;
+        height: auto;
+        padding: 53px 30px 40px 30px;
+        &.pt42{
+            padding: 42px 30px 40px 30px;
+        }
+        p.ic-download-title{
+            font-size: 2.0rem; 
+            font-weight: bold;
+            .code{
+                -webkit-user-select:all;
+                -ms-user-select:all ;    
+            }
+        }
+        .ic-download-tip{
+            font-weight: normal;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+    }
+}
+.alert-box-container{
+    .alert-overlay{
+        display: none;
+        position: absolute;
+        top:0;
+        left:0;
+        height: 100%;
+        width: 100%;
+        opacity: 0.47;
+        background-color: #ffd733;
+        z-index: 100;
+    }
+}
+ .alert-box{
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    display: none;
+    width: 85%;
+    padding: 30px 22px;
+    background: #fff;
+     box-shadow: 0 0 2px 0 #b0b0b0;
+    text-align: left;
+    border-radius: 8px;
+    box-sizing: border-box;
+    z-index:105;
+    .line-title{
+        border-left: 5px solid #9893c2;
+        padding-left: 14px;
+        margin-bottom: 14px;
+    }
+    .text-content{
+        text-align: justify;
+        line-height: 26px;
+        margin-bottom: 24px;
+    }
+    a.btn{
+        position: relative !important;
+        display: block;
+        left: 0;
+        padding: 0;
+        margin: 0;
+        color: #fff;
+        height: 40px;
+        width: 100%;
+        text-align: center;
+        line-height: 40px; 
+        border-radius: 100px;
+        background-color: #9893c2;
+        transform: translate(0, 0);
+    }
+}

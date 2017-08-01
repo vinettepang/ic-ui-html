@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dialog组件</title>
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+</head>
+<body>
+	<a class="vp-dialog-trigger ic-btn ic-btn-brown" dialog-target="vp-dialog-locked">点击触发dialog1</a>
+	<a class="vp-dialog-trigger ic-btn ic-btn-brown" dialog-target="vp-dialog-buycourse">点击触发dialog2</a>
+	<div class="vp-dialog" dialog-target="vp-dialog-locked" style="height: 190px; padding-top: 54px; min-height: 190px;text-align: center;">
+		<i class="nc-icon-outline ui-1_simple-remove btn-dialog-close"></i>
+		<p class="vp-content">当前积分：<span class="ic-mycredit text-taro">100分</span>。确认解锁？</p>
+		<div class="btn-group clearfloat">
+			<a class="ic-btn ic-btn-brown width150 pull-left btn-dialog-close">取消</a>
+			<a class="ic-btn ic-btn-brown width150 pull-right ic-chapter-unlocked">确认</a>
+		</div>
+	</div>
+	<div class="vp-dialog" dialog-target="vp-dialog-buycourse" style=" height: 230px; padding-top: 54px;min-height: 180px;text-align: center;">
+		<i class="nc-icon-outline ui-1_simple-remove vp-dialog-close"></i>
+		<p style="margin-bottom: 30px; text-align: left;">积分不够解锁，当前积分：<span class="ic-mycredit text-taro">100分</span></p>
+		<div class="btn-group clearfloat">
+			<a class="ic-btn ic-btn-brown width150 pull-left btn-dialog-close">取消</a>
+			<a class="ic-btn ic-btn-brown width150 pull-right ic-chapter-unlocked">确认</a>
+		</div>
+		<p class="center mgtop12 ftnormal" style="margin-top: 20px">（解锁过的课程不计入总价）</p>
+	</div>
+	<script type="text/javascript" src="../../assets/js/jquery.1.10.1.min.js"></script>
+	<script type="text/javascript" src="../../assets/js/v-ic-componment.js"></script>
+	<script type="text/javascript" src="../../assets/js/vpui.js"></script>
+</body>
+</html>

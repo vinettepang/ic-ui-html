@@ -1,0 +1,68 @@
+// Float
+.clear {
+    clear: both;
+    display: block;
+    overflow: hidden;
+    // visibility: hidden;
+    // width: 0;
+    // height: 0;
+}
+.dn{ display:none }
+
+.clearfix:before,
+.clearfix:after {
+    content: "\0020";
+    display: block;
+    overflow: hidden;
+}
+.clearfix:after {clear: both;}
+
+.clearfix { zoom: 1;}
+
+.pull-left { float: left; }
+.pull-right { float: right; }
+
+// Text Alignment
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+.text-center { text-align:center; }
+.text-justify { text-align: justify; }
+
+.text-remark { color: #666; font-size: 0.9em; }
+
+.text-grey { color: $text-grey-color; }
+.text-green { color: $text-green-color; }
+
+.text-color { color: $text-color; }
+.text-primary { color: $text-primary-color; }
+.text-secondary { color: $text-secondary-color; }
+.text-success { color: $text-success-color; }
+.text-emphasis { color: $text-emphasis-color; }
+.text-warning { color: $text-warning-color; }
+.text-error { color: $text-error-color; }
+.star { color: $text-emphasis-color; }
+
+.ft-bold{font-weight: $font-weight-bold;}
+.ft-normal{font-weight: $font-weight-medium;}
+
+.img-container img { max-width: 100%; }
+
+//bg-color
+.bg-bread{background-color: $bg-color;}
+
+// Position
+%absolute { position: absolute; }
+%fixed { position: fixed; }
+%relative { position: relative; }
+%static { position: static;}
+
+%visuallyhidden {
+    margin: -1px;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip: rect(0, 0, 0, 0);
+    position: absolute;
+}

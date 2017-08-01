@@ -1,0 +1,290 @@
+@import "../core/variables";
+//登录注册
+.ic-btn, button, input[type=button], input[type=reset], input[type=submit] {
+    font-size: 1.6rem;
+    font-weight: $font-weight-bold;
+    line-height: 1.42;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    cursor: pointer;
+    -webkit-transition: all;
+    transition: all;
+    -webkit-transition-timing-function: linear;
+    transition-timing-function: linear;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    color: #fff;
+    border: 0;
+    background-color: #fff;
+    background-clip: padding-box;
+    @include border-radius(2px);
+    @include box-shadow( 0 0 2px $box-shadow-color);
+    &.btn-square{
+        @include border-radius(0);
+    }
+    &.btn-radius{
+        @include border-radius(100px);
+    }
+    &.btn-noshadow{
+        @include box-shadow(none);
+    }
+    &:enabled{
+        &:active{
+            color: $pri-color;
+        }
+    }
+    &:active{
+        color: $pri-color;
+    }
+}
+//shape
+.ic-btn-block{
+    font-size: 1.8rem;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    padding: 0;
+    border:none;
+}
+.ic-btn-sm-block{
+    font-size: 1.6rem;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    padding: 0;
+    &.ic-btn-icon{
+        padding: 0 0 0 32px;
+        .btn-icon{
+            font-size: 22px;
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            margin-left: -32px;
+        }
+    }
+}
+.ic-btn-md{
+    font-size: 1.8rem;
+    height: 50px;
+    line-height: 50px;
+   // padding: 0 60px;
+    padding: 0;
+    width: 156px;
+    border:none;
+}
+.ic-btn-sm{
+    padding: 5px 23px;
+}
+.ic-btn-mini{
+    font-size: 1.4rem;
+    padding: 2px 14px;
+}
+.ic-btn-mini315{
+    font-size: 1.4rem!important;
+    font-weight: normal !important;
+    padding: 3px 15px!important;
+    line-height: 20px!important;
+}
+.ic-btn-tiny{
+    font-size: 1.4rem;
+    font-weight: normal;
+    color: #fff;
+    width: 60px !important;
+    height: 25px !important;
+    line-height: 25px;
+    padding: 0 !important;
+    i{
+        padding: 0 5px 0 0;
+    }
+}
+.ic-btn-border{
+    font-size: 1.4rem;
+    padding: 2px 12px;
+    color:$pri-color;
+    border: 1px solid $pri-color;
+    box-shadow:none;
+}
+//color
+.ic-btn-primary{
+    color: $pri-color;
+    background-color: $sec-color;
+    &:enabled{
+        &:active{
+            background-color: #FFEB99;
+        }
+    }
+    &:active{
+        background-color: #FFEB99;
+    }
+}
+.ic-btn-white{
+    color: $pri-color;
+    background-color: #fff;
+    &:enabled{
+        &:active{
+            background-color: #F9F9F9;
+        }
+    }
+    &:active{
+        background-color: #F9F9F9;
+    }
+}
+.ic-btn-purple{
+    color: #fff;
+    background-color: $btn-purple-color;
+    &:enabled{
+        &:active{
+            color: #fff;
+            background-color: #9893C2;
+        }
+    }
+    &:active{
+        color: #fff;
+        background-color: #9893C2;
+    }
+}
+.ic-btn-taro{
+    color: #fff;
+    background-color: $taro-color;
+    &:enabled{
+        &:active{
+            color: #fff;
+            background-color: #9893C2;
+        }
+    }
+    &:disabled{
+        background-color:#B0B0B0;
+        opacity:1;
+    }
+    &:active{
+        color: #fff;
+        background-color: #9893C2;
+    }
+    a{
+        color: #fff !important;
+    }
+}
+.ic-btn-eggyellow{
+    color: #482929;
+    background-color: $bg-color;
+    &:enabled{
+        &:active{
+            background-color: lighten($bg-color, 4%);
+        }
+    }
+    &:disabled{
+        background-color:#B0B0B0;
+        opacity:1;
+    }
+    &:active{
+        background-color: lighten($bg-color, 4%);
+    }
+    &.fullwidth{
+        width: 100%;
+        line-height: 36px;
+        height: 36px;
+        padding: 0;
+    }
+}
+.ic-btn-wechat{
+    color: #fff;
+    background-color: #1AAD19 ;
+    &:enabled{
+        &:active{
+            color: #fff;
+            background-color:lighten(#1AAD19, 4%);
+        }
+    }
+    &:active{
+        color: #fff;
+         background-color:lighten(#1AAD19, 4%);
+    }
+}
+.ic-btn-green{
+    color: #fff;
+    background-color: $green-color ;
+    &:enabled{
+        &:active{
+            color: #fff;
+            background-color:lighten(#1AAD19, 4%);
+        }
+    }
+    &:active{
+        color: #fff;
+         background-color:lighten(#1AAD19, 4%);
+    }
+    
+}
+.ic-btn-pri{
+    color: #fff;
+    background-color: $pri-color;
+    &:enabled{
+        &:active{
+            color: #fff;
+            background-color:lighten($pri-color, 4%);
+        }
+    }
+    &:active{
+        color: #fff;
+         background-color:lighten($pri-color, 4%);
+    }
+    &:disabled{
+        background-color: #b0b0b0;
+        opacity: 1;
+    }
+}
+.ic-btn-brown{
+    font-size: 1.8rem;
+    color: #fff;
+    background-color: $pri-color;
+    height: 40px;
+    width: 110px;
+    &:enabled{
+        &:active{
+            color: #fff;
+            background-color: $pri-color;
+        }
+    }
+    &:active{
+        color: #fff;
+        background-color: $pri-color;
+    }
+    &.fullwidth{
+        width: 100%;
+        line-height: 40px;
+        padding: 0;
+        .mui-spinner{
+            position: absolute;
+            top: 9px;
+        }
+    }
+    &.width120{
+        width: 120px;
+    }
+    &.width110{
+        width: 110px;
+    }
+}
+.ic-btn-brown-block{
+    font-size: 1.8rem;
+    color: #fff;
+    background-color: $pri-color;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    &:enabled{
+        &:active{
+            color: #fff;
+            background-color: $pri-color;
+        }
+    }
+    &:active{
+        color: #fff;
+        background-color: $pri-color;
+    }
+}
