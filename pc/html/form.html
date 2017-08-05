@@ -1,0 +1,1749 @@
+<include file="Public/header" /> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="../../assets/css/testresume.css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/tabstyles.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/flat-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/jBox.css" />
+<style type="text/css">
+  .dn{
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="body"> 
+  
+  <div id="container">
+    <input type="hidden" id="isShowDefault" value="1" />
+    <div class="clearfixs mr_created " id="tab1">
+        <div class="section-top">
+            <div class="section-top-container" id="section-top-container">
+                <div>
+                    <a class="lt-title" >一键闪填</a>
+                    <a class="rt-title" href="{:U('Resume/customize')}">｜&nbsp;&nbsp;&nbsp;开放性问题(OQ)</a>
+                    <div class="triangle-up-1"></div>
+                </div>
+                <div class="rt-progress">
+                <div class="complete">高频：</div>
+                  <div class="progress" id="progress-allresume" style=" width: 170px; ">
+                    <div class="progress-bar" style=" width:<?php $allnum = 170*$alllist[1]/$alllist[0]; echo sprintf("%.2f", $allnum);?>px"></div>
+                    <span class="counter" style="left:70px"><?php echo "$alllist[1]/$alllist[0]";?></span>
+                  </div>
+                <div class="lowusetip">低频：</div>
+                  <div class="progress " id="progress-emptyresume" style=" width: 65px; ">
+                    <div class="progress-bar" style="width: <?php $lownum= 65*$low_num[1]/$low_num[0]; echo sprintf("%.2f", $lownum);?>px"></div><span class="counter" style="left:12px;"><?php echo "$low_num[1]/$low_num[0]";?></span>
+                  </div>
+                  <!-- <div class="blank "></div> -->
+                  <div id="switchtip">
+                  <div class="toptriangle"></div>
+                  <span class="bold">完成度</span>在这里显示,<br/> <span class="bold">左侧</span>是<span class="bold">高频填</span>写项, <span class="bold">右侧</span>是<span class="bold">低频</span>填写项
+                  <a id="close-switchtip">知道了</a>
+                </div>
+                <div id="opentip">
+                  <div class="toptriangle"></div>
+                  可以选择切换高频或全部填写项 填写高频项后,<br/> 一键闪填的填写比例为70% 完成全部项后, <br/>一键闪填的填写比例将高达85%<a id="close-opentip">知道了</a>
+                </div>
+                </div>
+            </div>
+        </div>
+    <section class="container" id="editresume">
+      <div class="tabs tabs-style-underline">
+      <div class="resumebg-left" id="resumebg-left">
+      <div class="resume-button"> 
+          <a class="btn-resume-right mr_preview" target="_blank" href="/resume/myresumepreview">预览</a>
+          <button class="btn-resume-right mr_allsave">保存</button> 
+          <div class="clr"></div>   
+          <a href="/resumeen/editresumeen/" class="btn btn-secyellow" style="width: 100%; border-radius: 0; margin-top: 5px; ">英文简历</a>     
+      </div>
+        <nav>
+          <ul>
+            <li><a href="#su1" class="icon-resume icon-home"><span>基本信息</span><span class="countNum" id="infoNum"></span></a></li>
+            <li id="section-edu" ><a href="#section-underline-2" class="icon-resume icon-gift"><span>教育信息</span><span class="countNum" id="eduNum"></span></a></li>
+            <li id="section-work"><a href="#section-underline-3" class="icon-resume icon-upload"><span>工作经历</span><span class="countNum" id="jobNum"></span></a></li>
+            <li id="section-pro"><a href="#section-underline-4" class="icon-resume icon-coffee"><span>项目经历</span><span class="countNum" id="proNum">
+            </span></a></li>
+            <li id="section-schclub"><a href="#section-underline-7" class="icon-resume icon-schclub"><span>社团经历</span><span class="countNum" id="schclubNum"></span></a></li>
+            <li id="section-schaw"><a href="#section-underline-8" class="icon-resume icon-schawards"><span>获奖经历</span><span class="countNum" id="schawardNum"></span></a></li>
+             <li id="section-"><a href="#section-underline-9" class="icon-resume icon-language"><span>语言能力</span><span class="countNum" id="skilllangNum"></span></a></li>
+           <li id="section-certi"><a href="#section-underline-5" class="icon-resume icon-certificate"><span>已获证书</span><span class="countNum" id="certiNum"></span></a></li>
+             <li id="section-train"><a href="#section-underline-10" class="icon-resume icon-training"><span>培训经历</span><span class="countNum" id="trainingNum"></span></a></li>
+             <li id="section-otherinfo"><a href="#section-underline-11" class="icon-resume icon-otherinfo"><span>其他信息</span><span class="countNum" id="otherinfoNum"></span></a></li>
+          </ul>
+        </nav>
+        </div>
+        <div class="right-content">
+          <div class="private " id="private-alert">
+          白熊求职重视用户的隐私，我们不会泄露您的个人信息给任何第三方。<a class="private-link" href="/news/privacy" target="_blank">详情点击</a><a class="close-private"></a>
+          </div>
+         <!--  <div class="private bg-purple" id="credit-alert">
+          完善简历80%以上可获得200积分哦，积分可以在论坛里使用。<a class="close-private"><i class="nc-icon-outline ui-1_simple-remove"></i></a>
+          </div> -->
+          <div class="content-wrap" id="userAllInfo">
+            <div class="swich-container">
+              <!--   <input type="checkbox" checked data-toggle="switch" id="info-switch" onchange="checkChange()"  data-on-text="全部" data-off-text="高频"/> -->
+
+                 <div class="switch-resume switch-yellow">
+                  <input type="radio" class="switch-input" name="resume-checked" value="high" id="high" checked="">
+                  <label for="high" class="switch-label switch-label-off">高频</label>
+                  <input type="radio" class="switch-input" name="resume-checked" value="all" id="all">
+                  <label for="all" class="switch-label switch-label-on">全部</label>
+                  <span class="switch-selection"></span>
+                  
+                </div>
+            </div>
+
+            <section id="su1">
+              
+<div class="baseinfo-top">
+  <h3>基本信息</h3>
+</div>
+
+<!-- <link rel="stylesheet" type="text/css" href="/Public/Home/css/component.css" />
+<script src="/Public/Home/js/modernizr-1.custom.js"></script> -->
+<div class="mr_moudle_content">
+  <form id="olinfoForm">
+        <div class="myr_info_list">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="baseinfo">
+                <tr>
+                    <th class="pt10"><label>姓名</label></th>
+                    <td>
+                      <div class="myr_input_div_l">
+                          <input type="text" id="mr_name" name="mr_name" class="ed_name valid form-control" autocomplete="off" value="{$info.realname}">
+                      </div>
+                    </td>
+                </tr>
+                 <tr class="lowUse">
+
+                    <th class="pt10"><label>英文名</label><span class="lowFreqency">低频</span></th>
+                    <td>
+                      <div class="myr_input_div_l">
+                          <input type="text" id="english_name" name="english_name" class="ed_name valid form-control" autocomplete="off" value="{$info.english_name}">
+                      </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="pt10"><label>性别</label></th>
+                    <td>
+                      <div class="myr_radio">
+                          <label class="radio">
+                      <input type="radio" name="sex" id="sex1" value="男" data-toggle="radio" class="custom-radio" <?php if($info["sex"] == "1"): ?>checked=""<?php endif; ?> ><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+                      男
+                   </label>
+                   &nbsp;&nbsp;
+                   <label class="radio">
+                      <input type="radio" name="sex" id="sex2" value="女" data-toggle="radio" class="custom-radio"
+                      <?php if($info["sex"] == "2"): ?>checked=""<?php endif; ?>
+                      ><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+                      女
+                    </label>
+                    <input id="myysex" name="myysex" type="hidden" value="{$info.sex}">
+                      </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="pt10"><label>身高</label></th>
+                    <td>
+                      <div class="myr_input_div_s">
+                          <input type="text" id="height" name="height" class="valid form-control" autocomplete="off" value="{$info.height}"><span class="sticker">cm</span> 
+                      </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="pt10"><label>体重</label></th>
+                    <td >
+                      <div class="myr_input_div_s">
+                        <input id="weight" name="weight"  class="form-control" value="{$info.weight}"/><span class="sticker">kg</span>
+                        <span class="icon-resume icon-business_bulb tiptab_weight tipright" title="点击查看提示"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="pt10"><label>电子邮件</label></th>
+                     <td >
+                      <div class="myr_input_div_l email_s">
+                        <input id="mr_email" name="mr_email" class="form-control" value="{$info.email_jianli}"/>
+                      </div>
+                      </td>
+                </tr>
+                <tr>
+                    <th class="pt10"><label>手机号</label></th>
+                    <td >
+                    <div class="myr_input_div_l mobile_s">
+                        <input id="mr_mobile" name="mr_mobile" class="form-control" value="{$info.phone}"/>
+                      </div></td>
+                </tr>
+                 <tr>
+                    <th class="pt10"><label>固定电话</label></th>
+                    <td >
+                       <div class="myr_input_div_l email_s">
+                        <input id="tel" name="tel"  class="form-control" value="{$info.tel}"/>
+                      </div></td>
+                </tr> 
+                
+                  <tr class="lowUse">
+                    <th class="pt10"><label>QQ</label><span class="lowFreqency">低频</span></th>
+                    <td >
+                       <div class="myr_input_div_l email_s">
+                        <input id="qq_name" name="qq_name"  class="form-control" value="{$info.qq_name}"/>
+                      </div></td>
+                </tr> 
+                  <tr class="lowUse">
+                    <th class="pt10"><label>微信号</label><span class="lowFreqency">低频</span></th>
+                    <td >
+                       <div class="myr_input_div_l email_s">
+                        <input id="wx_name" name="wx_name"  class="form-control" value="{$info.wx_name}"/>
+                      </div></td>
+                </tr> 
+                  <tr class="lowUse">
+                    <th class="pt10"><label>微博地址</label><span class="lowFreqency">低频</span></th>
+                    <td >
+                       <div class="myr_input_div_l email_s">
+                        <input id="sina_name" name="sina_name"  class="form-control" value="{$info.sina_name}"/>
+                      </div></td>
+                </tr> 
+                 <tr class="lowUse">
+                    <th class="pt10"><label>个人主页</label><span class="lowFreqency">低频</span></th>
+                    <td >
+                       <div class="myr_input_div_l email_s">
+                        <input id="profile" name="profile"  class="form-control" value="{$info.profile}"/>
+                        <span class="icon-resume icon-business_bulb tiptab_profile tipright" title="点击查看提示"></span>
+                      </div></td>
+                </tr> 
+                <tr>
+                <th class="pt10"><label>证件类型</label></th>
+
+                <td >
+                  <div class="myr_input_div_l form_wrap normal_s" style="*z-index:3;">
+                    <input id="idcardtype_val" name="idcardtype_val" type="hidden" value="{$info.idcardtype}"/>
+                    <input id="idcardtype" name="idcardtype" type="button" class="mr_button form_select" value="{$info.idcardtype}"/>
+                    <i class="mr_sj"></i>
+                    <div class="xl_list dn">
+                      <ul class="drop_list ul_zjlx">
+                        <li>身份证</li>
+                        <li>护照</li>
+                        <li>香港永久居民身份证</li>
+                        <li>香港非永久居民身份证</li>
+                        <li>澳门永久居民身份证</li>
+                        <li>澳门非永久居民身份证</li>
+                        <li>台胞证</li>
+                        <li>军官证</li>
+                      </ul>
+                    </div>
+                  </div>
+                  </td>
+                </tr>
+                <tr>
+                    <th class="pt10"><label>证件号码</label></th>
+                    <td >
+                      <div class="myr_input_div_l mr_click_flag">
+                        <input id="idcard" name="idcard"  class="form-control" value="{$info.idcard}"/>
+                      </div>
+                    </td>
+                </tr>
+                <tr>
+                  <th class="pt10"><label>出生日期</label></th>
+                      <td >
+                        <div class="date_select" >
+                          <?php $birthday = (explode("-",$info["birthday"]))?>
+                            <input type="hidden" class="datetime_val" name="birthday" value="{$info.birthday}">
+                            <div class="date_contrainer normal_s" style="*z-index:3;">
+                              <i class="mr_sj"></i>
+                              <input type="button" class="year_val dateselect mr_button" value="<?php echo $birthday[0]?>" />
+                              <ul class="ul_date  yearselect"></ul>
+                            </div>
+                            <div class="date_contrainer normal_s" style="*z-index:3;">
+                              <i class="mr_sj"></i>
+                              <input type="button" class="month_val dateselect mr_button" value="<?php echo  $birthday[1]?>"/>
+                            <ul class="ul_date monthselect"></ul>
+                            </div>
+                            <div class="date_contrainer normal_s" style="*z-index:3;">
+                              <i class="mr_sj"></i>
+                              <input type="button" class="day_val dateselect mr_button" value="<?php echo $birthday[2]?>"/>
+                            <ul class="ul_date dayselect"></ul>
+                            </div>
+                        </div>
+                     <!--   <div class="form-item ">
+                          <div class="controls input-append date form_oldatetime" data-date="{$info.start_time}">
+                          <div class="form_wrap  normal_s controls">
+                              <input type="button" class="mr_button" value="{$info.birthday}" readonly class="text input date" placeholder="选择时间" name="birthday"  data-date-format="yyyy-mm-dd">
+                              <span class="add-on"><i class="icon-remove"></i></span>
+                              <span class="add-on"><i class="icon-calendar"></i></span>
+                              <i class="mr_sj"></i>
+                              </div>
+                          </div> 
+                      </div> -->
+               
+                      </td>
+                </tr>
+                <tr class="lowUse">
+                    <th class="pt10"><label>国籍</label><span class="lowFreqency">低频</span></th>
+                    <td >
+                     <div class="form_wrap normal_s" style="*z-index:4;">
+                     <input id="national_val" name="national_val" type="hidden" value="{$info.national}"/>
+                      <input id="national" name="national" type="button" class="mr_button" value="{$info.national}"/>
+                      <i class="mr_sj"></i>
+                      <div class="xl_list dn">
+                        <ul class="ul_national">
+                          <volist name="countrydata" id="vo">
+                          <li>{$vo.cninfo}</li>
+                        </volist>
+                          
+                        </ul>
+                      </div>
+                    </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="pt10"><label>籍贯</label></th>
+                    <td >
+              
+                    <div class="provicecity">
+                      <div class="form_wrap normal_s" style="*z-index:3;">
+                      <input id="nativeplace_val" type="hidden" name="nativeplace_val" value="{$info.nativeplace}"/>
+                       <input id="nativeplace" type="button" name="nativeplace"  class="mr_button form_select" value="{$info.nativeplace}"/>
+                        <i class="mr_sj"></i>
+                        <div class="xl_list dn">
+                          <ul class="ul_nativeplace" id="provincelist">
+                            <li>--选择省--</li>
+                          </ul>
+                         
+                        </div>
+                      </div>
+                      <div class="form_wrap normal_s" style="*z-index:3;">
+                      <input id="nativeplace_c_val" type="hidden" name="nativeplace_city_val" value="{$info.nativeplace_city}"/>
+                       <input id="nativeplace_c" type="button" name="nativeplace_city"  class="mr_button form_select" value="{$info.nativeplace_city}"/>
+                        <i class="mr_sj"></i>
+                        <div class="xl_list dn">
+
+                          <ul class="ul_nativeplace_city" id="nativeplace_city">
+                            <li>--选择市--</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <span class="icon-resume icon-business_bulb tiptab_nativecity tipinputright" title="点击查看提示"></span>
+                      <div class="clr"></div>
+                    </div>
+                   
+                    </td>
+                </tr>
+                <tr>
+                
+                    <th class="pt10"><label>民族</label></th>
+                    <td >
+                    
+                <div class="form_wrap normal_s" style="*z-index:4;">
+                    <input id="nation_val" name="nation_val" type="hidden" value="{$info.nation}"/>
+                    <input id="nation" name="nation" type="button" class="mr_button" value="{$info.nation}"/>
+                    <i class="mr_sj"></i>
+                    <div class="xl_list dn">
+                      <ul class="ul_nation">
+                        <volist name="nationdata" id="vo">
+                        <li>{$vo.nation}</li>
+                      </volist>
+                        
+                      </ul>
+                    </div>
+                  </div>
+                    </td>
+                </tr>
+                <tr>
+                
+                    <th class="pt10"><label>政治面貌</label></th>
+                    <td >
+                    <div class="form_wrap normal_s" style="*z-index:4;">
+                    <input id="politicalstatus_val" name="politicalstatus_val" type="hidden" value="{$info.politicalstatus}"/>
+                     <input id="politicalstatus" name="politicalstatus" type="button" class="mr_button"   class="form-control" value="{$info.politicalstatus}"/>
+                    <i class="mr_sj"></i>
+                    <div class="xl_list dn">
+                      <ul class="ul_politicalstatus">
+                        <li>中共党员</li>
+                        <li>中共预备党员</li>
+                        <li>共青团员</li>
+                        <li>群众</li>
+                        <li>九三学社</li>
+                        <li>中国民主同盟</li>
+                        <li>中国民主建国会</li>
+                        <li>中国民主促进会</li>
+                        <li>中国国民党革命委员会</li>
+                        <li>中国农工民主党</li>
+                        <li>中国致公党</li>
+                        <li>台湾民主自治同盟</li>
+                        <li>中华全国工商业联合会</li>
+                        <li>无党派民主人士</li>
+                        <li>其它</li> 
+                      </ul>
+                    </div>
+                  </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="pt10"><label>婚姻状况</label></th>
+                    <td>
+                      <div class="myr_radio">
+                          <label class="radio">
+                              <input type="radio" name="marital" id="maritalstatus1" value="未婚" data-toggle="radio" class="custom-radio" 
+                        <?php if($info["maritalstatus"] == "未婚"): ?>checked=""<?php endif; ?> 
+                              ><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+                              未婚
+                           </label>
+                           &nbsp;&nbsp;
+                           <label class="radio">
+                              <input type="radio" name="marital" id="maritalstatus2" value="已婚" data-toggle="radio"  class="custom-radio"
+                        <?php if($info["maritalstatus"] == "已婚"): ?>checked=""<?php endif; ?>
+                              ><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+                              已婚
+                            </label>
+                             &nbsp;&nbsp;
+                            <label class="radio">
+                              <input type="radio" name="marital" id="maritalstatus3" value="离婚" data-toggle="radio"  class="custom-radio"
+                        <?php if($info["maritalstatus"] == "离婚"): ?>checked=""<?php endif; ?>
+                              ><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+                              离婚
+                            </label>
+                            <input id="mymaritalstatus" name="maritalstatus" type="hidden" value="{$info.maritalstatus}">
+                              </div>
+                            </td>
+                        </tr>
+                <tr>
+                <th class="pt10"><label>现居住城市</label></th>
+                <td >
+      
+                   <div class="provicecity">
+                    <div class="form_wrap normal_s" style="*z-index:3;">
+                    <input id="live_c_val" type="hidden" name="live_city_val"   value="{$info.live_city}"/>
+                     <input id="live_c" type="button" name="live_city"  class="mr_button form_select" value="{$info.live_city}"/>
+                      <i class="mr_sj"></i>
+                      <div class="xl_list dn">
+                        <ul class="ul_live_city" id="live_city">
+                          <li>--选择省--</li>
+                        </ul>
+                       
+                      </div>
+                    </div>
+                    <div class="form_wrap normal_s" style="*z-index:3;">
+                    <input id="live_city_c_val" type="hidden" name="live_city_city_val" value="{$info.live_city_city}"/>
+                     <input id="live_city_c" type="button" name="live_city_city"  class="mr_button form_select" value="{$info.live_city_city}"/>
+                      <i class="mr_sj"></i>
+                      <div class="xl_list dn">
+
+                        <ul class="ul_live_city_city" id="live_city_city">
+                          <li>--选择市--</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+               </tr>
+               <tr>
+                <th class="pt10"><label>联系地址</label></th>
+                <td >
+                   <div class="myr_input_div_l email_s">
+                    <input id="live_address" name="live_address"  class="form-control" value="{$info.live_address}"/>
+                  </div></td>
+               </tr>
+                <tr>
+                <th class="pt10"><label>邮政编码</label></th>
+                <td >
+                  <div class="myr_input_div_l mr_click_flag">
+                    <input id="zip" name="zip"  class="form-control" value="{$info.zip}"/>
+                  </div></td>
+            </tr>
+            <tr class="lowUse">
+                <th class="pt10"><label>家庭地址</label><span class="lowFreqency">低频</span></th>
+                <td >
+                   <div class="myr_input_div_l email_s">
+                    <input id="contact_address" name="contact_address"  class="form-control" value="{$info.contact_address}"/>
+                  </div></td>
+               </tr>
+              <tr>
+              <th class="pt10"><label>最高学历</label></th>
+                <td >
+        
+                <div class="form_wrap normal_s" style="*z-index:4;">
+                    <input id="edu_val" name="edu_val" type="hidden" value="{$info.edu}"/>
+                    <input id="edu" name="edu" type="button" class="mr_button" value="{$info.edu}"/>
+                    <i class="mr_sj"></i>
+                    <div class="xl_list dn">
+                      <ul class="ul_xl">
+                        <li>博士研究生</li>
+                        <li>EMBA</li>
+                        <li>MBA</li>
+                        <li>MPA</li>
+                        <li>硕士研究生</li>
+                        <li>双学士</li>
+                        <li>大学本科-一本</li>
+                        <li>大学本科-二本</li>
+                        <li>大学本科-三本</li>
+                        <li>大学专科</li>
+                        <li>中专</li>
+                        <li>技校/职高</li>
+                        <li>高中</li>
+                        <li>初中及以下</li>
+                        <li>其他</li>
+                        <li>无</li>
+                      </ul>
+                    </div>
+                  </div>
+                 <!--  <select class="form-control select select-primary" data-toggle="select">
+                <option value="大专">大专</option>
+                <option value="1">本科</option>
+                <option value="2">硕士</option>
+                <option value="3">博士</option>
+                <option value="4" selected>其他</option>
+              </select> -->
+                </td>
+            </tr>
+             <tr>
+              <th class="pt10"><label>教育类型</label></th>
+                <td >
+        
+                <div class="form_wrap normal_s" style="*z-index:4;">
+                    <input id="edu_type_val" name="edu_type_val" type="hidden" value="{$info.edu_type}"/>
+                    <input id="edu_type" name="edu_type" type="button" class="mr_button" value="{$info.edu_type}"/>
+                    <i class="mr_sj"></i>
+                    <div class="xl_list dn">
+                      <ul class="ul_jylx">
+                        <li>全日制统分统招</li>
+                    <li>海外留学</li>
+                    <li>成人教育</li>
+                    <li>定向</li>
+                    <li>非定向</li>
+                    <li>委培</li>
+                    <li>自费</li>
+                    <li>其他</li>
+                      </ul>
+                    </div>
+                  </div>
+ 
+                </td>
+            </tr>
+               <tr class="lowUse">
+                <th class="pt10"><label>预计毕业时间</label><span class="lowFreqency">低频</span></th>
+          
+                <td >
+                
+                  <div class="datefutrue_select">
+                  <?php $graduate_time = (explode("-",$info["graduate_time"]))?>
+                    <input type="hidden" class="datetime_val" name="graduate_time" value="{$info.graduate_time}">
+                    <div class="date_contrainer normal_s" style="*z-index:3;">
+                      <i class="mr_sj"></i>
+                      <input type="button" class="year_val dateselect mr_button" value="<?php echo $graduate_time[0]?>" />
+                      <ul class="ul_date  yearselect"></ul>
+                    </div>
+                    <div class="date_contrainer normal_s" style="*z-index:3;">
+                      <i class="mr_sj"></i>
+                      <input type="button" class="month_val dateselect mr_button" value="<?php echo  $graduate_time[1]?>"/>
+                    <ul class="ul_date monthselect"></ul>
+                    </div>
+                 </div>
+                 
+               <!--     <div class="form-item ">
+                      <div class="controls input-append date form_oldatetime" data-date="{$info.start_time}">
+                      <div class="form_wrap  normal_s controls">
+                          <input type="button" class="mr_button" value="{$info.graduate_time}" readonly class="text input date" placeholder="选择时间" name="graduate_time"  data-date-format="yyyy-mm-dd">
+                          <span class="add-on"><i class="icon-remove"></i></span>
+                          <span class="add-on"><i class="icon-calendar"></i></span>
+                          <i class="mr_sj"></i>
+                          </div>
+                      </div> 
+                  </div>
+ -->
+
+                </td>
+            </tr>
+
+           <tr>
+                <th class="pt10"><label>入学前户口所在地</label></th>
+                <td >
+           
+                  <div class="provicecity">
+                    <div class="form_wrap normal_s" style="*z-index:3;">
+                    <input id="hukou_c_val" type="hidden" name="hukou_city_val" value="{$info.hukou_city}"/>
+                     <input id="hukou_c" type="button" name="hukou_city"  class="mr_button form_select" value="{$info.hukou_city}"/>
+                      <i class="mr_sj"></i>
+                      <div class="xl_list dn">
+                        <ul class="ul_hukou_city" id="hukou_city">
+                          <li>--选择省--</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="form_wrap normal_s" style="*z-index:3;">
+                     <input id="hukou_city_c_val" type="hidden" name="hukou_city_city_val" value="{$info.hukou_city_city}"/>
+                     <input id="hukou_city_c" type="button" name="hukou_city_city"  class="mr_button form_select" value="{$info.hukou_city_city}"/>
+                      <i class="mr_sj"></i>
+                      <div class="xl_list dn">
+                        <ul class="ul_hukou_city_city" id="hukou_city_city">
+                          <li>--选择市--</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+
+              <tr>
+                <th class="pt10"><label>当前户口所在地</label></th>
+                <td >
+        
+                   <div class="provicecity">
+                    <div class="form_wrap normal_s" style="*z-index:3;">
+                    <input id="hukou_city_n_val" type="hidden" name="hukou_city_now_val" value="{$info.hukou_city_now}"/>
+                     <input id="hukou_city_n" type="button" name="hukou_city_now"  class="mr_button form_select" value="{$info.hukou_city_now}"/>
+                      <i class="mr_sj"></i>
+                      <div class="xl_list dn">
+                        <ul class="ul_hukou_city_now" id="hukou_city_now">
+                          <li>--选择省--</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="form_wrap normal_s" style="*z-index:3;">
+                    <input id="hukou_now_c_val" type="hidden" name="hukou_city_now_city_val" value="{$info.hukou_city_now_city}"/>
+                     <input id="hukou_now_c" type="button" name="hukou_city_now_city"  class="mr_button form_select" value="{$info.hukou_city_now_city}"/>
+                      <i class="mr_sj"></i>
+                      <div class="xl_list dn">
+                        <ul class="ul_hukou_now_city" id="hukou_now_city">
+                          <li>--选择市--</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+
+
+            <tr>
+                <th class="pt10"><label>期望工作城市</label></th>
+                <td >
+    
+                    <div class="provicecity">
+                    <div class="form_wrap normal_s" style="*z-index:3;">
+                    <input id="expect_c_val" type="hidden" name="expect_city_val" value="{$info.expect_city}"/>
+                     <input id="expect_c" type="button" name="expect_city"  class="mr_button form_select" value="{$info.expect_city}"/>
+                      <i class="mr_sj"></i>
+                      <div class="xl_list dn">
+                        <ul class="ul_expect_city" id="expect_city">
+                          <li>--选择省--</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="form_wrap normal_s" style="*z-index:3;">
+                    <input id="expect_city_c_val" type="hidden" name="expect_city_city_val" value="{$info.expect_city_city}"/>
+                     <input id="expect_city_c" type="button" name="expect_city_city"  class="mr_button form_select" value="{$info.expect_city_city}"/>
+                      <i class="mr_sj"></i>
+                      <div class="xl_list dn">
+                        <ul class="ul_expect_city_city" id="expect_city_city">
+                          <li>--选择市--</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  </td>
+              </tr>
+               <tr>
+                <th class="pt10"><label>紧急联系人</label></th>
+                <td >
+                  <div class="myr_input_div_l mr_click_flag">
+                    <input id="contact_name" name="contact_name"  class="form-control" value="{$info.contact_name}"/>
+                  </div>
+                  </td>
+              </tr>
+                 <tr>
+                <th class="pt10"><label>紧急联系人电话</label></th>
+                <td >
+                  <div class="myr_input_div_l mr_click_flag">
+                    <input id="contact_phone" name="contact_phone"  class="form-control" value="{$info.contact_phone}"/>
+                  </div>
+                  </td>
+              </tr>
+               <tr class="lowUse">
+                <th class="pt10"><label>家庭成员-姓名</label><span class="lowFreqency">低频</span></th>
+                <td >
+                  <div class="myr_input_div_l mr_click_flag">
+                    <input id="fm_name" name="fm_name"  class="form-control" value="{$info.fm_name}"/>
+                    <span class="icon-resume icon-business_bulb tiptab_fmname tipright" title="点击查看提示"></span>
+                  </div>
+                  </td>
+              </tr>
+              <tr class="lowUse">
+                <th class="pt10"><label>家庭成员-关系</label><span class="lowFreqency">低频</span></th>
+                <td >
+                  <div class="myr_input_div_l mr_click_flag">
+                    <input id="fm_relation" name="fm_relation"  class="form-control" value="{$info.fm_relation}"/>
+                  </div>
+                  </td>
+              </tr>
+              <tr class="lowUse">
+                <th class="pt10"><label>家庭成员-联系电话</label><span class="lowFreqency">低频</span></th>
+                <td >
+                  <div class="myr_input_div_l mr_click_flag">
+                    <input id="fm_phone" name="fm_phone"  class="form-control" value="{$info.fm_phone}"/>
+                  </div>
+                  </td>
+              </tr>
+              <tr class="lowUse">
+                <th class="pt10"><label>家庭成员-工作单位</label><span class="lowFreqency">低频</span></th>
+                <td >
+                  <div class="myr_input_div_l mr_click_flag">
+                    <input id="fm_work" name="fm_work"  class="form-control" value="{$info.fm_work}"/>
+                  </div>
+                  </td>
+              </tr>
+              <tr class="lowUse">
+                <th class="pt10"><label>家庭成员-职位</label><span class="lowFreqency">低频</span></th>
+                <td >
+                  <div class="myr_input_div_l mr_click_flag">
+                    <input id="fm_position" name="fm_position"  class="form-control" value="{$info.fm_position}"/>
+                  </div>
+                  </td>
+              </tr>
+         
+
+            </table>
+        </div>  
+        <div class="btn-group">
+        <!-- <button class="progress-button mr_save" data-style="fill" data-horizontal>Submit</button> -->
+            <input type="submit" class="btn-resumeac mr_save" value="保存" />
+            <input type=button value="保存并下一项"  class="btn-resumeac mr_next" onclick="submitInfoFrom(); ">
+            <!-- <a href="javascript:" class="btn-resumeac mr_next" id="next" >下一步</a> -->
+        </div>
+      
+        
+        
+    </form>
+</div>
+<script src="/Public/Home/js/classie.js"></script>
+<!-- <script src="/Public/Home/js/progressbutton.js"></script>
+<script>
+[].slice.call( document.querySelectorAll( 'button.progress-button' ) ).forEach( function( bttn ) {
+        new ProgressButton( bttn, {
+        callback : function( instance ) {
+            var progress = 0,
+            interval = setInterval( function() {
+            progress = Math.min( progress + Math.random() * 0.1, 1 );
+            instance._setProgress( progress );
+
+            if( progress === 1 ) {
+                instance._stop(1);
+                clearInterval( interval );
+            }
+            }, 20 );
+        }
+        } );
+});
+</script> -->
+<script type="text/javascript">
+
+
+  function submitInfoFrom(){
+    //$('#olinfoForm').submit();
+    $('#olinfoForm').find('.mr_save').click();
+    tonext();
+  }
+
+    </script>
+ <script type="text/javascript">
+
+        var addressarr = {$city_arr};
+        addressarr = eval(addressarr);
+        function setprovince() {
+          var html = '';
+          for(var key in addressarr) {
+            if(addressarr[key]['pid']==1){
+        
+              html += '<li pid="'+addressarr[key].aid+'">'+addressarr[key].name+'</li>';
+            }
+          }
+  
+          $("#provincelist").html(html);
+          $("#live_city").html(html);
+          $("#hukou_city").html(html);
+          $("#hukou_city_now").html(html);
+          $("#expect_city").html(html);
+
+        }
+
+        function setnativecity(vv) {
+          var html = '';
+          var v ='';
+          if(isNaN(vv)){
+            v = $(vv).val();
+          }
+          else v = vv;
+
+          if(addressarr[v]){
+            var cityarr = addressarr[v]['sub'];
+            for(var k in cityarr) {
+               html += '<li cid="'+k+'">'+cityarr[k].name+'</li>';
+            }
+          }
+          $("#nativeplace_city").html(html);
+        }
+
+        function setlivecity(vv) {
+          var html = '';
+          var v ='';
+          if(isNaN(vv)){
+            v = $(vv).val();
+          }
+          else v = vv;
+
+          if(addressarr[v]){
+            var cityarr = addressarr[v]['sub'];
+            for(var k in cityarr) {
+              html += '<li cid="'+k+'">'+cityarr[k].name+'</li>';
+            }
+          }
+          $("#live_city_city").html(html);
+        }
+
+        function sethukoucity(vv) {
+          var html = '';
+          var v ='';
+          if(isNaN(vv)){
+            v = $(vv).val();
+          }
+          else v = vv;
+
+          if(addressarr[v]){
+            var cityarr = addressarr[v]['sub'];
+            for(var k in cityarr) {
+              html += '<li cid="'+k+'">'+cityarr[k].name+'</li>';
+            }
+          }
+
+          $("#hukou_city_city").html(html);
+        }
+        function sethukounowcity(vv) {
+          var html = '';
+          var v ='';
+          if(isNaN(vv)){
+            v = $(vv).val();
+          }
+          else v = vv;
+
+          if(addressarr[v]){
+            var cityarr = addressarr[v]['sub'];
+            for(var k in cityarr) {
+              html += '<li cid="'+k+'">'+cityarr[k].name+'</li>';
+            }
+          }
+
+          $("#hukou_now_city").html(html);
+        }
+        function setexpectcity(vv) {
+          var html = '';
+          var v ='';
+          if(isNaN(vv)){
+            v = $(vv).val();
+          }
+          else v = vv;
+
+          if(addressarr[v]){
+            var cityarr = addressarr[v]['sub'];
+            for(var k in cityarr) {
+              html += '<li cid="'+k+'">'+cityarr[k].name+'</li>';
+            }
+          }
+
+          $("#expect_city_city").html(html);
+        }
+
+        setprovince();
+       
+       $('#provincelist li').click(function(){
+          var obj = $(this).attr('pid'); 
+          $('#nativeplace_c').attr('value','');
+          setnativecity(obj);
+       });
+
+        
+        $('#live_city li').click(function(){
+          var obj = $(this).attr('pid'); 
+          $('#live_city_c').attr('value','');
+           setlivecity(obj);
+       });
+
+        $('#hukou_city li').click(function(){
+          var obj = $(this).attr('pid'); 
+          $('#hukou_city_c').attr('value','')
+           sethukoucity(obj);
+       });
+
+        $('#hukou_city_now li').click(function(){
+          var obj = $(this).attr('pid'); 
+          $('#hukou_now_c').attr('value','')
+           sethukounowcity(obj);
+       });
+
+        $('#expect_city li').click(function(){
+          var obj = $(this).attr('pid'); 
+          $('#expect_city_c').attr('value','')
+           setexpectcity(obj);
+       });
+
+</script>
+
+            </section>
+            <section id="section-underline-2">
+              <include file="./App/Home/View/default/Resume/add/addedu.html" />
+            </section>
+            <section id="section-underline-3">
+              <include file="./App/Home/View/default/Resume/add/addwork.html" />
+            </section>
+            <section id="section-underline-4">
+              <include file="./App/Home/View/default/Resume/add/addproject.html" />
+            </section>
+            <section id="section-underline-7">
+              <include file="./App/Home/View/default/Resume/add/addschoolclub.html" />
+            </section>
+            <section id="section-underline-8">
+              <include file="./App/Home/View/default/Resume/add/addSchoolAwards.html" />
+            </section>
+            <section id="section-underline-9">
+              <include file="./App/Home/View/default/Resume/add/addLanguageSkill.html" />
+            </section>
+            <section id="section-underline-5">
+              <include file="./App/Home/View/default/Resume/add/addCertificate.html" />
+            </section>
+             <section id="section-underline-10">
+              <include file="./App/Home/View/default/Resume/add/addTraining.html" />
+            </section>
+            <section id="section-underline-11">
+              <include file="./App/Home/View/default/Resume/add/addOtherInfo.html" />
+            </section>
+            <a href="javascript:" class="prev" id="prev1" style="display: none">
+             <!--    <img src="http://demo.litextension.com/le_demo/skin/frontend/default/default/le_itemslider/images/icon-prev.png"> -->
+            </a>
+
+            <a href="javascript:" class="next" id="next1" style="display: none">
+               <!--  <img src="http://demo.litextension.com/le_demo/skin/frontend/default/default/le_itemslider/images/icon-next.png"> -->
+            </a>
+          </div><!-- /content -->
+        </div>
+        
+        <div class="clear"></div>
+      </div><!-- /tabs -->
+    </section>
+       
+      </div>     
+    </div>
+  
+
+  <div id="tiptab-weight" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav"><li class="current"><a href="javascript:void(0);" >是什么</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">虽然我们也不明白为什么企业网申要填这个，但根据我们的科学统计，这个真的是一个高频填写项</div>
+          </div>
+        </div>
+      </div><a class="tiptab-close"></a>
+    </div>
+  </div>
+  
+  <div id="tiptab-nativecity" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >是什么</a></li>
+          <li><a href="javascript:void(0);">怎么写</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">参照公安部公通字[1995]91号文件，公民的籍贯应为本人祖父的居住地。</div>
+            <div class="tiptab-con-item">
+              假如你的祖父出生在湖南常德，后来长期生活在广东深圳，那籍贯应该填广东深圳，即以长期居住地为准。这一栏一般不太重要，如果不清楚祖父的居住地，填自己的出生地也无碍。
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+
+  <div id="tiptab-profile" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >是什么</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">这个可以是博客、Linkedin、人人网，也可以是关于自己的主页。</div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+
+   <div id="tiptab-fmname" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >是什么</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">有的公司会在乎你家庭的背景，以此推断你在以后工作中是否有可利用的家庭人脉 。例如，商业银行就很看重家庭有政商背景的。</div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+
+  <div id="tiptab-tutorname" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >是什么</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">HR和用人单位希望了解应聘者的教育背景及在专业学习上取得的成就，方便时可与导师取得联系</div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+
+  <div id="tiptab-gpa" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >是什么</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">GPA英语全称是Grade Point Average，意思就是平均成绩点数（平均分数、平均绩点），一般来说GPA换算是要按照4分制来计算，满分是4.0分，GPA精确度往往达到小数点后1到2位，如：3.0、3.45。以下为分数与GPA对照表：<br/>
+             100分——90分：4.0<br/>89分——80分：3.0<br/>79分——70分：2.0<br/>69分——60分：1.0<br/>60分以下，在中国常规就是不及格，因此绩点为0分
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+
+  <div id="tiptab-prodescri" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >是什么</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;"> 用有组织的语言罗列核心课程即可，如果其中有的课程拿到非常好的成绩，可以注明一下。</div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+ <div id="tiptab-workproperty" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >是什么</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;"> 机关、团体、法人、企业等非自然人的实体或其下属部门的性质。区分工薪阶层上班的地方的类别关系。单位性质是个模糊的概念，不同的单位会有不同的界定。</div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+  <div id="tiptab-projectDuty" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >怎么写</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">最重要是写清楚两点：“你做了什么”与“你做得怎样”。</div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+  <div id="tiptab-projectRemark" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >怎么写</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">项目描述最好可以加上项目背景与项目的等级。</div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+  <div id="tiptab-workDes" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >怎么写</a></li>
+          <li><a href="javascript:void(0);" >示范案例</a></li>
+          
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">社团工作职责与之前的“工作描述”写法是大致相同的，重点是写清楚两点：“你做了什么”与“你做得怎么样”。</div>
+            <div class="tiptab-con-item" >错误写法：<br/>2014-2016  校学生会主席  管理学生会大小事务，负责多场大型校园活动，带领团队获得多家企业赞助<br/><br/>正确写法：<br/>2014-2016  校学生会主席  管理学生会部长及干事合共50人，负责统筹全年30余场大型校园活动，其中有10场参加人数超过3000人。全年合共获得20家企业赞助，总金额超过20万元。</div>
+          </div>
+          
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+  <div id="tiptab-awardsName" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >怎么写</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">不要把考取的证书当成获奖来填写哟</div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+  <div id="tiptab-awardsDes" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >怎么写</a></li>
+          <li><a href="javascript:void(0);" >参考样例</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">挑2-3个最高级别的写即可，简要写明奖项含金量，不是所有HR都对各种各类奖项了解。可以用级别或数字或百分比的方式突出含金量。</div>
+            <div class="tiptab-con-item" >获国家励志奖学金（全班2人）；获国家奖学金（全系前5%）。</div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+  <div id="tiptab-certiName" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          
+          <li class="current"><a href="javascript:void(0);" >怎么写</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">尽量写与申请的工作相关的证书</div>
+            
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+   <div id="tiptab-certiDes" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          
+          <li class="current"><a href="javascript:void(0);" >怎么写</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">参考获奖描述。证书描述最好列出与该工作相关的证书，而不是什么无关紧要的都写上。</div>
+            
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+  <div id="tiptab-trainingDes" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          
+          <li class="current"><a href="javascript:void(0);" >怎么写</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">写清培训的内容即可，一般可以参考培训方提供的课程大纲 </div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+   
+  </div>
+  </div>
+<div id="tiptab-workdescri" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);" >是什么</a></li>
+          <li><a href="javascript:void(0);">参考样例</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">最重要是写清楚两点：“你做了什么”与“你做得怎样”。
+一般同学都会写到自己做过了什么，但往往忽略了更重要的“你做得怎样”这部分。做得怎么样通常用三点来完成：关键词+数据+成果</div>
+           
+            <div class="tiptab-con-item">
+              协助IPO尽调：在一个5人团队中，经过两个月，参与一家电气公司IPO项目尽职调查及辅导工作，深入了解企业商业模式和运作情况<br/><br/>参与财务核查：保证收入和费用的真实性，抽查公司凭证及出库入库单、核查关联交易
+招股说明书撰写：撰写招股说明书历史沿革、业务与技术及财务等部分（60页），分析换股或者代持的情况<br/><br/>
+底稿整理：协助完成项目相关申报文件的撰写和报送，协助各类流程，整理编制所需底稿材料约2000页
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+  <div id="tiptab-selfIntro" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);">怎么写</a></li>
+          <li><a href="javascript:void(0);">参考样例</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">
+             把自己的相关经验、相关技能、相关成果、适配求职岗位的原因等做一个总结和初步的展现，每条一句话罗列出来。
+            </div>
+            <div class="tiptab-con-item">
+            （应聘互联网产品经理职位）<br/>
+          * 大学互联网产品协会副会长，曾在XX公司实习两个月，担任产品助理<br/>
+          * 熟练使用Axure, Xmind等软件，熟悉各类产品文档撰写方法<br/>
+          * 担任产品助理期间追踪并处理BUG和需求超过50个，参与4个版本的迭代<br/>
+          * 热爱互联网，乐观开朗，善于交流
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+  <div id="tiptab-skill" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);">怎么写</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">
+            如实写出一些自己平时的爱好就行了，如果与目标岗位相关的就最好了。例如，应聘游戏公司，爱好可以是打游戏。但如果是国企，爱好是打游戏就减分了。
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+  <div id="tiptab-hobbies" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);">怎么写</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">
+            根据自身实际情况，对前面没提到的技能进行补充，注意，最好与应聘的岗位相关。比如求职产品经理，在这里可以补充自己会一些PS, Sketch等设计软件，或者懂一些编程语言。
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+    <div id="tiptab-achievement" class="tip-container dn">
+    <div class="tiptab" >
+      <div class="tiptab-bg">
+        <ul class="tiptab-nav j-tab-nav">
+          <li class="current"><a href="javascript:void(0);">是什么</a></li>
+          <li><a href="javascript:void(0);">怎么写</a></li>
+          <li><a href="javascript:void(0);">示范案例</a></li>
+        </ul>
+        <div class="tiptab-con">
+          <div class="j-tab-con">
+            <div class="tiptab-con-item" style="display:block;">
+            其实前面填写的各种项已经包含了同学们的各种成就，不过有的企业希望有一栏能集中看到同学们的闪光点，所以有了这个填写项。
+            </div>
+             <div class="tiptab-con-item" >
+           个人成就可以包含这几点：干部经历、学校活动经历、社会实践经历、奖学金或者相关学术成就。
+            </div>
+            <div class="tiptab-con-item" >
+           * 担任本系的分团委副书记，期间拿下省红旗团委称号，全校仅一个名额。<br/>
+          * 2015年7-8月参加赴湘西贫困山区支教活动，获得XX机构颁发的“优秀志愿者”称号。<br/>
+          * 1次获得国家级奖学金，2次获得省级奖学金
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="tiptab-close"></a>
+    </div>
+  </div>
+<div id='loading-mask'></div>
+<div id="loading-download">
+    <div class="loading-indicator">
+      <img src="../../assets/images/loading-mask.png">
+      <a class="close-mask"></a>
+       <!-- 网申简历配合求职助手将大大提高您在企业网申中的效率，建议先下载求职助手再填写哦。<br/>
+       <a class="btndl" href="/Install/install/" target="_blank" id="todownload" style="left:50px">立即下载</a><a id="closeloaddl" class="btndl" style="right:50px">已经下载</a> -->
+    </div>
+</div>
+<div class="save_success_cover">
+    <i class="save_success_icon"></i>
+    <span class="save_success_content">保存成功</span>
+</div>
+
+<!--删除确认框 start-->
+<div style="display: none;">
+    <div id="confirm-unbounding-text" style="width:320px;height:160px;overflow:auto; position: relative; overflow: hidden;">
+        <div class="unbound-container-text">
+            <p>删除后不可恢复，你确定要删除吗？</p>
+            <div class="btn-group-text">
+                <a class="btn-cancel-text">取消</a>
+                <a class="btn-confirm-text">确认</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--删除确认框 end-->
+    <script type="text/javascript" src="../../assets/js/jquery.1.10.1.min.js"></script>
+     <script type="text/javascript" src="../../assets/js/validate-1.14.0.min.js"></script>
+  <script type="text/javascript" src="../../assets/js/v-ic-componment.js"></script>
+  <script type="text/javascript" src="../../assets/js/vpui.js"></script>
+  <script src="../../assets/js/cbpFWTabs.js"></script>
+  <script type="text/javascript" src="../../assets/js/jQuery.rTabs.js"></script>
+  <script>
+      jQuery(function($) {
+          // $(".phonebound-pop-text").fancybox({
+          //     'closeBtn': true,
+          //     'hideOnContentClick':true,
+          //     helpers: {
+          //         overlay: {
+          //             closeClick: true,
+          //             css: {
+          //                 'frameWidth': 300,
+          //                 'frameHeight': 82,
+          //                 'background': 'rgba(255, 215, 50, 0.9)',
+          //                 'overlayOpacity': 0.9
+          //             }
+          //         }
+
+          //     }
+          // });
+      });
+
+      $(document).ready(function() {
+        // var setchecked = $('input[name=resume-checked]').val();
+        // if (setchecked == "all") {
+
+        // }
+
+        checkChange();
+        $('.content-wrap').find('input').attr('autocomplete','off');
+        $('div').delegate(".tiptab_gpa", "click", function(a) {
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-gpa").css({top:top,left:left});
+          $('#tiptab-gpa').css("position","absolute");
+          
+          $("#tiptab-gpa").removeClass('dn');
+          $("#tiptab-gpa .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+
+        function checkopen(){
+            $('.tip-container').each(function () {
+              $(this).hasClass('dn') ? '' :$(this).addClass('dn');
+            });
+        }
+       
+        $('div').delegate(".tiptab_weight", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-50;
+          $("#tiptab-weight").css({top:top,left:left});
+          $('#tiptab-weight').css("position","absolute");
+          $("#tiptab-weight").removeClass('dn');
+          $("#tiptab-weight .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+
+        $('div').delegate(".tiptab_nativecity", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-nativecity").css({top:top,left:left});
+          $('#tiptab-nativecity').css("position","absolute");
+          $("#tiptab-nativecity").removeClass('dn');
+          $("#tiptab-nativecity .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+
+        $('div').delegate(".tiptab_profile", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-profile").css({top:top,left:left});
+          $('#tiptab-profile').css("position","absolute");
+          $("#tiptab-profile").removeClass('dn');
+          $("#tiptab-profile .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+
+        $('div').delegate(".tiptab_fmname", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-fmname").css({top:top,left:left});
+          $('#tiptab-fmname').css("position","absolute");
+          $("#tiptab-fmname").removeClass('dn');
+          $("#tiptab-fmname .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+
+        $('div').delegate(".tiptab_tutorname", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-tutorname").css({top:top,left:left});
+          $('#tiptab-tutorname').css("position","absolute");
+          $("#tiptab-tutorname").removeClass('dn');
+          $("#tiptab-tutorname .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+
+        $('div').delegate(".tiptab_workproperty", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-workproperty").css({top:top,left:left});
+          $('#tiptab-workproperty').css("position","absolute");
+          $("#tiptab-workproperty").removeClass('dn');
+          $("#tiptab-workproperty .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+
+        $('div').delegate(".tiptab_projectDuty", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-projectDuty").css({top:top,left:left});
+          $('#tiptab-projectDuty').css("position","absolute");
+          $("#tiptab-projectDuty").removeClass('dn');
+          $("#tiptab-projectDuty .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+
+        $('div').delegate(".tiptab_projectRemark", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-projectRemark").css({top:top,left:left});
+          $('#tiptab-projectRemark').css("position","absolute");
+          $("#tiptab-projectRemark").removeClass('dn');
+          $("#tiptab-projectRemark .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+
+        $('div').delegate(".tiptab_workDes", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-workDes").css({top:top,left:left});
+          $('#tiptab-workDes').css("position","absolute");
+          $("#tiptab-workDes").removeClass('dn');
+          $("#tiptab-workDes .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+         $('div').delegate(".tiptab_awardsName", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-awardsName").css({top:top,left:left});
+          $('#tiptab-awardsName').css("position","absolute");
+          $("#tiptab-awardsName").removeClass('dn');
+          $("#tiptab-awardsName .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+         $('div').delegate(".tiptab_awardsDes", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-awardsDes").css({top:top,left:left});
+          $('#tiptab-awardsDes').css("position","absolute");
+          $("#tiptab-awardsDes").removeClass('dn');
+          $("#tiptab-awardsDes .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+        $('div').delegate(".tiptab_certiName", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-certiName").css({top:top,left:left});
+          $('#tiptab-certiName').css("position","absolute");
+          $("#tiptab-certiName").removeClass('dn');
+          $("#tiptab-certiName .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+        $('div').delegate(".tiptab_certiDes", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-certiDes").css({top:top,left:left});
+          $('#tiptab-certiDes').css("position","absolute");
+          $("#tiptab-certiDes").removeClass('dn');
+          $("#tiptab-certiDes .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+        $('div').delegate(".tiptab_trainingDes", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-trainingDes").css({top:top,left:left});
+          $('#tiptab-trainingDes').css("position","absolute");
+          $("#tiptab-trainingDes").removeClass('dn');
+          $("#tiptab-trainingDes .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+         $('div').delegate(".tiptab_selfIntro", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-selfIntro").css({top:top,left:left});
+          $('#tiptab-selfIntro').css("position","absolute");
+          $("#tiptab-selfIntro").removeClass('dn');
+          $("#tiptab-selfIntro .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+          $('div').delegate(".tiptab_skill", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-skill").css({top:top,left:left});
+          $('#tiptab-skill').css("position","absolute");
+          $("#tiptab-skill").removeClass('dn');
+          $("#tiptab-skill .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+           $('div').delegate(".tiptab_hobbies", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-hobbies").css({top:top,left:left});
+          $('#tiptab-hobbies').css("position","absolute");
+          $("#tiptab-hobbies").removeClass('dn');
+          $("#tiptab-hobbies .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+            $('div').delegate(".tiptab_achievement", "click", function(a) {
+          checkopen();
+          var  top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-achievement").css({top:top,left:left});
+          $('#tiptab-achievement').css("position","absolute");
+          $("#tiptab-achievement").removeClass('dn');
+          $("#tiptab-achievement .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+
+        $('div').delegate(".tiptab-close", "click", function(a) {
+          $(this).parent().parent().addClass('dn');
+          $(this).parent().find('.j-tab-nav li').siblings().removeClass('current'); 
+          $(this).parent().find('.j-tab-nav li').first().addClass('current');
+          $(this).parent().find('.j-tab-con .tiptab-con-item').siblings().css('display','none'); 
+          $(this).parent().find('.j-tab-con .tiptab-con-item').first().css('display','block');
+          $(this).parent().find('.j-tab-con').css('position','');
+          $(this).parent().find('.j-tab-con').css({top:'',left:''});
+          $(this).parent().find('.j-tab-con').css('width','');
+        });
+
+        $('div').delegate(".tiptab_prodescri", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-prodescri").css({top:top,left:left});
+          $('#tiptab-prodescri').css("position","absolute");
+          $('#tiptab-prodescri').css("z-index","10");
+          $("#tiptab-prodescri").removeClass('dn');
+          $("#tiptab-prodescri .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+        $('div').delegate(".tiptab_workdescri", "click", function(a) {
+          checkopen();
+          var top = $(this).offset().top+$(this).height()+20;
+          var left = $(this).offset().left-350;
+          $("#tiptab-workdescri").css({top:top,left:left});
+          $('#tiptab-workdescri').css("position","absolute");
+          $('#tiptab-workdescri').css("z-index","10");
+          $("#tiptab-workdescri").removeClass('dn');
+          $("#tiptab-workdescri .tiptab").rTabs({bind : 'click',animation : 'left'});
+        });
+
+      $("input[name=resume-checked]").bind("click",function(){
+        $("input[name=resume-checked]").unbind("click");
+        checkChange();
+          var login_check = true;//<?php echo $info[login_check]?>
+          if (login_check == 1) {
+              openOnce();
+              var login_check = "2";
+              $.ajax({
+                  url: ctx + "Resume/firstOpen",
+                  type: "post",
+                  data: {"login_check":login_check}, 
+                  success: function (result) {
+                      console.log(result);
+                      clickSwitch();
+                  }
+              })
+          }else{
+            clickSwitch();
+          }
+      });
+
+     
+    
+      
+      // $('.tipright').jBox('Tooltip', {
+      //   position: {
+      //     x: 'right',
+      //     y: 'center'
+      //   },
+      //   width:150,
+      //   outside: 'x' // Horizontal Tooltips need to change their outside position
+      // });
+      // $('.tiprighttext').jBox('Tooltip', {
+      //   position: {
+      //     x: 'right',
+      //     y: 'center'
+      //   },
+      //   width:150,
+      //   outside: 'x' // Horizontal Tooltips need to change their outside position
+      // });
+
+        // $(".form_oldatetime").datetimepicker({
+        //     format: "yyyy-mm-dd",
+        //     language: 'zh-CN',
+        //     weekStart: 1,
+        //     todayBtn:  1,
+        //     autoclose: 1,
+        //     todayHighlight: 1,
+        //     startView: 2,
+        //     minView: 2,
+        //     forceParse: 0
+
+        // });
+      //alert(window.location.pathname);
+      var realhash = window.location.hash;
+      //alert(realhash);
+      if (realhash == "#section-underline-2") {
+        $("#section-edu").click();
+      }else if (realhash == "#section-underline-3") {
+         $("#section-work").click();
+      }else if (realhash == "#section-underline-4") {
+         $("#section-pro").click();
+      }else if (realhash == "#section-underline-5") {
+         $("#section-certi").click();
+      }else if (realhash == "#section-underline-6") {
+         $("#section-schpra").click();
+      }else if (realhash == "#section-underline-7") {
+         $("#section-schclub").click();
+      }else if (realhash == "#section-underline-8") {
+         $("#section-schaw").click();
+      }else if (realhash == "#section-underline-9") {
+         $("#section-").click();
+      }else if (realhash == "#section-underline-10") {
+         $("#section-train").click();
+      }else if (realhash == "#section-underline-11") {
+         $("#section-otherinfo").click();
+      }else{
+      }
+
+      $(".section-top").affix({
+          offset: { 
+          top: 10 
+        }
+      });
+      $("#resumebg-left").affix({
+          offset: { 
+          top: 10 
+        }
+      });
+       
+   }); 
+  function openOnce() {
+    $('#switchtip').css('display','block');
+  }
+  function clickSwitch(){
+    $("input[name=resume-checked]").click(function(){
+          checkChange();  
+    });
+  }
+  function checkChange() {
+       //  var checkbox = document.getElementById('info-switch');//
+       // // alert(checkbox.checked);//是否被选中
+       //  if(checkbox.checked){
+       //    $(".lowUse").css("display","");
+       //  }else{
+       //    $(".lowUse").css("display","none");
+       //  }
+      var rechecked = $("input[name='resume-checked']:checked").val();
+        if(rechecked == "all"){
+          $(".lowUse").css("display","table-row");
+        }else{
+          $(".lowUse").css("display","none");
+        }
+  }
+    (function() {
+      [].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+        new CBPFWTabs( el );
+      });
+    })();
+
+    var $t=new CBPFWTabs(document.getElementById( 'tab1' ) )
+    document.getElementById('prev1').onclick=function(){
+        var current=$t.current;
+        var count=$t.items.length;
+        current--;
+        if(current<0) current=count-1;
+        $t._show(current);
+    };
+
+    document.getElementById('next1').onclick=function(){
+        var current=$t.current;
+        var count=$t.items.length;
+        current++;
+        if(current>=count) current=0;
+        $t._show(current);
+    };
+
+    function tonext(){
+       document.getElementById('next1').click();
+    }
+  </script>
+</div>
+<!-- end #body --> 
+<script type="text/javascript" src="../../assets/js/resume-style.js"></script>
+<script type="text/javascript" src="../../assets/js/core.min.js"></script> 
+<script type="text/javascript" src="../../assets/js/script.js"></script> 
+<!-- <script type="text/javascript" src="../../assets/js/popup.js"></script>  -->
+
+<!-- <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script> -->
+<script type="text/javascript" src="../../assets/js/affix.js"></script> 
+
+<script src="../../assets/js/flat-ui.min.js"></script>
+</body>
+
+</html>
