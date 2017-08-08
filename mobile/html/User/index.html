@@ -1,0 +1,525 @@
+<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/sass/module/setting.css" />
+</head>
+	<body class="mui-fullscreen ic-theme-yellow ic-center-screen">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--单页面开始-->
+		<div id="setting" class="mui-page">
+			<header class="mui-navbar-inner mui-bar mui-bar-nav ic-header-nav">
+			<h1 class="mui-title ic-collapse-title">
+			<a id="icon-menu" class="mui-action-menu ">
+			<img class="mlogo" src="/Public/Mobile/images/assets/mlogo.png" />
+			<if condition="$nav.setting eq 'company'">白熊求职
+			<elseif condition="$nav.setting eq 'academy'"/>白熊学院
+			<else/>白熊论坛</if><i class="nc-icon-outline arrows-1_minimal-down"></i>
+			</a></h1>
+		</header>
+		<div id="menu-wrapper" class="menu-wrapper hidden">
+			<div id="menu" class="menu ">
+				<ul class="mui-table-view mui-table-view-inverted ic-topdropnav mui-row">
+					<if condition="$nav.setting neq 'bbs'">
+					<li class=" mui-col-xs-4">
+						<a href="http://bbs.icebear.me/forum-1.htm" open-type="common"><span class=""><i class="nc-icon-outline ui-3_chat-46"></i></span>白熊论坛</a>
+					</li>
+					</if>
+					<if condition="$nav.setting neq 'company'">
+					<li class=" mui-col-xs-4">
+						<a href="/company/companylist" open-type="common"><span class=""><i class="nc-icon-outline business_briefcase-24"></i></span>白熊求职</a>
+					</li>
+					</if>
+					<li class=" mui-col-xs-4">
+						<a href="/baike" open-type="common"><span class=""><i class="nc-icon-outline business_books"></i></span>白熊百科</a>
+					</li>
+					<if condition="$nav.setting neq 'academy'">
+					<li class="mui-col-xs-4">
+						<a href="/academy" open-type="common"><span class=""><i class="nc-icon-outline media-1_player"></i></span>白熊学院</a>
+					</li>
+					</if>
+				</ul>
+			</div>
+		</div>
+		<div id="menu-backdrop" class="menu-backdrop"></div>
+			<!--页面标题栏结束-->
+			<!--页面主内容区开始-->
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper ic-center-bg">
+					<div class="mui-scroll ic-center-bg">
+						<div class="ic-center-userinfo">
+							<div class="ic-center-avaterInfoFace">
+								<img class="ic-center-avaterFace" id="head-img" src="{:($data['head']=='')?'/Public/images/missing_face.png':$data['head']}">
+							</div> 
+							<div class="ic-center-avaterInfo">
+								<p class="ic-center-username" id="ic-center-username">{$data.nickname}</p>
+								<p class='ic-center-userGrade'><if condition="$data.level gt 1">{$data.levelname}</if></p>
+								<p class="ic-center-userCredit" id="ic-center-userCredit">我的积分：<span>{$data.credits|default=0}</span></p>
+							</div>
+						</div>
+							
+						<ul class="mui-table-view mui-table-view-chevron ">
+							<li class="mui-table-view-cell ic-center-msgli">
+								<a class="ic-nbsp ic-daysignin"><i class="nc-icon-outline ui-1_leaf-81"></i>每日签到
+									<if condition="$issign eq true"><button id="ic-btn-sign" disabled="disabled" class="btn-sign"><span>已签到</span><i class="sign-dot"><em></em><em></em><em></em><em></em><em></em></i></button><else/><button id="ic-btn-sign" class="btn-sign"><span>点击签到</span><i class="sign-dot"><em></em><em></em><em></em><em></em><em></em></i></button></if><i class="nc-icon-outline ui-2_alert-circle sign-tips"></i>
+									<!-- <if condition="$issign eq true"><button id="ic-clickCredits" class="ic" style="display:none">点击签到</button><else /><button id="ic-clickCredits" class="ics" style="display:block">点击签到</button></if>
+									<span id="ic-clickCreditsNum">已签到{$data.allsign}天</span> -->
+								</a>
+							</li>
+							<!-- <li class="mui-table-view-cell ic-center-msgli">
+								<a href="#edit-account" class="mui-navigate-right ic-nbsp" id="edit-accounts"><i class="nc-icon-outline design_eraser-33"></i>修改昵称</a>
+							</li>
+							<li class="mui-table-view-cell ic-center-msgli">  
+								<a href="#ic-newPwd" class=" mui-navigate-right ic-nbsp" id="ic-newPwds"><i class="nc-icon-outline objects_key-25"></i>修改密码</a>
+							</li> -->
+							
+							<li class="mui-table-view-cell ic-center-msgli">
+								<a href="#myCredit" class=" mui-navigate-right ic-nbsp ic-close-nav"  id="myCredits"><i class="nc-icon-outline business_coins"></i>如何赚积分</a>
+							</li>
+							<li class="mui-table-view-cell ic-center-msgli">
+								<a href="#whatIsCredit" class=" mui-navigate-right ic-nbsp ic-close-nav"  id="whatIsCredits"><i class="nc-icon-outline design_wand-11"></i>积分可以做什么</a>
+							</li>
+							<li class="mui-table-view-cell ic-center-msgli">
+								<a href="#myprofile" class="mui-navigate-right ic-nbsp ic-close-nav" id="edit-accounts"><i class="nc-icon-outline design_eraser-33"></i>基本资料</a>
+							</li>
+							<li class="mui-table-view-cell ic-center-msgli">
+								<a href="#binding" class="mui-navigate-right ic-nbsp ic-close-nav"  id="bindings"><i class="nc-icon-outline ui-2_link-72"></i>绑定设置</a>
+							</li>
+							<li class="mui-table-view-cell ic-center-msgli ic-center-msg">
+								<a href="#news" class=" mui-navigate-right ic-nbsp ic-close-nav"  id="news-center"><i class="nc-icon-outline ui-1_bell-54"></i>消息中心<span class="ic-red-point"></span></a>
+								<!-- <a href="#news" class="mui-navigate-right" id="news-center">消息中心<span class="ic-red-point"></span></a> -->
+							</li>
+						</ul>
+						<ul class="mui-table-view ic-center-loginout">
+							<li class="mui-table-view-cell ic-center-msgli" style="text-align: center;">
+								<a href="/user/logout" open-type="common">退出登录</a>
+							</li>
+						</ul>
+
+						<!-- <div class="ic-dialog ic-signup"><img src="/Public/Mobile/images/kissbear.png"><p>每日签到 +50 分<br/>连续 5 天签到 +50 分</p><a class=" ic-btn ic-btn-sm-block btn-square ic-btn-brown fullwidth">知道了</a></div> -->
+					</div>
+				</div>
+			</div>
+			<!--页面主内容区结束-->
+		</div>
+		<!--单页面结束-->
+		
+		<!--修改昵称-->
+		<div id="edit-account" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<!-- <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button> -->
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left ic-open-nav"  id="edit-accountBack"></a>
+				<h1 class="mui-center mui-title">修改昵称</h1>
+			</div>
+			<form class="mui-input-group ic-center-form">
+				<div class="mui-input-row ic-center-nickname">
+					<!-- <input type="text" class="mui-input-clear"> -->
+					<input type="text" class="mui-input-clear"  name="oldnickname" id="oldnickname" value="{$data.nickname}">
+				</div>
+			</form>
+			<span class="ic-alertSpan" id="ic-chengenickname-error">*昵称错误</span>
+			<div class="mui-button-row ic-center-btn">
+                <button  type="button" class="mui-btn ic-btn-block ic-btn-primary mui-btn-block" data-loading-text="保存中" data-loading-icon-position="right" id="resetnicknamesubmit" value="保存">保存</button>
+            </div>
+		</div>
+		<!--修改密码-->
+		<div id="ic-newPwd" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<!-- <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button> -->
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left ic-open-nav" id="ic-newPwdBack"></a>
+				<h1 class="mui-center mui-title">修改密码</h1>
+			</div>
+            <form id="changePwd" class="mui-input-group ic-clogin-form">
+                <div class="mui-input-row mui-password">
+                    <input type="password" value="" autocomplete="off"  id="ic-center-oldpwd" name="loginOldPwd" placeholder="当前密码" class="mui-input-password">
+                </div>
+               
+                <div class="mui-input-row mui-password">
+                    <input type="password" value="" autocomplete="off"  id="ic-center-newpwd" name="loginNewPwd" placeholder="新密码" class="mui-input-password">
+                </div>
+            </form>
+            <span class="ic-alertSpan ic-alertSpanPwd" id="ic-chengephone-error">*密码错误</span>
+			<div class="mui-button-row ic-center-btn">
+                <button id="ic-center-newpwdbtn" type="button" class="mui-btn ic-btn-block ic-btn-primary mui-btn-block" data-loading-text="保存中" data-loading-icon-position="right">保存</button>
+            </div>
+		</div>
+		<!--基本资料-->
+		<div id="myprofile" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<!-- <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button> -->
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left ic-open-nav" id="ic-newPwdBack"></a>
+				<h1 class="mui-center mui-title">基本资料</h1>
+			</div>
+            <form id="changePwd" class=" ic-border-input">
+            	<div class="mui-input-group">
+            		<div class="mui-input-row ic-center-nickname">
+						<!-- <input type="text" class="mui-input-clear"> -->
+						<input type="text" class="mui-input-clear"  name="oldnickname" id="oldnickname-profile" value="{$data.nickname}">
+					</div>
+					<span class="ic-alertSpan ic-alertSpanPwd" id="ic-nickname-error"></span>
+            	</div>
+            	<div class="mui-input-group">
+	                <div class="mui-input-row mui-password">
+	                    <input type="password" value="" autocomplete="off"  id="ic-center-oldpwd-profile" name="loginOldPwd" placeholder="当前密码" class="mui-input-password">
+	                </div>
+	               
+	                <div class="mui-input-row mui-password">
+	                    <input type="password" value="" autocomplete="off"  id="ic-center-newpwd-profile" name="loginNewPwd" placeholder="新密码" class="mui-input-password">
+	                </div>
+	                <span class="ic-alertSpan ic-alertSpanPwd" id="ic-password-error"></span>
+                </div>
+            </form>
+            
+			<div class="mui-button-row ic-center-btn">
+                <button id="ic-profilebtn" type="button" class="mui-btn ic-btn-block ic-btn-primary mui-btn-block" data-loading-text="保存中" data-loading-icon-position="right">保存</button>
+            </div>
+		</div>
+		<!--绑定设置-->
+		<div id="binding" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left ic-open-nav" id="bindingBack"></a>
+				<h1 class="mui-center mui-title">绑定设置</h1>
+			</div>
+			<div class="ic-bing-phone">
+				<div class="ic-circle">
+					<i class="nc-icon-glyph design_phone"></i>
+				</div>
+				<div class="ic-iphones">
+					{$data.mobile}
+				</div>
+				<div class="ic-changeiphone">
+					<a href="#changephone">更换</a>
+				</div>
+			</div>
+			<div class="ic-bing-wx">
+			<if condition="$isbind eq true">
+				<div class="ic-circle active"></div><div class="ic-wx" id="ic-wx">{$wxinfo.wx_nickname}</div>
+			<else />
+				<div class="ic-circle"></div><div class="ic-wx" id="ic-wx">微信</div>
+			</if>
+			<div class="ic-changewx">
+			<if condition="$isbind eq true">
+				<span id="wxUnbind">解绑</span>
+			<elseif condition="$isbind neq true && $wxBroser eq true" />
+				<a style="color: #9B9B9B;" href="javascript:;" class="ic-wx-bind" uid="{$uid}" open-type="common">点击绑定</a>
+			<else />
+				<span class="unbindwx">点击绑定</span>
+			</if>
+			</div>
+			</div>
+			<!-- <div class="mui-button-row ic-center-change">
+                <button id="ic-center-saveChange" type="button" class="mui-btn ic-btn-block ic-btn-primary mui-btn-block" data-loading-text="保存中" data-loading-icon-position="right">保存</button>
+            </div> -->
+		</div>
+		<!--修改手机号-->
+		<div id="changephone" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav" id="changePhonesTitle">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left ic-open-nav"></a>
+				<h1 class="mui-center mui-title">修改手机号</h1>
+			</div>
+			<form id="ic-center-formPhoneChange" class="mui-input-group ic-newphone">
+                <div class="mui-input-row">
+					<input type="number" class="mui-input-clear" id="newphone" name="newphone" maxlength="11" placeholder="新手机号" >
+				</div>
+				<div class="mui-input-row ic-yzmPicBox">
+					<input type="text" class="" id="yzmPic"   name="centerverify" placeholder="" maxlength="4">
+					<div class="ic-yzmPic"><img class="verifyimg reloadverify" id="verifyphoneimg"   alt="点击切换" src="{:U('User/verify')}" style="cursor:pointer;"></div>
+					<!-- /User/verify?0.9291341831255102 -->
+				</div>
+				<div class="mui-input-row">
+					<input type="text" class="" id="yzmCode" name="toPhoneCode" placeholder="验证码">
+					<button id="ic-center-sendMsg">发送验证码</button>
+				</div>
+            </form>
+            <span class="ic-changePhone-Error" id="ic-changePhone-Error"></span>
+			<div class="mui-button-row ic-center-change">
+                <button id="ic-center-savePhoneChange" type="button" class="mui-btn ic-btn-block ic-btn-primary mui-btn-block" data-loading-text="绑定中" data-loading-icon-position="right">绑定</button>
+            </div>
+		</div>
+		<!--消息中心-->
+		<div id="news" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left ic-action-back ic-open-nav"></a>
+				<p class="mui-center mui-title" style="font-weight:700;font-size: 18px;color: #482929;letter-spacing: 1.12px;">消息中心</p>
+			</div>
+
+            <div class="mui-content" id="ic-news-content">
+                <div class="mui-slider" id="ic-slider">
+                    <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted ic-slider-indicator">
+                        <a class="mui-control-item ic-active-other mui-active" href="#itemOneMobile"><span class="ic-red-point"></span>系统消息</a>
+                        <a class="mui-control-item" href="#itemTwoMobile"><span class="ic-red-point"></span>我的消息</a>
+                    </div>
+                    <!-- <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6 ic-slider-progress-bar"></div> -->
+
+                    <div class="mui-slider-group ic-slider-group">
+                        <div id="itemOneMobile" class="mui-slider-item mui-control-content mui-active">
+                            <div class="empty"style="display: none">
+                                <div class="empty-container">
+
+                                    <img src="/Public/Home/images/sysmsg/empty-min.png">
+                                    <p class="text-center">还没有消息啦~</p>
+                                </div>
+                            </div>
+                            <div class="notempty" style="display: none">
+                                <div class="mui-scroll-wrapper ic-scroll-wrapper">
+                                    <div class="mui-scroll">
+                                        <ul class="mui-table-view bg-bread ic-table-view ic-haveNews">
+                                            <li>
+                                                <span class="ic-news-one"><span></span>个新消息</span>
+                                                <span class="ic-news-two" id="ic-news-two">全标已读</span>
+                                            </li>
+                                        </ul>
+                                        <ul class="mui-table-view bg-bread ic-table-view">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="loading">
+                                <!-- <img src="/Public/Home/images/loading.png"> -->
+								<div style="text-align: center;margin-top:50%;"><li class="nc-icon-glyph loader_circle-04"></li></div>
+								<p class="text-center">加载中...</p>
+                            </div>
+                        </div>
+
+                        <div id="itemTwoMobile" class="mui-slider-item mui-control-content">
+                            <div class="empty" style="display: none;">
+                                <div class="empty-container">
+                                    <img src="/Public/Home/images/sysmsg/empty-min.png">
+                                    <p class="text-center">还没有消息啦~</p>
+                                </div>
+                            </div>
+                            <div class="notempty" style="display: none;">
+                                <div class="mui-scroll-wrapper ic-scroll-wrapper">
+                                    <div class="mui-scroll">
+                                        <ul class="mui-table-view bg-bread ic-table-view ic-haveNews">
+                                            <li>
+                                                <span class="ic-content-one"><span></span>个新消息</span>
+                                                <span class="ic-content-two" id="ic-content-two">全标已读</span>
+                                            </li>
+                                        </ul>
+                                        <ul class="mui-table-view bg-bread ic-table-view">
+											<!--<li class="ic-table-view-cell">-->
+                                                    <!--<p><span class="news-name">hhhhahaha</span> 回复了你:</p>-->
+                                                    <!--<span class="news-content"><a href="#">内容</a></span>-->
+                                                    <!--<span class="news-time">2016/8/9</span>-->
+                                            <!--</li>-->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="loading">
+                                <!-- <img src="/Public/Home/images/loading.png"> -->
+								<div style="text-align: center;margin-top:50%;"><li class="nc-icon-glyph loader_circle-04"></li></div>
+                                <p class="text-center">加载中...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+		</div>
+		<!--我的积分-->
+		<div id="myCredit" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav" id="changePhonesTitle">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left ic-open-nav"></a>
+				<h1 class="mui-center mui-title">怎么赚积分</h1>
+			</div>
+			<div class="mui-content" id="ic-news-content">
+                <div class="mui-slider" id="ic-slider">
+                    <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted ic-slider-indicator">
+                        <a class="mui-control-item ic-active-other mui-active" href="#myCredit1"><span class="ic-red-point"></span>积分任务</a>
+                        <a class="mui-control-item" href="#myCredit2"><span class="ic-red-point"></span>积分明细</a>
+                    </div>
+                    <!-- <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6 ic-slider-progress-bar"></div> -->
+
+                    <div class="mui-slider-group ic-slider-group">
+                        <div id="myCredit1" class="mui-slider-item mui-control-content mui-active">
+                        	<div class="mui-scroll-wrapper ic-scroll-wrapper">
+                        	<div class="mui-scroll" style="background: #fff !important;">
+                            <p class="credit-title">我的积分：<span class="text-pink">{$data.credits}</span></p>
+                            <ul class="mui-table-view mui-table-view-chevron ic-simple-list icon-list">
+                            	<li class="mui-table-view-cell">
+									<i class="nc-icon-outline users-2_a-add"></i>
+                            		<span class="pdlt30">邀请好友 <span class="text-whitepink">{$creditconf.invite} 分</span></span>
+                            		<button data-href="{$recomidurl}" class="ic-btn ic-btn-mini315 ic-btn-pri btn-noshadow btn-invite-friend">去完成</button>
+								</li>
+								<li class="mui-table-view-cell">
+									<i class="nc-icon-outline business_signature"></i>
+                            		<span class="pdlt30">每日签到 <span class="text-whitepink">{$creditconf.sign} 分</span></span>
+                            		<if condition="$issign eq true">
+                            			<button id="myCreditsign" disabled class="ic-btn ic-btn-mini315 ic-btn-pri btn-noshadow">已完成</button>
+                            		<else />
+                            			<button id="myCreditsign" class="ic-btn ic-btn-mini315 ic-btn-pri btn-noshadow mui-action-back">去完成</button>
+                            		</if>	
+								</li>
+								<li class="mui-table-view-cell">
+									<i class="nc-icon-outline business_signature"></i>
+                            		<span class="pdlt30">连续五日签到 <span class="text-whitepink">{$creditconf.sign_5} 分</span></span>
+                            		<button id="myCreditsign" class="ic-btn ic-btn-mini315 ic-btn-pri btn-noshadow mui-action-back">去完成</button>
+								</li>
+								<li class="mui-table-view-cell">  
+									<i class="nc-icon-outline ui-2_link-72"></i>
+                            		<span class="pdlt30">绑定微信 <span class="text-whitepink">{$creditconf.wechat} 分</span></span>
+                            		<if condition="$wechatok eq 1"><button id="myCreditwechat" disabled class="ic-btn ic-btn-mini315 ic-btn-pri btn-noshadow">已完成</button><else /><button id="myCreditwechat" class="ic-btn ic-btn-mini315 ic-btn-pri btn-noshadow" ><a href="#binding" style="color: #fff;">去完成</a></button></if>
+								</li>
+							</ul>
+							<p class="credit-title">积分可以干嘛？</p>
+                            <ul class="mui-table-view mui-table-view-chevron ic-simple-list icon-list">
+                            	<li class="mui-table-view-cell">
+									<i class="nc-icon-outline emoticons_like"></i>
+                            		<span class="pdlt30">兑换内推 <!-- {$creditconf.referral} --><span class="text-taro">100 分/每次</span></span>
+                            		<button onclick="location='/company/referral'" class="ic-btn ic-btn-mini315 ic-btn-taro btn-noshadow">去兑换</button>
+                            		<!-- <button style="background-color: #b0b0b0 !important;width: 72px;padding:3px 0 !important; text-align: center;" onclick="location='/company/referral'" class="ic-btn ic-btn-mini315 ic-btn-taro btn-noshadow">即将上线</button> -->
+								</li>
+								<li class="mui-table-view-cell">
+									<i class="nc-icon-outline ui-1_edit-75"></i>
+                            		<span class="pdlt30">论坛提问 <span class="text-taro"><?php echo str_replace("-", "", $creditconf['thread']);?> 分</span></span>
+                            		<button onclick="location='http://bbs.icebear.me/forum-1.htm'" class="ic-btn ic-btn-mini315 ic-btn-taro btn-noshadow">去提问</button>
+								</li>
+								<li class="mui-table-view-cell">
+									<i class="nc-icon-outline education_agenda-bookmark"></i>
+                            		<span class="pdlt30">锦囊下载 <!-- {$creditconf.brochure} --><span class="text-taro">100 分</span></span>
+                            		<button onclick="location='http://bbs.icebear.me/package.htm'" class="ic-btn ic-btn-mini315 ic-btn-taro btn-noshadow">去下载</button>
+								</li>
+							</ul>
+							<p class="tips">* 更多赚积分方式请用电脑访问官网 www.icebear.me</p>
+							</div>
+							</div>
+                        </div>
+
+                        <div id="myCredit2" class="mui-slider-item mui-control-content">
+                         	<div class="mui-scroll-wrapper ic-scroll-wrapper">
+                            <div class="mui-scroll">
+                           <div class="ic-inner-content">
+								<ul class="mui-table-view mui-table-view-chevron ic-table-list">
+									<volist name="credit_detail" id="v">
+									<li class="mui-table-view-cell">
+										<span class="text-left">{$v.time|date='Y/m/d', ###}</span>
+										<span class="pull-right" style="width: 25px; text-align: right;">{$v.credits}</span>
+										<span class="pull-right pdrt50">{$v.content}</span>
+									<li>
+									</volist>
+                                </ul>
+                                <p class="show-record ft12"><span class="end-line pull-left"></span>只展示近三个月记录<span class="end-line pull-right"></span></p>
+                           </div>
+                           </div></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+		</div>
+		<!-- 积分可以做什么 -->
+		<div id="whatIsCredit" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav" id="changePhonesTitle">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left ic-open-nav"></a>
+				<h1 class="mui-center mui-title">积分可以做什么</h1>
+			</div>
+			<div class="mui-content" id="ic-news-content">
+                <div class="mui-slider" id="ic-slider">
+                    <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted ic-slider-indicator">
+                        <a class="mui-control-item ic-active-other mui-active" href="#whatIsCredit1"><span class="ic-red-point"></span>积分任务</a>
+                        <a class="mui-control-item" href="#whatIsCredit2"><span class="ic-red-point"></span>积分明细</a>
+                    </div>
+                    <!-- <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6 ic-slider-progress-bar"></div> -->
+
+                    <div class="mui-slider-group ic-slider-group">
+                        <div id="whatIsCredit1" class="mui-slider-item mui-control-content mui-active">
+                        	<!-- <div class="mui-scroll"> -->
+                            <p class="credit-title">积分可以干嘛？</p>
+                            <ul class="mui-table-view mui-table-view-chevron ic-simple-list icon-list">
+                            	<li class="mui-table-view-cell">
+									<i class="nc-icon-outline emoticons_like"></i>
+                            		<span class="pdlt30">兑换内推 <!-- {$creditconf.referral} --><span class="text-taro">100 分/每次</span></span>
+                            		<button onclick="location='/company/referral'" class="ic-btn ic-btn-mini315 ic-btn-taro btn-noshadow">去兑换</button>
+								</li>
+								<li class="mui-table-view-cell">
+									<i class="nc-icon-outline ui-1_edit-75"></i>
+                            		<span class="pdlt30">论坛提问 <span class="text-taro"><?php echo str_replace("-", "", $creditconf['thread']);?> 分</span></span>
+                            		<button onclick="location='http://bbs.icebear.me/forum-1.htm'" class="ic-btn ic-btn-mini315 ic-btn-taro btn-noshadow">去提问</button>
+								</li>
+								<li class="mui-table-view-cell">
+									<i class="nc-icon-outline education_agenda-bookmark"></i>
+                            		<span class="pdlt30">锦囊下载 <!-- {$creditconf.brochure} --><span class="text-taro">100 分</span></span>
+                            		<button onclick="location='http://bbs.icebear.me/package.htm'" class="ic-btn ic-btn-mini315 ic-btn-taro btn-noshadow">去下载</button>
+								</li>
+							</ul>
+							<p class="tips">* 更多赚积分方式请用电脑访问官网 www.icebear.me</p>
+							<!-- </div> -->
+                        </div>
+
+                        <div id="whatIsCredit2" class="mui-slider-item mui-control-content">
+                         	<div class="mui-scroll-wrapper ic-scroll-wrapper">
+                            <div class="mui-scroll">
+                           <div class="ic-inner-content">
+								<ul class="mui-table-view mui-table-view-chevron ic-table-list">
+									<volist name="credit_detail" id="v">
+									<li class="mui-table-view-cell">
+										<span class="text-left">{$v.time|date='Y/m/d', ###}</span>
+										<span class="pull-right" style="width: 25px; text-align: right;">{$v.credits}</span>
+										<span class="pull-right pdrt50">{$v.content}</span>
+									<li>
+									</volist>
+                                </ul>
+                                <p class="show-record ft12"><span class="end-line pull-left"></span>只展示近三个月记录<span class="end-line pull-right"></span></p>
+                           </div>
+                           </div></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+		</div>
+		<div class="ic-dialog ic-profile-wxunbind" style="height: auto; ">
+			<p>解绑后不能使用微信登录白熊，确定要解绑吗？</p>
+			<a class="ic-btn ic-btn-brown pull-left ic-btn-dialog-close" href="javascript:;">取消</a><a class="ic-btn ic-btn-brown pull-right ic-wx-unbind" uid="{$uid}" href="javascript:;">确认</a>
+		</div>
+		<div class="ic-dialog pdtop-close" style="height: auto;">
+			<i class="nc-icon-glyph ui-1_simple-remove ic-btn-dialog-close"></i>
+			<p class="ftnormal">绑定失败。请确保网络通畅，或检查微信是否已绑定其他白熊账号。</p>
+			<p class="ftnormal">若再次失败请联系客服「熊小二」</p>
+			<div class="center"><img src="/Public/qr/code_xiongxiaoer.png" style="max-width: 130px; padding-bottom: 20px;"></div>
+			<p class="center ftnormal mgclr">扫码或搜索微信号 xunluyyl 添加</p>
+		</div>
+		<div class="ic-dialog ic-dialog-unbingwxtip pdtop-close" style="height: auto; ">
+			<i class="nc-icon-glyph ui-1_simple-remove ic-btn-dialog-close"></i>
+			<p>请通过以下方式绑定微信：</p>
+			<p class="ftnormal">1. 电脑浏览器访问 <span class="text-taro">icebear.me</span><br/>2. 在公众号「白熊小助手」底部菜单访问白熊学院。</p>
+			<div class="center"><img src="/Public/qr/code_xiaozhushou.png" style="max-width: 130px; padding-bottom: 20px;"></div>
+			<p class="center ftnormal mgclr">扫码或搜索公众号「白熊小助手」</p>
+		</div>
+		<div class="ic-dialog sign-dialog" style="height: auto;">
+			<p class="ftbold">1 次签到 = {$creditconf.sign} 分，<br/>连续五日签到 = 额外奖励 {$creditconf.sign_5} 分。</p>
+			<!-- <p class="ftnormal">积分可用于「白熊学院」解锁课程。</p>
+			<p class="ftnormal">积分还可以用于「白熊论坛」的提问和礼包下载。你的每一次提问都会得到白熊团队或者白熊老司机们的认真回复。</p> -->
+			<div class="center" style="margin-top: 12px;"><a class="ic-btn ic-btn-brown ic-btn-block ic-btn-dialog-close" style="width: 100%; line-height: 40px;">知道了</a></div>
+		</div>
+		<!-- 修改状态 -->
+		<div class="ic-changeAlartBingo" id="ic-changeAlartBingo">
+			<span class="ic-alert-box"><i class="nc-icon-glyph ui-1_check-bold"></i>修改成功</span>
+		</div>
+		<div class="ic-changeAlartError" id="ic-changeAlartError">
+			<span class="ic-alert-box"><i class="nc-icon-glyph  ui-2_fat-remove"></i>修改失败</span>
+		</div>
+		<div class="ic-changeAlartBingo" id="ic-bindAlartBingo">
+			<span class="ic-alert-box"><i class="nc-icon-glyph ui-1_check-bold"></i>绑定成功</span>
+		</div>
+		<div class="ic-changeAlartBingo" id="ic-signAlartBingo">
+			<span class="ic-alert-box">签到成功 + {$creditconf.sign}</span>
+		</div>
+		<div class="ic-changeAlartBingo" id="ic-signFiveAlartBingo">
+			<p style="height: 74px; width: 136px;color: #fff;line-height: 20px;padding: 17px 0;" class="ic-alert-box">签到成功 +{$creditconf.sign}<br/>连续五天 +{$creditconf.sign_5}</p>
+		</div>
+
+	

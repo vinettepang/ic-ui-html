@@ -1,0 +1,114 @@
+<include file="Public/header" />
+<include file="Public/top_nav_company" />
+	<input type="hidden" name="loginStatus" value="{$isLogin}" >
+	<div class="mui-content mui-scroll-wrapper">
+		<div id="slider" class="ic-slider mui-slider mui-fullscreen ic-slider-border">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="trigger-overlay trigger-company">搜索结果：</a>
+					<div class="mui-scroll ic-slider-select">
+						<a class="mui-control-item mui-active" href="#item1mobile">全职({$ftcount})</a>
+						<a class="mui-control-item" href="#item2mobile">实习({$ptcount})</a>
+					</div>
+				</div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<notempty name="infofull">
+							<div class="mui-scroll">
+								<ul class="ic-company-table mui-table-view">
+								<volist name="infofull" id="full">
+									<li class="mui-table-view-cell">
+										<img class="company-img" src="{$full['path']}"/><a href="{$full.url_link}" open-type="common" ><span class="company-name" ><?php echo mb_substr($full['company_name'],0,8,'utf-8').((mb_substr($full['company_name'],0,8,'utf-8') == $full['company_name'])?"":"…");  ;?><if condition="$full.spring_recruit eq 1"><i class="spring-recruit"></i></if></span></a>
+										<if condition="$full.openstatus eq 1">
+			                          <if condition="$full.timeflag eq 1">
+			                              <span class="ic-time">未开始 <if condition="$full.start_time neq null">({$full.start_time} 开始)</if> </span>
+			                           <elseif condition="$full.timeflag eq 2"/>
+			                              <span class="ic-time start">已开始 <if condition="$full.end_time neq null">({$full.end_time } 截止)</if> </span>
+			                            <elseif condition="$full.timeflag eq 3"/>
+			                              <span class="ic-time">已结束 <if condition="$full.end_time neq null">({$full.end_time} 截止)</if> </span>  
+			                           <elseif condition="$full.timeflag eq 4"/>
+			                              <span class="ic-time start">已开始 <if condition="$full.end_time neq null">{($full.end_time } 截止)</if></span>
+			                          </if>
+			                        <elseif condition="$full.openstatus eq 0"/>
+			                          <span class="ic-time">未开始 <if condition="$full.start_time neq null">({$full.start_time} 开始)</if> </span>
+                        			</if>
+										
+										<if condition="$isLogin eq 1">
+				                          <if condition="$full.keepcid neq null">
+				                           <span class="ic-icon-fav collected text-taro" cid='{$full.id}' kid={$full.kid}><i class="nc-icon-glyph ui-2_favourite-31 icon-favourite"></i></span>
+				                           <elseif condition="$full.keepcid eq null"/>
+				                           <span class="ic-icon-fav jobCollection text-grey" cid='{$full.id}'><i class="nc-icon-outline  ui-2_favourite-31 icon-favourite"></i></span>
+				                           </if>
+				                        <else/>
+				                          <span class="ic-icon-fav text-grey"><a href="/user/login"><i class="nc-icon-outline  ui-2_favourite-31 icon-favourite"></i></a></span>
+				                        </if> 
+									</li>
+								</volist>
+								</ul>
+							</div>
+							</notempty>
+							<empty name="infofull">
+							<div class="empty-container-center">
+								<p>暂无信息。</p>
+							</div>
+							</empty>
+						</div>
+						<input type="hidden" name="fullajax" data-cid="{$cid|default=''}" data-num="40" data-type="fulltime" data-order="{$order|default=''}" data-search="{$search|default=''}">
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<notempty name="infopart">
+							<div class="mui-scroll">
+								<ul class="ic-company-table mui-table-view">
+								<volist name="infopart" id="part">
+									<li class="mui-table-view-cell">
+										<img class="company-img" src="{$part['path']}"/><a href="{$part.url_link}" open-type="common" ><span class="company-name" ><?php echo mb_substr($part['company_name'],0,8,'utf-8').((mb_substr($part['company_name'],0,8,'utf-8') == $part['company_name'])?"":"…");  ;?><if condition="$part.spring_recruit eq 1"><i class="spring-recruit"></i></if></span></a>
+										<if condition="$part.openstatus eq 1">
+			                          <if condition="$part.timeflag eq 1">
+			                              <span class="ic-time">未开始 <if condition="$part.start_time neq null">({$part.start_time} 开始)</if> </span>
+			                           <elseif condition="$part.timeflag eq 2"/>
+			                              <span class="ic-time start">已开始 <if condition="$part.end_time neq null">({$part.end_time } 截止)</if> </span>
+			                            <elseif condition="$part.timeflag eq 3"/>
+			                              <span class="ic-time">已结束 <if condition="$part.end_time neq null">({$part.end_time} 截止)</if> </span>  
+			                           <elseif condition="$part.timeflag eq 4"/>
+			                              <span class="ic-time start">已开始 <if condition="$part.end_time neq null">{($part.end_time } 截止)</if></span>
+			                          </if>
+			                        <elseif condition="$part.openstatus eq 0"/>
+			                          <span class="ic-time">未开始 <if condition="$part.start_time neq null">({$part.start_time} 开始)</if> </span>
+                        			</if>
+										
+										<if condition="$isLogin eq 1">
+				                          <if condition="$part.keepcid neq null">
+				                           <span class="ic-icon-fav collected text-taro" cid='{$part.id}' kid={$part.kid}><i class="nc-icon-glyph ui-2_favourite-31 icon-favourite"></i></span>
+				                           <elseif condition="$part.keepcid eq null"/>
+				                           <span class="ic-icon-fav jobCollection text-grey" cid='{$part.id}'><i class="nc-icon-outline  ui-2_favourite-31 icon-favourite"></i></span>
+				                           </if>
+				                        <else/>
+				                          <span class="ic-icon-fav text-grey"><a href="/user/login"><i class="nc-icon-outline  ui-2_favourite-31 icon-favourite"></i></a></span>
+				                        </if> 
+									</li>
+								</volist>
+								</ul>
+							</div>
+							</notempty>
+							<empty name="infopart">
+							<div class="empty-container-center">
+								<p>暂无信息。</p>
+							</div>
+							</empty>
+						</div>
+						<input type="hidden" name="partajax" data-cid="{$cid}" data-num="40" data-type="fulltime" data-order="{$order}" data-search="{$search|default=''}">
+					</div>
+				
+				</div>
+			</div>
+	</div>
+	<div id="fav-cb" class="fav-cb animated"><span>+1</span></div>
+<include file="Public/footer_nav_company" />
+<include file="Public/redirect" />
+<include file="Public/footer" />
+
+<script src="/Public/Mobile/js/mui.pullToRefresh.js"></script>
+<script src="/Public/Mobile/js/mui.pullToRefresh.material.js"></script>
+<script type="text/javascript" src="{:stamp('Public/Mobile/js/triggermeun.js')}"></script>
+<script type="text/javascript" src="{:stamp('Public/Mobile/js/company.js')}"></script>

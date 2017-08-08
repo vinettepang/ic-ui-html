@@ -1,0 +1,49 @@
+<include file="Public/header" />
+<include file="Public/var" />
+<link rel="stylesheet" type="text/css"  href="/Public/Mobile/css/sass/login.css" />
+</head>
+<body>
+<div class="ic-login-container">
+    <div class="mui-content mui-scroll-wrapper ic-login-container">
+        <div class="mui-content-padded">
+            <div class="ic-logo">
+                <a href="/"><img src="/Public/Mobile/images/loginglasses.png" /></a>
+            </div>
+            <p class="reg-tip"><span class="tip-light"><i></i></span><span class="tip-text">白熊账号升级啦，之前用邮箱注册的用户都需绑定手机号，手机号可以作为账号直接登录啦。</span><span class="tip-kiss"><i></i></span></p>
+            <div id="slider" class="mui-slider ic-slider-login">
+                <div class="mui-slider-group">
+                    <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                        <!-- <div id="scroll1" class="mui-scroll-wrapper"> -->
+                        <div id="scroll1">
+                            <form id="bindingForm" class="mui-input-group ic-login-form" id="loginForm" >
+                                <div class="loginform-container">
+                                    
+                                    <div class="mui-input-row">
+                                        <input type="text" value="" autocomplete="off" name="phone" placeholder="手机号">
+                                        <p class="icon-tips"><i class="nc-icon-outline ui-1_check"></i><i class="nc-icon-outline ui-1_simple-remove"></i></p>
+                                    </div>
+                                    <div class="mui-input-row">
+                                        <input type="text" value="" autocomplete="off" name="verify">
+                                        <img class="verifyimg reloadverify" alt="点击切换" src="{:U('verify')}" style="cursor:pointer;">
+                                        <div class="verifyimg-tip dn">
+                                            <i class="tiptri"></i>看不清？换一张</div>
+                                    </div>
+                                   <div class="mui-input-row">
+                                        <input type="text" value="" autocomplete="off" name="phoneverify" placeholder="验证码">
+                                        <button class="sendverify phoneverify">发送验证码</button>
+                                    </div>
+                                </div>
+                                <span class="false cb-error" id="binding-cb-error"></span>
+                            </form>
+                            <div class="mui-button-row">
+                                <button id="ic-btn-bingphone" type="button" class="mui-btn ic-btn-block ic-btn-primary mui-btn-block" data-loading-text="提交中" data-loading-icon-position="right">绑定</button>
+                            </div>
+                            <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2535357251&amp;site=qq&amp;menu=yes" target="_blank" open-type="common">无法绑定？</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>    
+<include file="Public/footer-login" />

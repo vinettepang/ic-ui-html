@@ -1,0 +1,7 @@
+<script type="text/javascript">
+	//已登录未绑定手机时跳转至绑定页面
+	var needbindphone = '<?php echo $needbindphone;?>';
+	if(needbindphone != '' && needbindphone != undefined && needbindphone != false){
+		window.location.href = "{$Think.WEB_URL}" + 'user/bindingphone';
+	}
+</script>

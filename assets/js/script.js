@@ -75,26 +75,26 @@ $(document).ready(function() {
     }
   });
 
-  $("#dltologin").fancybox({
-    helpers: {
-      overlay: {
-        css: {
-          'background': 'rgba(255, 215, 50, 0.9)',
-          'overlayOpacity': 0.9
-        }
-      }
-    }
-  });
-  $(".popup-trigger").fancybox({
-    helpers: {
-      overlay: {
-        css: {
-          'background': 'rgba(255, 215, 50, 0.9)',
-          'overlayOpacity': 0.9
-        }
-      }
-    }
-  });
+  // $("#dltologin").fancybox({
+  //   helpers: {
+  //     overlay: {
+  //       css: {
+  //         'background': 'rgba(255, 215, 50, 0.9)',
+  //         'overlayOpacity': 0.9
+  //       }
+  //     }
+  //   }
+  // });
+  // $(".popup-trigger").fancybox({
+  //   helpers: {
+  //     overlay: {
+  //       css: {
+  //         'background': 'rgba(255, 215, 50, 0.9)',
+  //         'overlayOpacity': 0.9
+  //       }
+  //     }
+  //   }
+  // });
   $('.nav-switch a').click(function(e) {
     e.preventDefault()
     $(this).tab('show')
@@ -416,14 +416,14 @@ $(document).ready(function() {
 
   //cookie操作
   /*顶部广告*/
-  if ($.cookie('ic_ad_site_vip')== null || localStorage.getItem('ic_ad_site_vip')== null) {
-    $('.ad-site').css('display','block');
-  }
-  $('.ad-site .close-ad-site').click(function(event) {
-    $.cookie("ic_ad_site_vip", "true",{ expires: 10000 , path: '/' });
-    localStorage.setItem("ic_ad_site_vip", 'true');
-    $('.ad-site').slideUp();
-  });
+  // if ($.cookie('ic_ad_site_vip')== null || localStorage.getItem('ic_ad_site_vip')== null) {
+  //   $('.ad-site').css('display','block');
+  // }
+  // $('.ad-site .close-ad-site').click(function(event) {
+  //   $.cookie("ic_ad_site_vip", "true",{ expires: 10000 , path: '/' });
+  //   localStorage.setItem("ic_ad_site_vip", 'true');
+  //   $('.ad-site').slideUp();
+  // });
   //companylist 第一次点击收藏提示
   // if ($.cookie('ic_tip_collect')== null || localStorage.getItem('ic_tip_collect')== null) {
   //    $('.jd_col').click(function(event) {

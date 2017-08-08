@@ -1,0 +1,77 @@
+<include file="Public/header" />
+<include file="Public/top_nav_academy" />
+	<div class="mui-content  ">
+		<div class="ic-inner-content">
+			<div class="ic-course-package">
+				<if condition="$wxBroser eq true">
+				<form action="/wechatpay/paycourse" class="payform" method="post" id="academy-payform">
+				<else/>
+				<form action="/alipay/paycourse" class="payform" method="post" id="academy-payform">
+				</if>
+				<ul class="mui-table-view ic-border-list">
+					 <li class="mui-table-view-cell mui-row"><label class="table-left ft-bold">课程名称：</label><span class="table-left">{$info[0]['coursename']}</span></li>
+			         <li class="mui-table-view-cell mui-row"><label class="table-left ft-bold">课程内容：</label><div class="table-left"><ul style="padding: 0 0 0 20px; list-style-type: disc;"> {$info[0]['coursecontent']}</ul></div></li>
+			        <switch name="ever_locked" >
+					 <case value="1" break="1">
+					 	<li class="mui-table-view-cell mui-row"><label class="table-left ft-bold">课程价格：</label><span class="table-left"><span class="line-through">￥ {$info[0]['courseprice']}</span></span><span class="discount-price" style="padding-left: 15px;">￥ {$discount}</span></li>
+					 </case>
+					<default />	
+						<li class="mui-table-view-cell mui-row"><label class="table-left ft-bold">课程价格：</label><span class="table-left">￥ {$info[0]['courseprice']}</span></li>
+					</switch>
+			         
+			         <li class="mui-table-view-cell mui-row"><label class="table-left ft-bold">支付方式：</label>
+				        <div class="table-left ic-radio-group">
+				        	<if condition="$wxBroser eq true">
+					         	<div class="mui-input-row mui-radio mui-left">
+									<input name="pay" id="wechatpay" value="wechatpay" type="radio" checked="checked"/>
+									<label for="wechatpay">
+									<span class="img-pay"><img src="/Public/Mobile/images/assets/WePayLogo.png" alt="wechat"></span></label>
+								</div>
+								<div class="mui-input-row mui-radio mui-left" >
+									<input  name="pay" id="jdpay" value="jdpay" type="radio" />
+									<label for="jdpay"><span class="img-pay"><img src="/Public/Mobile/images/assets/jdpay.png" alt="jdpay"></span></label>
+								</div>	
+								<div class="mui-input-row mui-radio mui-left" >
+									<input  name="pay" id="alipay" value="alipay" type="radio" disabled/>
+									<label for="alipay"><span class="img-pay"><img src="/Public/Mobile/images/assets/alipay-dark.png" alt="alipay"></span></label>
+								</div>
+							<else/>		
+								<div class="mui-input-row mui-radio mui-left" >
+									<input  name="pay" id="alipay" value="alipay" type="radio" checked="checked"/>
+									<label for="alipay"><span class="img-pay"><img src="/Public/Mobile/images/assets/alipay.png" alt="alipay"></span></label>
+								</div>
+								<div class="mui-input-row mui-radio mui-left" >
+									<input  name="pay" id="jdpay" value="jdpay" type="radio" />
+									<label for="jdpay"><span class="img-pay"><img src="/Public/Mobile/images/assets/jdpay.png" alt="jdpay"></span></label>
+								</div>	
+								<div class="mui-input-row mui-radio mui-left">
+									<input name="pay" id="wechatpay" value="wechatpay" type="radio" disabled />
+									<label for="wechatpay">
+									<span class="img-pay"><img src="/Public/Mobile/images/assets/wx-dark.png" alt="wechat"></span></label>
+								</div>
+							</if>
+			            </div>
+			        </li>
+				</ul>
+				<if condition="$wxBroser eq true">
+					<p class="buypay-tips">* 用【支付宝】付款请在浏览器打开此链接。</p>
+				<else/>	
+					<p class="buypay-tips">* 用【微信】付款请在服务号「白熊小助手」打开此链接。</p>
+				</if>
+				<input type="hidden" class="out_trade_no" name="out_trade_no" value="{$orderid}"/>
+				<input type="hidden" class="courseid" name="courseid" value="{$info[0]['id']}"/>
+		        <input type="hidden" class="ordtotal_fee" name="ordtotal_fee" value="{$discount}"/>
+		        <input type="hidden" value="{$info[0]['coursename']}" class="ordsubject" name="ordsubject" />
+		        <input type="hidden" value="订单描述" class="ordbody" name="ordbody" />
+		        <input type="hidden" value="http://icebear.me/cooperate/jd" class="ordshow_url" name="ordshow_url" />
+		        <input type="hidden" value="{$info[0]['courseflag']}" class="preflag" name="preflag">
+		        <input type="hidden" value="<?php echo date('YmdHis');?>" class="tradetime" name="tradetime" />
+		        <!-- <input type="submit" class="alisubmit" value="立即购买" /> -->
+				</form>
+			</div>
+		</div>
+		<div class="ic-inner-wrapper">
+			<button id="ic-btn-buy" type="button" class="ic-btn ic-btn-block ic-btn-primary alisubmit" data-loading-text="购买中" data-loading-icon-position="right">确认购买</button>
+		</div>
+	</div>
+<include file="Public/f-buy" />

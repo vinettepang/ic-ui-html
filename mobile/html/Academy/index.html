@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+	 <link rel="stylesheet" href="../../assets/css/mui.min.css" />
+    <link rel="stylesheet" href="../../assets/css/sass/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/nucleo-glyph.css" />
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/nucleo-outline.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/sass/module/academy.css" />
+</head>
+<body>
+
+<include file="Public/header" />
+<include file="Public/top_nav_academy" />
+	<div class="mui-content mui-scroll-wrapper">
+		<div id="slider" class="mui-slider ic-slider">
+			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<a open-type="common" class="mui-control-item mui-active" >通用课程</a>
+				<a open-type="common" class="mui-control-item " href="">行业课程</a>
+			</div>
+			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+			<div class="mui-slider-group">
+				<div id="item1mobile" class="mui-slider-item mui-control-content <if condition="I('catid') eq 209 || I('catid') eq null">mui-active</if>">
+					<div id="scroll1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view ic-banner-list bg-bread">
+							<li class="mui-table-view-cell" style="position: relative;">
+									<a class="aca_to_ref_ad" style="background-image: url('/Public/Mobile/images/academy/referral-banner@2x.png'); display: none;" 
+									href="/company/referral" 
+									open-type="common" class="" ></a>
+									<i style="position: absolute;right: 0;top: 0;z-index: 1; padding: 12px; color: #fff;font-size: 16px;" class="nc-icon-outline ui-1_simple-remove referral_ad_close"></i>
+									<!--锦囊上线banner-->
+									<!-- <a style="background-image: url('/Public/Mobile/images/mask@2x.png');" 
+									href="http://bbs.icebear.me/package.htm" 
+									open-type="common" class="" > <h3 style=" position: absolute;top: 34px;left: 32px;">独家求职锦囊已上线</h3><span style=" position: absolute;top: 64px;left: 32px; font-size: 18px;">点击获取</span><img style=" position: absolute;bottom: 0px;right: 32px;display: block;height: 110px;width: 99px;" src="/Public/Mobile/images/brochure@2x.png"></a> -->
+								</li>
+							<volist name="catArr[209]" id="courseData">
+				            	<li class="mui-table-view-cell" >
+									<a style="background-image: url({$courseData.coursepath});" 
+									href="{:U('/academy/detail/flag/'.$courseData['courseflag'])}" 
+									open-type="common" class="" > <span class="title">{$courseData.coursename}</span></a>
+									<if condition="$courseData.activity eq 1 && $courseData.is_purchased neq true && $courseData.is_unlock_all neq 1"><p class="free-label">限时免费</p></if>
+									<!-- <a href="{:U('/academy/detail/cid/'.$courseData['id'])}" open-type="common" class="" ><img src="{$courseData.coursepath}"> <span class="title">{$courseData.coursename}</span></a> -->
+									<!--免费的课程显示下面的标签-->
+									<!-- <if condition="$courseData.activity eq 1"><p class="free-label">限时免费</p></if> -->
+								</li>
+				            </volist>
+						</ul>
+						</div>
+					</div>
+				</div>
+				<div id="item2mobile" class="mui-slider-item mui-control-content <if condition="I('catid') eq 1">mui-active</if>">
+					<div id="scroll2" class="ic-slider-left " >		
+						<div class="mui-scroll mui-row">
+								<div class="mui-col-xs-3">
+									<div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
+									<a class="mui-control-item mui-active" href="#content1">互联网</a>
+									<a class="mui-control-item" href="#content2">金融</a>
+									</div>
+								</div>
+								<div id="segmentedControlContents" class="mui-col-xs-9" >
+								<div id="content1" class="mui-control-content mui-scroll-wrapper  mui-active">
+									<div class="mui-scroll">
+										<ul class="mui-table-view ic-banner-list bg-bread">
+											<volist name="catArr[1]" id="vo">
+											<li class="mui-table-view-cell">
+												<a style="background-image: url({$vo.coursepath});" 
+												href="{:U('/academy/detail/flag/'.$vo['courseflag'])}"  
+												open-type="common" class="" > <span class="title">{$vo.coursename}</span></a>
+												<if condition="$vo.activity eq 1 && $vo.is_purchased neq true && $vo.is_unlock_all neq 1"><p class="free-label">限时免费</p></if>
+											</li>
+											</volist>
+										</ul>
+									</div>	
+								</div>
+								<div id="content2" class="mui-control-content  mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<div class="empty-container">
+											<img src="/Public/Mobile/images/comingsoon.png">
+											<p class="text-center">即将上线...</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<include file="Public/footer_nav_academy" />
+<include file="Public/redirect" />
+ <script src="../../../assets/js/jquery-1.8.2.min.js"></script>
+    <script src="../../../assets/js/cookie.js"></script>
+    <script src="../../assets/js/mui.js"></script>
+    <script src="../../assets/js/app.js"></script>
+<script src="../../assets/js/cookie.js"></script>
+<script src="../../assets/js/academy.js"></script>
+	
+</body>
+</html>

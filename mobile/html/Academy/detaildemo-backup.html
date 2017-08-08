@@ -1,0 +1,216 @@
+<include file="Public/header" />
+<include file="Public/top_nav_academy" />
+	<div class="mui-content mui-scroll-wrapper">
+		<div class="ic-banner">
+			<img src="/Public/Mobile/images/academy/jc.png" />
+			<h3 class="ic-banner-title">{$courseData[0].coursename}</h3>
+
+			<!--免费的课程显示右边的标签-->
+			<h5 class="ic-banner-sec-title line-through">￥{$courseData[0].courseprice}</h5>
+			<a class="ic-btn btn-radius ic-btn-sm ic-btn-purple btn-noshadow ic-banner-btn">免费试听</a>
+		</div>
+
+		<div id="slider" class="mui-slider ic-slider">
+			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<a class="mui-control-item mui-active" href="#item1mobile">介绍</a>
+				<a class="mui-control-item" href="#item2mobile">目录</a>
+				<a class="mui-control-item" href="#item3mobile">评价</a>
+			</div>
+			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+			<div class="mui-slider-group">
+				<div id="item1mobile" class="mui-slider-item mui-control-content  mui-active">
+					<div id="scroll1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<div class="ic-inner-content">
+								{$courseData[0].courseintroh5}
+								<notempty name="silkinfo">
+								<section class="mui-col ic-academy-content">	
+								<h4 class="sec-title"><i></i>配套资料<span class="backup">(请用PC在官网下载)</span></h4>
+									 <ul class="mui-table-view ic-border-list">
+									 <volist name="silkinfo" id="vo">
+										<li class="mui-table-view-cell">{$vo.name}</li>
+								       </volist>
+									</ul>
+								</section>
+								</notempty>
+							</div>
+							<include file="Public/copyright" />
+						</div>
+					</div>
+				</div>
+				<div id="item2mobile" class="mui-slider-item mui-control-content">
+					<div id="scroll2" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<div class="ic-inner-content">
+							<section class="mui-col ic-academy-content">
+							
+                                    <volist name="videoData" id="videoData">
+                                    <div class="ic-dashed-list ic-ellipsis-label">   
+                                        <h4 class="sec-title"><i></i>{$videoData[0]['title']}</h4>
+                                   <!--  <p>{$videoData[0]['brief']}</p>  -->
+                        
+                                        <if condition="$videoData[1][0] eq ''">
+
+                                        	<if condition="is_login() eq true && $videoData[1]['is_locked'] eq 0">
+	                                        	<a class="ic-dashed-item ic-aca-unlocked" data-href="{:U('/media/'.$videoData[1]['vid'].'/cid/'.$courseData[0]['id'].'')}" data-status="false">
+	                                        	<if condition="$videoData[1]['view_status'] eq 2">
+	                                        		<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        	<elseif condition="$videoData[1]['view_status'] eq 1" />
+	                                        		<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        	<else/><p class='mui-ellipsis'></if>{$videoData[1]['title']}</p></a>
+                                            <elseif condition="is_login() eq true && $videoData[1]['lockable'] eq 1" /> 
+	                                            <a class="ic-dashed-item ic-aca-unlocked" data-href="{:U('/media/'.$videoData[1]['vid'].'/cid/'.$courseData[0]['id'].'')}">
+	                                            <if condition="$videoData[1]['view_status'] eq 2">
+	                                        		<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        	<elseif condition="$videoData[1]['view_status'] eq 1" />
+	                                        		<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        	<else/><p class='mui-ellipsis'></if>{$videoData[1]['title']}</p>
+	                                            <button class="ic-btn btn-radius ic-btn-border btn-unlocked">今日可解</button>
+	                                            </a>
+                                            <elseif condition="is_login() eq true && $videoData[1]['lockable'] eq 0"/> 
+	                                            <a class="ic-dashed-item ic-buycourse-trigger"><if condition="$videoData[1]['view_status'] eq 2">
+	                                        		<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        	<elseif condition="$videoData[1]['view_status'] eq 1" />
+	                                        		<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        	<else/><p class='mui-ellipsis'></if>{$videoData[1]['title']}</p>
+	                                            <i class=" nc-icon-outline ui-1_lock icon-islocked"></i></a>  
+                                            <else /> 
+                                            	<a class="ic-dashed-item">{$videoData[1]['title']}</a>
+                                            </if>
+                                        <else/>
+                                            <volist name="videoData[1]" id="v">
+        									<if condition="is_login() eq true && $v['is_locked'] eq 0">
+	                                        	<a class="ic-dashed-item ic-aca-unlocked" data-href="{:U('/media/'.$v['vid'].'/cid/'.$courseData[0]['id'].'')}" data-status="false">
+	                                        	<if condition="$v['view_status'] eq 2">
+	                                        		<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        	<elseif condition="$v['view_status'] eq 1" />
+	                                        		<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        	<else/><p class='mui-ellipsis'></if>{$v['title']}</p></a>
+                                            <elseif condition="is_login() eq true && $v['lockable'] eq 1" /> 
+	                                            <a class="ic-dashed-item ic-aca-unlocked" data-href="{:U('/media/'.$v['vid'].'/cid/'.$courseData[0]['id'].'')}">
+	                                            <if condition="$v['view_status'] eq 2">
+	                                        		<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        	<elseif condition="$v['view_status'] eq 1" />
+	                                        		<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        	<else/><p class='mui-ellipsis'></if>{$v['title']}</p>
+	                                            <button class="ic-btn btn-radius ic-btn-border btn-unlocked">今日可解</button>
+	                                            </a>
+                                            <elseif condition="is_login() eq true && $v['lockable'] eq 0"/> 
+	                                            <a class="ic-dashed-item ic-buycourse-trigger"><if condition="$v['view_status'] eq 2">
+	                                        		<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        	<elseif condition="$v['view_status'] eq 1" />
+	                                        		<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        	<else/><p class='mui-ellipsis'></if>{$v['title']}</p>
+	                                            <i class=" nc-icon-outline ui-1_lock icon-islocked"></i></a>  
+                                            <else /> 
+                                            	<a class="ic-dashed-item">{$v['title']}</a>
+                                            </if>
+                                            </volist>
+
+                                        </if>
+                             
+                                    </div>
+                                    </volist>
+								</section>
+							
+							</div><!--inner-content-->
+							<include file="Public/copyright" />
+						</div>
+					</div>
+
+				</div>
+				<div id="item3mobile" class="mui-slider-item mui-control-content">
+					<div id="scroll3" class="mui-scroll-wrapper">
+						<div class="mui-scroll ic-course-comment">
+							<section>
+								<div class="ic-card">
+									<div class="ic-card-content mui-row">
+								        <div class="mui-col-xs-3 img-offer">
+								        	<img src="/Public/Home/images/academy/lee@2x.png" alt="headimg">
+								        	<p class="name">王同学</p>
+								        </div>
+								        <p class="mui-col-xs-9">“白熊的运营课我觉得最棒的地方在于它给你建立了一个完整的运营体系，店长高屋建瓴的讲解可以让你更好的理解运营，群交流和每周固定答疑比较人性化，这波课买的不亏。”</p>
+									</div>
+									<div class="ic-card-footer mui-row">
+								        <div class="mui-col-xs-3"></div>
+								        <div class="mui-col-xs-9 offer-container">
+								        <span class="mui-pull-left">已拿offer：</span><img class="offerimg mui-pull-left" src="/Public/Home/images/academy/ASUS.png"><img class="offerimg" src="/Public/Home/images/academy/ASUS.png"></div>
+									</div>
+								</div><!-- card-end -->
+								<div class="ic-card">
+									<div class="ic-card-content mui-row">
+								        <div class="mui-col-xs-3 img-offer">
+								        	<img src="/Public/Home/images/academy/lee@2x.png" alt="headimg">
+								        	<p class="name">王同学</p>
+								        </div>
+								        <p class="mui-col-xs-9">“白熊的运营课我觉得最棒的地方在于它给你建立了一个完整的运营体系，店长高屋建瓴的讲解可以让你更好的理解运营，群交流和每周固定答疑比较人性化，这波课买的不亏。”</p>
+									</div>
+									<div class="ic-card-footer mui-row">
+								        <div class="mui-col-xs-3"></div>
+								        <div class="mui-col-xs-9 offer-container">
+								        <span class="mui-pull-left">已拿offer：</span><img class="offerimg mui-pull-left" src="/Public/Home/images/academy/ASUS.png"><img class="offerimg" src="/Public/Home/images/academy/ASUS.png"></div>
+									</div>
+								</div><!-- card-end -->
+							</section><!--inner-content-->
+							<include file="Public/copyright" />
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!--content-->
+	<div class="ic-alert-success">
+		<span class="ic-alert-box"><i class="nc-icon-glyph ui-1_check-bold"></i>成功解锁三节课</span>
+	</div>
+	<div class="ic-alert-error">
+		<span class="ic-alert-box"><i class="nc-icon-glyph  ui-2_fat-remove"></i>解锁失败</span>
+	</div>
+	<div class="ic-dialog ic-dialog-buycourse">
+		<p>每天只能免费解锁三节课，现在购买可以立即解锁《产品经理基础课》全部课程。</p>
+		<div class="btn-group">
+			<button class="ic-btn ic-btn-brown ic-dialog-close pull-left">取消</button>
+			<a class="ic-btn ic-btn-brown pull-right" href="{:U('/academy/buy/cid/'.$courseData[0]['id'])}" open-type="common" data-loading-text="购买中">购买课程</a>
+		</div>
+	</div>
+<include file="Public/footer_nav_academy" />
+
+<include file="Public/footer" />
+<script type="text/javascript">
+	mui('body').on('tap', '.ic-buycourse-trigger', function(event) {
+		jquery('.ic-dialog-buycourse').fadeIn();
+	});
+	mui('body').on('tap', '.ic-dialog-close', function(event) {
+		jquery('.ic-dialog-buycourse').fadeOut();
+		return false;
+	});
+	mui('body').on('tap', '.ic-aca-unlocked', function(event) {
+		var type = jquery(this).attr('data-type'); 
+		var locked = jquery('input[name="lockedStatus"]').val();
+		jquery.ajax({
+			type : 'POST',
+			url : '/academy/lockedCourse',
+			data : {
+				'cid' : {$courseData[0].id},
+			},
+			success : function(data){
+				if (data.status) {
+					if (locked != 'true') {
+						jquery('.ic-aca-unlocked.ic-ft-locked').text('解锁更多课程');
+						jquery('.ic-aca-unlocked.ic-ft-locked').removeClass('ic-aca-unlocked').addClass('ic-buycourse-trigger');
+						jquery('input[name="lockedStatus"]').val('true') ;
+						jquery('.ic-alert-success').fadeIn();
+						setTimeout("jquery('.ic-alert-success').fadeOut();", 3000);
+						jquery('.btn-unlocked').fadeOut();
+					}else{
+						if (type != 'btn') {
+							location.href=jquery(this).attr('data-href');
+						}
+					}
+				}
+			}
+		 })
+		//console.log(locked);	
+	});
+
+</script>

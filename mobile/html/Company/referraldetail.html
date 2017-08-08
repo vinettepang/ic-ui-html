@@ -1,0 +1,131 @@
+<include file="Public/header" />
+<include file="Public/top_nav_company" />
+
+  <div class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+    <div class="referral-container" id="referral">  
+      <!-- 用户资料 -->
+      <input type="hidden" name="myCredit" value="{$info.user_credit}">
+      <input type="hidden" name="rid" value="{$rid}">
+      <input type="hidden" name="needCredit" value="{$list.need_credit}">
+      <input type="hidden" name="rtitle" value="{$list.name}">
+      <input type="hidden" name="usertype" value="{$info.user_level}">
+      <if condition="$list.exchange_status eq 1">
+      <div class="referral-card">
+        <h4 class="title ft18">内推方式</h4>
+        <pre>{$list.referral_method}</pre>
+      </div>
+      </if>
+
+      <h2 class="pri-title"><i></i><span>公司介绍</span></h2>
+      <div class="r-content">{$list.intro}</div>
+      <h2 class="pri-title"><i></i><span>招聘职位</span></h2>
+      <div class="r-p">{$list.p_content}</div>
+      <!-- 数据备份 -->
+      <!-- <section>
+          <h3 class="position-title">全职职位：</h3>
+          <h3 class="position-sectitle">新媒体运营<span class="label-border label-pink">直通面试</span></h3>
+          <h3 class="position-sectitle">产品经理<span class="label-border label-brown">直通笔试</span></h3>
+          <h3 class="position-sectitle">iOS 开发<span class="label-border label-pink">直通面试</span><span class="label-border label-brown">直通笔试</span></h3>
+          <h3 class="position-sectitle">Java 开发<span class="label-border label-pink">直通面试</span><span class="label-border label-brown">直通笔试</span></h3>
+          <h3 class="position-title">实习职位：<br/></h3>
+          <h3 class="position-sectitle">新媒体运营<span class="label-border label-pink">直通面试</span></h3>
+          <h4 class="brown-list mgtp25">岗位职责：</h4>
+          <ul class="brown-list list-paddingleft-2"><li><p>优化前端开发课程的公众号、知乎、社区运营方案，增强用户黏性；</p></li>
+              <li><p>策划公众号、知乎、社区平台活动，提供活动创意，并根据活动方案完成落地；</p>/li>
+              <li><p>跟踪分析用户行为数据，进行分析，改进当前运营方法。 </p></li>
+          </ul>
+          <h4 class="brown-list mgtp25"> 工作地点：深圳 </h4>
+      </section> -->
+      <if condition="$list.exchange_status eq 0">
+       <div class="credit-card">
+         <h2 class="center text-white">- 内推方式 -</h2>
+         <p class="center text-white ft18">截止日期：{$list.deadline|date='Y-m-d',###}</p>
+         <div style="border-top: dotted 1px #ffffff;height: 1px;margin: 20px 0;"></div>
+        <p class="center text-white ft20">「积分」换「内推」</p>
+        <p class="center text-white ft20">点击兑换查看如何内推</p>
+        <if condition="$info.login_status neq false"><p class="ft18 ft-bold text-sec" style="margin-top: 24px;">当前积分: {$info.user_credit} 分</p></if>
+        
+        <if condition="$info.login_status eq false">
+          <a href="/user/login" open-type="common" class="ic-btn ic-btn-white"><span>100 积分点击兑换</span></a>
+          <a href="/user/login" open-type="common" class="ic-btn ic-btn-primary"><span>白熊 VIP 0 积分兑换</span></a>
+        <else/>
+          <a href="javasrcipt:;" class="ic-btn ic-btn-white ref-trigger"><span>100 积分点击兑换</span></a>
+          <a href="javasrcipt:;" class="ic-btn ic-btn-primary ref-free-trigger"><span>白熊 VIP 0 积分兑换</span></a>
+        </if>
+        <p class="text ft18 alert-trigger text-white" style="margin-top: 24px;" alert-target="#whatisvip"><i style="margin-right: 6px;" class="nc-icon-outline ui-2_alert-circle"></i>什么是白熊VIP？</p>  
+      </div>
+      <p class="ft18 ft-bold mgbt25" style="line-height: 1.56;">购买下面任意一门课程，<span class="text-taro">即可享受 0 积分兑换白熊网站所有内推哟 </span>↓</p>
+      <div class="course-item blue">
+        <h1>「产品经理基础课」</h1><a open-type="common" class="btn btn-darkblue btn-circle" href="/academy/detail/flag/chanpinjinglijichuke">了解更多</a>
+      </div>
+      <div class="course-item yellow">
+        <h1>「新媒体运营系统课」</h1><a open-type="common" class="btn btn-secondary btn-circle" href="/academy/detail/flag/xinmeiti">了解更多</a>
+      </div>
+      <div class="course-item green">
+        <h1>「产品运营基础课」</h1><a open-type="common" class="btn btn-grass btn-circle" href="/academy/detail/flag/chanpingyunying">了解更多</a>
+      </div>
+      </if>
+      
+    </div>
+    <div class="ic-dialog ic-referral" style="height: 200px; padding-top: 52px;min-height: 180px;text-align: center;">
+      <p class="text-left mgbt30 ft18" style="height: 45px;"></p>
+      <div class="btn-group clearfloat"><a class="ic-btn ic-btn-brown pull-left"></a><a class="ic-btn ic-btn-brown pull-right"></a></div>
+    </div>
+</div></div>
+  <div class="alert-box-container">
+      <div class="alert-box" id="whatisvip"><p class="line-title ft20">如何成为白熊VIP？</p><p class="text-content">凡是购买过白熊学院「<span class="text-taro">产品经理基础课</span>」、「<span class="text-taro">新媒体运营系统课</span>」或「<span class="text-taro">产品运营基础课</span>」中任意课程，即可享受白熊VIP福利 0 积分兑换内推机会。</p><a href="javasrcipt:;" class="btn btn-circle btn-purple alert-trigger" alert-target="#whatisvip">知道了</a></div><div class="alert-overlay"></div>
+  </div>
+   <div class="ic-dialog ic-referral" style="height: 200px; padding-top: 52px;min-height: 180px;text-align: center;">
+      <p class="text-left mgbt30 ft18" style="height: 45px;"></p>
+      <div class="btn-group clearfloat"><a class="ic-btn ic-btn-brown width150 pull-left"></a><a class="ic-btn ic-btn-brown width150 pull-right"></a></div>
+    </div>
+    <div id="bottom-wrapper" class="menu-wrapper hidden bottom-wrapper" > 
+      <i class="btn-bottom-close nc-icon-outline ui-1_simple-remove icon-close"></i>
+      <p class="bottom-tip"></p>
+      <div class="btn-group btn-group-adjust"><a class="ic-btn ic-btn-brown width150 pull-left"></a><a class="ic-btn ic-btn-brown width150 pull-right"></a></div>
+    </div>
+    <div class="ic-alert-success">
+    <span class="ic-alert-box"><i class="nc-icon-glyph ui-1_check-bold"></i><span class="alert-tip"></span></span>
+  </div>
+  <div class="ic-alert-error">
+    <span class="ic-alert-box"><i class="nc-icon-glyph  ui-2_fat-remove"></i><span class="alert-tip"></span></span>
+  </div>
+  <include file="Public/footer_nav_company" />
+  <include file="Public/redirect" />
+  <include file="Public/footer" />
+  <script src="/Public/Mobile/js/referral.js"></script>
+  <script src="/Public/Mobile/js/mui.pullToRefresh.js"></script>
+  <script src="/Public/Mobile/js/mui.pullToRefresh.material.js"></script>
+  <script type="text/javascript" src="/Public/Mobile/js/analytics.js"></script>
+  <script type="text/javascript">
+  
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '<?php echo $data['appid']?>', // 必填，公众号的唯一标识
+        timestamp: '<?php echo $data['timestamp']?>', // 必填，生成签名的时间戳
+        nonceStr: '<?php echo $data['nonceStr']?>', // 必填，生成签名的随机串
+        signature: '<?php echo $data['signature']?>',// 必填，签名，见附录1
+        jsApiList: [
+       'checkJsApi',
+       'onMenuShareTimeline',
+       'onMenuShareAppMessage'
+        ]// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+        wx.ready(function () {
+        var shareData = {
+          title: "<?php echo $share_title;?>",
+          desc: 'icebear.me',
+          link: 'http://icebear.me/company/companylist',
+          imgUrl: '<?php echo $share_img;?>'
+        };
+        wx.onMenuShareAppMessage(shareData);
+        wx.onMenuShareTimeline(shareData);
+      });
+
+      wx.error(function (res) {
+        alert(res.errMsg);
+      });
+  </script>
+</body>
+</html>

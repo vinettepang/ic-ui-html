@@ -1,0 +1,36 @@
+<include file="Public/header" />
+<include file="Public/top_nav_academy" />
+
+<div class="mui-content mui-scroll-wrapper ic-mycourse">
+	<div class="mui-scroll ic-course-comment">
+		<empty name="paycourse">
+		<div class="empty-container">
+	        <img src="/Public/Home/images/collect-empty.png">
+	        <p class="text-center">还没有购买过课程哟~</p>
+	    </div>
+		</empty>
+	 	<notempty name="paycourse">
+			<volist name="paycourse" id="vo">
+				<div class="ic-card">
+					<div class="ic-card-content mui-row">
+						<div class="mui-col-xs-4 img-mycourse" style="background-image: url({$vo.coursepath});"></div>
+						<div class="mui-col-xs-8">
+							<h5>{$vo.coursename}</h5><p>已学{$vo.viewedcount}/{$vo.count}</p>
+							<if condition="$vo.viewedcount eq 0">
+								<a open-type="common" class="ic-btn btn-radius ic-btn-mini ic-btn-purple ic-right-btn" href="{:U('/media/'.$vo['next_video'].'/cid/'.$vo['id'].'')}">开始学习</a>
+
+							<elseif condition="$vo.viewedcount eq count"/>
+								<a open-type="common" class="ic-btn btn-radius ic-btn-mini ic-btn-purple ic-right-btn" href="{:U('/media/'.$vo['next_video'].'/cid/'.$vo['id'].'')}">复习一下</a>
+							<else/>
+								<a open-type="common" class="ic-btn btn-radius ic-btn-mini ic-btn-purple ic-right-btn" href="{:U('/media/'.$vo['next_video'].'/cid/'.$vo['id'].'')}">继续学习</a>
+							</if>
+						</div>
+					</div>
+				</div><!-- card-end -->
+			</volist>
+		</notempty>
+	</div>
+</div>
+
+<include file="Public/footer_nav_academy" />
+<include file="Public/footer" />

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/style.css" />
+</head>
+<body>
+    <div class="collect-detail edit-collect-detail"><ul class="detail"><li>工作城市：<input name="location" value="" onkeyup="words_deal(this,16)"></li><li>部门/事业群：<input name="department" value="" onkeyup="words_deal(this,14)"></li><li>岗位：<input name="post" value="" onkeyup="words_deal(this,16)"></li></ul><ul class="action"><li>投递状态：<div class="myr_input_div_l form_wrap normal_s" style="*z-index:3;"><input name="deliver_status" type="button" class="mr_button form_select select-val" value="选择"><i class="nc-icon-outline arrows-1_minimal-down tick-down"></i><div class="xl_list" style="display:none"><ul id="cid" class="deliver-status"><li class="">已投递</li><li class="">已笔试</li><li class="">已面试</li><li class="">已终面</li><li class="">已拿offer</li></ul></div></div></li><li class="longtext">备注：<input class="longtext" name="mark" value="" onkeyup="words_deal(this,48)"></li></ul></div>
+</body>
+ <script type="text/javascript" src="../../assets/js/jquery.1.10.1.min.js"></script>
+   <script type="text/javascript" src="../../assets/js/scrollspy.js"></script>
+   <script type="text/javascript" src="../../assets/js/affix.js"></script>
+    <script type="text/javascript" src="../../assets/js/cookie.js"></script>
+  <script type="text/javascript" src="../../assets/js/script.js"></script>
+<script type="text/javascript">
+
+    function words_deal(obj, v) {
+    var content = obj.value;
+    var realLength = 0;
+    for (var i = 0; i < content.length; i++) {
+        charCode = content.charCodeAt(i);
+        if (charCode >= 0 && charCode <= 128)
+            realLength += 1;
+        else
+            realLength += 2;
+    }
+    if (realLength > v) {
+        var num = String.cutByte(content, v, '');
+        //var num = countsubstr(content, v); 
+        console.log(num);
+        $(obj).css('color', 'red');
+        obj.value = num;
+        //$(obj).attr("value", num);
+    } else {
+        $(obj).css('color', '#482929');
+    }
+}
+String.getBlength = function(str) {
+    for (var i = str.length, n = 0; i--;) {
+        n += str.charCodeAt(i) > 255 ? 2 : 1;
+    }
+    return n;
+}
+String.cutByte = function(str, len, endstr) {
+        var len = +len,
+            endstr = typeof(endstr) == 'undefined' ? "..." : endstr.toString(),
+            endstrBl = this.getBlength(endstr);
+
+        function n2(a) {
+            var n = a / 2 | 0;
+            return (n > 0 ? n : 1)
+        } //用于二分法查找
+        if (!(str + "").length || !len || len <= 0) {
+            return "";
+        }
+        if (len < endstrBl) {
+            endstr = "";
+            endstrBl = 0;
+        }
+        var lenS = len - endstrBl,
+            _lenS = 0,
+            _strl = 0;
+        while (_strl <= lenS) {
+            var _lenS1 = n2(lenS - _strl),
+                addn = this.getBlength(str.substr(_lenS, _lenS1));
+            if (addn == 0) {
+                return str;
+            }
+            _strl += addn
+            _lenS += _lenS1
+        }
+        if (str.length - _lenS > endstrBl || this.getBlength(str.substring(_lenS - 1)) > endstrBl) {
+            return str.substr(0, _lenS - 1) + endstr
+        } else {
+            return str;
+        }
+    }
+</script>
+</html>

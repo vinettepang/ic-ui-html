@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<head>
+    <meta charset="UTF-8" />
+    <title>白熊求职</title>
+    <meta charset="utf-8" />
+    <title>白熊求职</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../../assets/css/mui.min.css" />
+    <link rel="stylesheet" href="../../assets/css/sass/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/nucleo-glyph.css" />
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/nucleo-outline.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/sass/module/company.css" />
+    </head>
+</head>
+<body>
+ <header class="mui-bar mui-bar-nav ic-header-nav">
+        <!-- <h1 class="mui-title ic-collapse-title"><a id="icon-menu" class="mui-action-menu ">白熊学院</a></h1> -->
+        <h1 class="mui-title ic-collapse-title">
+          <a id="icon-menu" class="mui-action-menu ">
+            <img class="mlogo" src="/Public/Mobile/images/assets/mlogo.png" />白熊百科
+            <i class="nc-icon-outline arrows-1_minimal-down"></i></a>
+        </h1>
+      </header>
+      <div id="menu-wrapper" class="menu-wrapper hidden">
+        <div id="menu" class="menu ">
+          <ul class="mui-table-view mui-table-view-inverted ic-topdropnav mui-row">
+            <li class=" mui-col-xs-4">
+              <a href="http://bbs.icebear.me/forum-1.htm" open-type="common">
+                <span class="">
+                  <i class="nc-icon-outline ui-3_chat-46"></i>
+                </span>白熊论坛</a>
+            </li>
+            <li class=" mui-col-xs-4">
+              <a href="/company/" open-type="common">
+                <span class="">
+                  <i class="nc-icon-outline business_briefcase-24"></i>
+                </span>白熊求职</a>
+            </li>
+            <!-- <li class=" mui-col-xs-4">
+            <a href="/baike" open-type="common"><span class=""><i class="nc-icon-outline business_books"></i></span>百科</a></li> -->
+            <li class="mui-col-xs-4">
+              <a href="/academy" open-type="common">
+                <span class="">
+                  <i class="nc-icon-outline media-1_player"></i>
+                </span>白熊学院</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="menu-backdrop" class="menu-backdrop"></div>
+	<input type="hidden" name="loginStatus" value="{$isLogin}" >
+	 <form id="filterForm" name="form1" method="get" action="/company/referral/cid/<?php echo $cid?>">
+      <input id="parttime" type="hidden" value="{$condition.parttime}" name="parttime" to="filter">
+      <input id="fulltime" type="hidden" value="{$condition.fulltime}" name="fulltime" to="filter">
+      <input id="end" type="hidden" value="{$condition.end}" name="end" to="filter">
+      <input id="exchange" type="hidden" value="{$condition.exchange}" name="exchange" to="filter">
+    </form>
+	<nav id="ic-nav-filter" class="ic-nav-filter">
+		<ul class="mui-row mui-table-view">
+			<!-- <li class="mui-col-xs-6"><a ic-target="#ref-cat" class="mui-control-item filter-menu-trigger">全部内推<i class="nc-icon-outline arrows-1_minimal-down"></i></a> </li> -->
+			<li class="mui-col-xs-6"><a ic-target="#ref-condition" class="mui-control-item filter-menu-trigger"><i class="nc-icon-glyph design_bullet-list-68"></i>筛选条件<!-- <i class="nc-icon-outline arrows-1_minimal-down"></i> --></a></li>
+		</ul>
+	</nav>
+<!-- 	<div id="ref-cat" class="filter-menu-wrapper hidden">
+		<div class="menu ">
+			<ul class="mui-table-view mui-row">
+				<li><a href="/company/referral" open-type="common" class="active" <if condition="!$cid">class="active"</if>><i class="nc-icon-outline ui-1_check"></i>全部内推 (40)</a></li>
+				<li><a href="/company/referral/cid/2" open-type="common" <if condition="$cid eq 1">class="active"</if>><i class="nc-icon-outline ui-1_check"></i>非技术类 (20)</a></li>
+				<li><a href="/company/referral/cid/1"  open-type="common" <if condition="$cid eq 2">class="active"</if>><i class="nc-icon-outline ui-1_check"></i>技术类 (10)</a></li>
+			</ul>
+		</div>
+	</div> -->
+	<div id="ref-condition" class="filter-menu-wrapper hidden">
+		<form id="submitForm" class="mui-row"> 
+		<div class="menu filter-box clearfloat">
+			<a class="f-item active" filter-type="fulltime">全职<span class="remove"><i class="nc-icon-outline ui-2_small-remove"></i></span></a>
+			<a class="f-item " filter-type="parttime">实习<span class="remove"><i class="nc-icon-outline ui-2_small-remove"></i></span></a>
+			<a class="f-item " filter-type="end">未截止<span class="remove"><i class="nc-icon-outline ui-2_small-remove"></i></span></a>
+			<a class="f-item " filter-type="exchange">未兑换<span class="remove"><i class="nc-icon-outline ui-2_small-remove"></i></span></a>
+		</div>
+		<a class="ic-btn btn-primary mui-col-xs-6 ic-filter-cancel">取消</a><a class="filter-submit ic-btn mui-col-xs-6 ic-btn-primary">确定</a>
+		</form>
+	</div>
+	<div id="filter-menu-backdrop" class="filter-menu-backdrop"></div>
+	<div class="mui-content mui-scroll-wrapper bg-yellow mgt44">
+		<div class="mui-scroll">
+		<nav>
+			<ul class="filter-select clearfloat pdclr" style="margin:10px 20px -8px 20px;">
+				<if condition="$condition.parttime eq 1">
+	            <li class="f-select active"><a filter-form="filterForm" filter="parttime" filter-status="<if condition="$condition.parttime == 1">0<else/>1</if>"><span class="checkbox-select"></span>实习<span class="remove"><i class="nc-icon-outline ui-2_small-remove"></i></span></a></if></li>
+	            </if>
+	            <if condition="$condition.fulltime eq 1">
+	            <li class="f-select active"><a filter-form="filterForm" filter="fulltime" filter-status="<if condition="$condition.fulltime == 1">0<else/>1</if>"><span class="checkbox-select"></span>全职<span class="remove"><i class="nc-icon-outline ui-2_small-remove"></i></span></a></if></li>
+	            </if>
+	            <if condition="$condition.end eq 1">
+	            <li class="f-select active"><a filter-form="filterForm" filter="end" filter-status="<if condition="$condition.end == 1">0<else/>1</if>"><span class="checkbox-select"></span>未截止<span class="remove"><i class="nc-icon-outline ui-2_small-remove"></i></span></a></if></li>
+	            </if>
+	            <if condition="$condition.exchange eq 1">
+	            <li class="f-select active"><a filter-form="filterForm" filter="exchange" filter-status="<if condition="$condition.exchange == 1">0<else/>1</if>"><span class="checkbox-select"></span>未兑换<span class="remove"><i class="nc-icon-outline ui-2_small-remove"></i></span></a></if></li>
+	            </if>
+	          </ul>
+		</nav>
+
+		<empty name="list">
+          <div class="referral-empty">
+            <p class="empty ft14" style="margin: 98px 0 60px 0;">- 暂时没有符合条件的内推 - </p>
+            <img style="max-width: 337px;" src="/Public/qr/referral_tips@2x.png">
+          </div>
+        <else/>
+          <div class="card-list clearfix">
+            <volist name="list" id="li">
+            <section class="card-item">
+              <div class="referral-forward" rid="{$li.id}">
+                <div class="inner-box clearfix">
+                  <div class="pull-left img" style="background-image:url('{$li.logo_path}')"></div>
+                  <h4 class="title">{$li.name}</h4>
+                  <p class="">内推名额<span class="text-taro">{$li.quota}</span>个</p>
+                  <p class="">职位数量<span class="text-taro">{$li.p_num}</span>个</p> 
+                  <div>
+                    <if condition="stripos($li['company_type'],'1') nheq false"><span class="label-solid label-whiteyellow border-rclr">实习</span></if>
+                    <if condition="stripos($li['company_type'],'2') nheq false"><span class="label-solid label-whitegreen border-rclr">全职</span></if>
+                  </div>
+                </div>
+                <div class="card-item-label">
+                	<if condition="stripos($li['direct_type'],'1') nheq false"><span class="label-border label-taro">直通面试</span></if>
+	                <if condition="stripos($li['direct_type'],'2') nheq false"> <span class="label-border label-brown">直通笔试</span></if>
+	                <span class="time pull-right">截止日：{$li.deadline|date='Y-m-d',###}</span>
+                </div>
+                <div class="card-item-bottom">
+                	<p class="slogan ft14">{$li.slogan}</p><if condition="$li.exchange_status eq 1"><a class="btn btn-taro" href="{:U('/company/referraldetail?id='.$li.id)}">查看内推方式</a></if>
+                </div>
+              </div>
+              <if condition="$li.show_status eq 2">
+                <div class="item-overlay"></div>
+                <span class="change-over">已兑换完</span>
+              <elseif condition="$li.show_status eq 3"/>
+                <div class="item-overlay"></div>
+                <span class="change-over">已截止</span>
+              </if> 
+            </section>
+            </volist>
+          </div>
+        </empty>
+        </div>
+	</div>
+	
+	<include file="Public/footer_nav_company" />
+
+	 <script src="../../../assets/js/jquery-1.8.2.min.js"></script>
+    <script src="../../../assets/js/cookie.js"></script>
+    <script src="../../assets/js/mui.js"></script>
+    <script src="../../assets/js/app.js"></script>
+	<script src="../../assets/js/referral.js"></script>
+	<script src="../../assets/js/mui.pullToRefresh.js"></script>
+	<script src="../../assets/js/mui.pullToRefresh.material.js"></script>
+	<script type="text/javascript" src="../../assets/js/triggermeun.js"></script>
+	<script type="text/javascript" src="../../assets/js/company.js"></script>
+	<include file="Public/wxshare" />
+</body>
+</html>

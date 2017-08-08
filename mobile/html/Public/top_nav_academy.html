@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="{:stamp('Public/Mobile/css/sass/module/academy.css')}">
+</head>
+<body>
+<div class="ic-theme-yellow ic-academy"><!--theme module-->
+	<if condition="$topNav.academy eq 'detail' ">
+		<header class="mui-bar mui-bar-nav ic-header-nav">
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" href="{:U('/academy/index/catid/'.$courseData[0]['pid'])}" open-type="common"></a>
+			<h1 class="mui-title ic-collapse-title">课程介绍</h1>
+		</header>
+	<elseif condition="$topNav.academy eq 'media'" />	
+		<header class="mui-bar mui-bar-nav ic-header-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="{:U('/academy/detail/flag/'.$courseflag)}" open-type="common"></a>
+			<h1 class="mui-title ic-collapse-title">{$info.title}</h1>
+		</header>	
+	<elseif condition="$topNav.academy eq 'order'"/>	
+		<header class="mui-bar mui-bar-nav ic-header-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" href="{:U('/academy/detail/flag/'.$courseflag)}" open-type="common"></a>
+			<!-- <a class="mui-action-back mui-icon mui-icon-closeempty mui-pull-right"></a> -->
+			<h1 class="mui-title ic-collapse-title">确认订单</h1>
+		</header>
+	<elseif condition="$topNav.academy eq 'setting'"/>	
+		<header class="mui-bar mui-bar-nav ic-header-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+
+			<h1 class="mui-title ic-collapse-title">设置</h1>
+		</header>	
+	<else/>	
+		<header class="mui-bar mui-bar-nav ic-header-nav">
+			<!-- <h1 class="mui-title ic-collapse-title"><a id="icon-menu" class="mui-action-menu ">白熊学院</a></h1> -->
+			<h1 class="mui-title ic-collapse-title"><a id="icon-menu" class="mui-action-menu "><img class="mlogo" src="/Public/Mobile/images/assets/mlogo.png" />白熊学院<i class="nc-icon-outline arrows-1_minimal-down"></i></a></h1>
+		</header>
+		<div id="menu-wrapper" class="menu-wrapper hidden">
+			<div id="menu" class="menu ">
+				<ul class="mui-table-view mui-table-view-inverted ic-topdropnav mui-row">
+					<li class=" mui-col-xs-4">
+						<a href="http://bbs.icebear.me/forum-1.htm" open-type="common"><span class=""><i class="nc-icon-outline ui-3_chat-46"></i></span>白熊论坛</a>
+					</li>
+					<li class=" mui-col-xs-4">
+						<a href="/company/" open-type="common"><span class=""><i class="nc-icon-outline business_briefcase-24"></i></span>白熊求职</a>
+					</li>
+					<li class=" mui-col-xs-4">
+						<a href="/baike" open-type="common"><span class=""><i class="nc-icon-outline business_books"></i></span>白熊百科</a>
+					</li>
+					<!-- <li class="mui-table-view-cell">
+						<a href="javascript:;"><span class=""><i class="nc-icon-outline media-1_player"></i></span>学院</a>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+		<div id="menu-backdrop" class="menu-backdrop"></div>
+	</if>
+
+	

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<style type="text/css">
+  .main-content #bk-head.affix{
+    top: 29px;
+    background-color: #FFF;
+    z-index: 10;
+    position: fixed;
+  }
+</style>
+<link rel="stylesheet" type="text/css" href="../../assets/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/list.css"/>
+<link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.css"/>
+    <script type="text/javascript" src="../../assets/js/jquery.1.10.1.min.js"></script>
+<script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../assets/js/script.js"></script>
+
+<body data-spy="scroll" data-target="#bk-nav" data-offset="100">
+<div class="content">
+  <div class="row container">
+    <div class="span3 aside hidden-xs" id="aside">
+      <a class="lt-banner company-banner220" href="/company/companylist" target="_blank" style="margin: 0 0 10px 0;"></a>
+      <div class="nav-aside" id="nav-aside"><!--nav-aside-->
+        <ul class="nav-lt-aside">
+          <li>
+            <h3 class="aside-title"><i class="nc-icon-outline design_app bold-pd12"></i>行业领域</h3>
+         <!--    <div class="myr_input_div_l form_wrap normal_s" style="*z-index:3;">
+              <input id="cid" data-cid="<?php echo $array['cid']; ?>" name="cid" type="button" class="mr_button form_select" value="<?php echo $array['cattitle']; ?>"/><i class="nc-icon-outline arrows-1_minimal-down select_button_icon"></i>
+              <div class="xl_list" style="display:none">
+                <ul id="cid" class="baike-cat">
+                  <volist name="category" id="categorylt" offset="0">
+                    <li class="" data-cid="{$categorylt.id}" >{$categorylt.title}</li>
+                  </volist>
+                </ul>
+              </div>
+            </div> -->
+            <div class="left_nav_cat">
+              <ul>
+                  <volist name="category" id="categorylt" offset="0">
+                    <li data-cid="{$categorylt.id}"><if condition="$cid eq $categorylt['id']"><i class="nc-icon-glyph ui-1_check-bold"></i></if><a href="/baike/?cid={$categorylt[id]}">{$categorylt.title}</a></li>
+                  </volist>
+                </ul>
+            </div>
+          </li>
+          <li>
+            <h3 class="aside-title"><i class="nc-icon-outline business_briefcase-24 bold-pd12"></i>具体职位</h3>
+            <ul class="deep position">
+              <volist name="catlist" id="catlistlt" offset="0">
+                <li <if condition="$position eq $catlistlt['id']">class="active"</if> data-id="{$catlistlt.id}">{$catlistlt.jobname}</li>
+              </volist>
+            </ul>
+          </li>
+        </ul>
+       <!--  <div class="block-line"></div>
+        <p class="ft14">（更多内容白熊正在筹备中）</p> -->
+      </div><!--nav-aside-->
+      <div class="lt-banner hidden-xs ">
+        <a class="baike-toupiao" href="http://szicebear.mikecrm.com/oZOdtv" target="_blank">
+          <img src="/Public/Home/images/baike/left_banner1.png">
+        </a>
+      </div>
+      <div class="lt-banner hidden-xs ">
+        <a class="baike-jiucuo" href="http://wpa.qq.com/msgrd?v=3&uin=2535357251&site=qq&menu=yes" target="_blank">
+          <img src="/Public/Home/images/baike/left_banner2.png">
+        </a>
+      </div>
+
+      <?php if (!empty($list[0]['course_path'])):?>
+      <div class="lt-banner">
+        <img src="<?php echo $list[0]['course_path']?>">
+      </div>
+      <?php endif;?><!--banner-aside-->
+      <form id="baikeSearchForm" name="baikeSearchForm" action="/Baike/index.html" method="get">
+          <input type="hidden" name="position" id="positionInput" value="<php>echo $_GET['position']</php>"/>
+          <input type="hidden" name="cid" id="cidInput" value="<php>echo $_GET['cid']</php>"/>
+      </form>
+    </div>
+    <div class="span9 main-content overlay overlay-hugeinc">
+
+    <volist name="list" id="bklist" offset="0" length='1'>
+      <div class="mian-nav visible-xs"><!--phone visible-->
+        <div class="mobile-lt-cat"><a  class="trigger-overlay"><i class="nc-icon-glyph media-1_button-record pd12 ft10"></i>{$bklist.jobname}<i class="nc-icon-outline arrows-1_minimal-down lt-pd12 ft10"></i></a></div>
+        <div class="mobile-rt-cat"><a class="trigger-overlay-cat"><i class="nc-icon-glyph ui-2_menu-bold"></i></a></div>
+      </div>
+      <div id="bk-head" data-spy="affix">
+        <h3 class="bk-title hidden-xs"><i class="nc-icon-glyph media-1_button-record bold-pd12 ft10"></i>{$bklist.jobname}</h3>
+       <nav class="bk-nav">
+           <div   id="bk-nav">
+              <ul class="nav">
+                 <li class="active"><a href="#position-des">职位描述</a></li><li><a href="#position-dis">职业发展</a></li><li><a href="#hotissue">热门问题</a></li><li><a href="#download-book">锦囊下载</a></li>
+              </ul>
+           </div>
+        </nav>
+      </div>
+     
+      <div class="bk-content scrollspy" >
+        <div class="bk-block" id="position-des" data-offset="100">
+          <h3 class="bk-heading"><i class="nc-icon-outline clothes_shirt-neck bgyl-pd12"></i>职位描述</h3>
+          <h4 class="bk-sec-title">工作内容</h4>
+          <p>互联网产品经理是互联网公司中一个常见的职能部门，负责互联网产品的计划和推广，以及互联网产品生命周期演化的推进。职能上，狭义的产品经理只负责产品策划工作，而广义上，产品经理则需同时兼顾产品的策划和运营工作。产品经理在互联网公司中处于核心位置，需要非常强的沟通能力、协调能力、市场洞察力和商业敏感度。最著名的互联网产品经理有百度的俞军，腾讯的张小龙等。产品经理的工作内容主要有以下几点：</p>
+          <ul>
+              <li>负责用户需求的调研、分析、评估和原型设计；</li>
+              <li>推动、协调产品功能的开发、测试和发布；</li> 
+              <li>协助产品上线以后的 BUG 跟踪、收集改进意见、提供改进方案；</li> 
+              <li>定期对行业相关产品进行评估，并提出功能优化、用户体验升级等方面建议。 </li>
+          </ul>
+        </div>
+        <div class="bk-block">
+          <h4 class="bk-sec-title">岗位要求</h4>
+          <p>产品经理岗可谓是现阶段互联网众多岗位中的“当红炸子鸡”，相对低的 IT 技术要求，无专业限制，重思考的逻辑性，重沟通的效率性，重团队协作的顺畅性，为了更好地完成日常工作，产品经理必须熟练掌握以下技能：</p>
+          <ul>
+            <li>熟练使用Axure，Xmind，Office等软件输出产品文档，产品原型图，流程图，思维导图等。</li>
+            <li>具备较强的逻辑分析能力，通过问卷，聊天等形式收集用户的需求，分析用户需求。</li>
+            <li>有一定的市场敏感度，调研竞品，优化产品功能，提升产品的用户体验。</li>
+            <li>热爱互联网行业，有较强的协作能力，沟通能力以及创新能力，做事严谨认真。</li>
+          </ul>
+        </div>
+        <div class="bk-block" id="position-dis" data-offset="100">
+          <h3 class="bk-heading"><i class="nc-icon-outline business_chart-growth bgyl-pd12"></i>职业发展</h3>
+          <div class="bk-block">
+            <h4 class="bk-sec-title">职业发展晋升图</h4>
+            <p>大型互联网公司发展比较成熟，各个岗位的职业发展体系也比较完善，所以关于产品经理的职业发展我们会主要以大型公司为背景。应届生进入大型公司后，发展情况都大同小异，一般会从产品助理 / 专员（新人）进阶到产品经理（成熟）， 再进阶到高级产品经理（骨干）。一般每个阶段会经历0.5-2 年，具体的晋升速度取决于产品线发展速度、公司发展情况、个人成长速度和导师水平。</p>
+            <div class="bk-item row">
+            <div class="span4 lt-item">
+              <span class="bk-item-title">产品助理/专员</span>
+              <span class="bk-item-time"><i class="nc-icon-outline ui-2_time pd12"></i>0-2年</span>
+              <span class="bk-item-salary"><i class="nc-icon-outline business_coins pd12"></i>5-8K／月</span>
+            </div>
+            <div class="span8 rt-item">
+              <p>在导师的指导下，可以完成相对简单的任务，比如设计一个小的功能并推动上线，或完成一份比较清楚的竞品分析。</p>
+            </div>
+          </div>
+          </div>
+       
+        </div>
+
+        <div class="bk-block row" id="hotissue" data-offset="100">
+          <h3 class="bk-heading"><i class="nc-icon-outline ui-1_pencil bgyl-pd12"></i>热门问题</h3>
+          <!-- 热门问题 1-->
+          <notempty name="bklist.hot_question1">
+          <div class="span12 bk-hotissue">
+            <p class="bk-question">Q1:Q1:产品经理怎么入门，如何自主学习？</p>
+            <div class="bk-answer  answer-bottom over-answer">
+              <div class="answer-cover"></div>
+              <p>1.首先清楚产品经理的要求是什么？</p>
+                <p>想要成为一个产品经理，总要先了解企业对产品经理的要求是什么，大部分公司要求的产品经理即功能型产品经理：①设计技能：懂得产品模式的功能结构，掌握功能的策划和设计；②产品软件：熟练使用office、思维导图、原型设计软件、各类产品文档；③产品模式：了解B2C、O2O、SNS等产品的功能结构和运作模式。</p>
+                <p>2.和产品经理的差距在哪里？如何提高？</p>
+                <p>从最简单的软件入手。产品相关软件：①使用Axure进行原型设计 ②使用Mindmanager、Xmind绘制思维导图 ③Axure，Visio画流程图 ④项目管理软件：Project，禅道； ⑤办公软件：Office，WPS等；以上软件起码要掌握基础的操作，如利用AXURE会做简单的交互动作，利用VISIO会画简单的流程图，泳道图；利用Peoject会做简单的项目排期，利用Excel会做简单的数据分析。</p>
+                <p>清楚不同产品模式下不同的功能结构，并且可以根据企业的产品模式，设计出产品原型及文档；这里的建议是： ①从设计开始：对不同产品模式的网站：如B2B,B2C,C2C这三种不同类型的网站，尝试着自己设计出一套产品原型出来，从最简单的一套流程开始，如注册流程、下单流程... ②对比：把自己设计的产品，与真正的网站进行对比，找出自己所完成的流程与真正的、成熟的流程相比下的差距在哪里 ③小结：思考以下这些问题：有哪些细节没有想到？为什么会有这样的差距？自己的思维有哪些盲点？设计这些产品的产品经理是怎么考虑的？  ④反复修正：根据对比的结果找到自己的不足后，给第一次自己做的设计进行修改，再重新进行对比——小结——修改，对作品进行反复的修正。 ⑤如果掌握了相关软件和不同产品模式下的功能设计，那么当个产品专员是足够了的。</p>
+                <p>3.产品经理必备的素质：</p>
+                <p>①一定的技术功底或者知识：虽然在知乎上大家一直都在讨论产品经理到底需不需要技术功底，但是掌握一定的编程知识，不但可提升自己的逻辑思维能力，在跟程序员的沟通上，也少了很多问题，所以就算不会编程，还是建议掌握一定的技术知识。 ②一定的运营知识：再好的产品也需要运营，不管是为了产品还是为了更好的同运营部门沟通，运营知识是少不了的； ③一定的沟通技巧：产品经理虽然被称为迷你CEO，但他是一个没有权力的CEO，如何利用公司的各种资源为自己服务，完成产品，那么沟通技巧就不可缺少了； ④一定的设计技巧：在很多公司没有交互设计职位的情况下，产品经理和UI负责了整个产品的设计，不具备一定设计知识的无法把产品经理的工作做到游刃有余。如果以上的标准都达标，那么获得一个产品经理的职位，并不是很困难的事情。</p>
+                <p>总结起来，产品经理最重要的三条能分别是学习能力、逻辑思维、沟通。而其中，学习能力排在第一位。知乎上有大量关于产品方面的提问和答案，在书店中也有大量关于产品经理的书籍，只要你有心去学习、去关注，掌握相关知识和技能并不是一件什么难事。</p>                
+            </div>
+      
+            <a href="javascript:;" class="btn-circle btn-secondary read-answer">查看完整回答</a>
+           
+          </div>
+          </notempty>
+          <!-- 热门问题 2-->
+          <notempty name="bklist.hot_question2">
+          <div class="span12 bk-hotissue">
+            <p class="bk-question">Q2:{$bklist.hot_question2}</p>
+            <div class="bk-answer  <if condition="mb_strlen($bklist['answer2'],'utf8') gt 150 ">over-answer answer-bottom</if>">
+              <div class="answer-cover" <if condition="mb_strlen($bklist['answer2'],'utf8') lt 150 ">style="display:none"</if>></div>
+              {$bklist.answer2}
+                
+            </div>
+            <if condition="is_login()">
+            <a href="javascript:;" class="btn-circle btn-secondary read-answer" <if condition="mb_strlen($bklist['answer2'],'utf8') lt 150 ">style="display:none"</if>>查看完整回答</a>
+            <else/>
+            <a  class="btn-circle btn-secondary btn-fixed loginpop" href="#loginpopup" data-type="log">查看完整回答</a>
+            </if>
+          </div>
+          </notempty>
+          <!-- 热门问题 3-->
+          <notempty name="bklist.hot_question3">
+          <div class="span12 bk-hotissue">
+            <p class="bk-question">Q3:{$bklist.hot_question3}</p>
+            <div class="bk-answer  <if condition="mb_strlen($bklist['answer3'],'utf8') gt 150 ">over-answer answer-bottom</if>">
+              <div class="answer-cover" <if condition="mb_strlen($bklist['answer3'],'utf8') lt 150 ">style="display:none"</if>></div>
+              {$bklist.answer3}
+                
+            </div>
+            <if condition="is_login()">
+            <a href="javascript:;" class="btn-circle btn-secondary read-answer" <if condition="mb_strlen($bklist['answer3'],'utf8') lt 150 ">style="display:none"</if>>查看完整回答</a>
+            <else/>
+            <a  class="btn-circle btn-secondary btn-fixed loginpop" href="#loginpopup" data-type="log">查看完整回答</a>
+            </if>
+          </div>
+          </notempty>
+          <!-- 热门问题 4-->
+          <notempty name="bklist.hot_question4">
+          <div class="span12 bk-hotissue">
+            <p class="bk-question">Q4:{$bklist.hot_question4}</p>
+            <div class="bk-answer  <if condition="mb_strlen($bklist['answer4'],'utf8') gt 150 ">over-answer answer-bottom</if>">
+              <div class="answer-cover" <if condition="mb_strlen($bklist['answer4'],'utf8') lt 150 ">style="display:none"</if>></div>
+              {$bklist.answer4}
+                
+            </div>
+            <if condition="is_login()">
+            <a href="javascript:;" class="btn-circle btn-secondary read-answer" <if condition="mb_strlen($bklist['answer4'],'utf8') lt 150 ">style="display:none"</if>>查看完整回答</a>
+            <else/>
+            <a  class="btn-circle btn-secondary btn-fixed loginpop" href="#loginpopup" data-type="log">查看完整回答</a>
+            </if>
+          </div>
+          </notempty>
+          <!-- 热门问题 5-->
+          <notempty name="bklist.hot_question5">
+          <div class="span12 bk-hotissue">
+            <p class="bk-question">Q5:{$bklist.hot_question5}</p>
+            <div class="bk-answer  <if condition="mb_strlen($bklist['answer5'],'utf8') gt 150 ">over-answer answer-bottom</if>">
+              <div class="answer-cover" <if condition="mb_strlen($bklist['answer5'],'utf8') lt 150 ">style="display:none"</if>></div>
+              {$bklist.answer5}
+                
+            </div>
+           
+            <a href="javascript:;" class="btn-circle btn-secondary read-answer">查看完整回答</a>
+          
+          </div>
+          </notempty>
+        </div>
+        
+         <div class="bk-block" id="download-book" data-offset="100">
+          <h3 class="bk-heading"><i class="nc-icon-outline education_book-bookmark bgyl-pd12"></i>锦囊下载</h3>
+          <div class="bk-book row">
+            <div class="span9 book-intro">
+            <div class="row">
+              <div class="book-left span4"> 
+                <span><img src="{$bklist.file_path}"></span>
+              </div>
+              <div class="book-right span8">   
+                  <h3 class="book-title">{$bklist.silk_bag}</h3>
+                  <notempty name="bklist.silk_author">
+                  <span class="book-detail">作者：{$bklist.silk_author}</span>
+                  </notempty>
+                  <notempty name="bklist.publish_time">
+                  <span class="book-detail">出版：{$bklist.publish_time}</span>
+                  </notempty>
+                  <notempty name="bklist.silk_copyright">
+                  <span class="book-detail">版权：{$bklist.silk_copyright}</span>
+                  </notempty>
+                  <if condition="$bklist['is_dev'] eq 1"> 
+                    <a href="{:U('File/download_silk?id='.$bklist['id'].'')}"  class="bk-book-dl btn-circle-sm btn-secondary">立即下载</a>
+                 
+                    <a id="dltologin" href="#loginpopup" class="loginpop" data-type="log" style="display:none"></a>
+                  <else/> 
+                    <a href="javascript:;" class="bk-book-dl btn-circle-sm btn-disabled">立即下载</a>
+                  </if>
+              </div>
+            </div>
+              
+
+            </div>
+            <div class="span3 hidden-xs">
+              <div class="share-block">
+                <a class="btn btn-third share-button ">分享<i class="nc-icon-outline lt-pd12 arrows-1_share-91"></i></a>
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style_24x24" style="display:none; bottom:10px; right:0;   position: absolute; height: 60px;">
+                  <a class="jiathis_button_qzone"></a>
+                  <a class="jiathis_button_tsina"></a>
+                <!--    <a class="jiathis_button_tqq"></a> -->
+                  <a class="jiathis_button_weixin"></a>
+                  <a class="jiathis_button_renren"></a>
+                  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                 <!--  <a class="jiathis_counter_style"></a> -->
+                </div>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+                <!-- JiaThis Button END -->
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bk-book-detail row">
+           <div class="span12" data-example-id="togglable-tabs">
+              <ul id="myTabs" class=" book-detail-nav" role="tablist">
+                <li role="presentation" class="active"><a href="#bookintro" id="bookintro-tab" role="tab" data-toggle="tab" aria-controls="bookintro" aria-expanded="false">简介</a></li>
+                <li role="presentation" class=""><a href="#booklist" role="tab" id="booklist-tab" data-toggle="tab" aria-controls="booklist" aria-expanded="true">目录</a></li>
+              
+              </ul>
+              <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="bookintro" aria-labelledby="bookintro-tab">
+                 {$bklist.introduction}
+                </div>
+                <div role="tabpanel" class="tab-pane fade " id="booklist" aria-labelledby="booklist-tab">
+                  {$bklist.bagcontent}
+                </div>
+                
+              </div>
+            </div>
+          </div>
+      
+          
+        </div> 
+        <div class="row">
+            <div class="lt-banner span6 visible-xs">
+              <a class="baike-toupiao" href="http://szicebear.mikecrm.com/oZOdtv" target="_blank">
+                <img src="/Public/Home/images/baike/left_banner1.png">
+              </a>
+            </div>
+            <div class="lt-banner span6 visible-xs">
+              <a class="baike-jiucuo" href="http://wpa.qq.com/msgrd?v=3&uin=2535357251&site=qq&menu=yes" target="_blank">
+                <img src="/Public/Home/images/baike/left_banner2.png">
+              </a>
+            </div>
+          </div>      
+      </div>
+      </volist>
+    </div>
+  </div>
+</div>
+
+<!-- open/close -->
+  <div class="overlay-sideup hideNav hidden">
+    <h3 class="overlay-title">选择职位<a  class="trigger-overlay"><i  class="overlay-close nc-icon-glyph ui-1_simple-remove pd12 ft10"></i></a></h3>
+    
+    <ul class="deep position nav-list">
+      <volist name="catlist" id="catlistnav" offset="0">
+        <li class="nav-item" data-id="{$catlistnav.id}"><a href="#" class="item-anchor">{$catlistnav.jobname}</a></li>
+      </volist>
+    </ul>
+  </div>
+
+  <div class="overlay-sideup-cat hideNav hidden">
+    <h3 class="overlay-title">选择行业<a  class="trigger-overlay-cat"><i  class="overlay-close nc-icon-glyph ui-1_simple-remove pd12 ft10"></i></a></h3>
+    <ul  class="baike-cat nav-list">
+      <!-- <volist name="category" id="categorynav" offset="0">
+        <li class="nav-item" data-cid="{$categorynav.id}" ><a href="#" class="item-anchor">{$categorynav.title}</a></li>
+      </volist> -->
+      <li class="nav-item" data-cid="1">互联网/游戏/软件 </li><li class="nav-item" data-cid="41">房地产/建筑/物业 </li>
+    </ul>
+  </div>
+
+
+</body>
+ <script type="text/javascript" src="../../assets/js/jquery.1.10.1.min.js"></script>
+   <script type="text/javascript" src="../../assets/js/scrollspy.js"></script>
+   <script type="text/javascript" src="../../assets/js/affix.js"></script>
+    <script type="text/javascript" src="../../assets/js/cookie.js"></script>
+  <script type="text/javascript" src="../../assets/js/script.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  //   if (<?php echo $array['position']; ?>) {
+  //     var position = <?php echo $array['position']; ?>;
+  //     var positionDiv = $('.position');
+  //     for (var i = 0; i <= positionDiv.length; i++) {
+  //       var findposition = positionDiv.find('li').eq(i);
+  //       if (findposition.attr('data-id') == position) {
+  //         findposition.addClass('active');
+  //         break;
+  //       }
+  //     }
+  //   }else{
+  //   var cidDiv = $('.position').find('li').eq(0);
+  //   cidDiv.addClass('active');
+  // }
+ 
+
+  });    
+</script>
+
+<include file="Public/footer" />
+</body>
+</html>

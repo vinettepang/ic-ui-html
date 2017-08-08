@@ -1,0 +1,865 @@
+
+	<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			.mui-views,
+			.mui-view,
+			.mui-pages,
+			.mui-page,
+			.mui-page-content {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #efeff4;
+			}
+			.mui-pages {
+				top: 46px;
+				height: auto;
+			}
+			.mui-scroll-wrapper,
+			.mui-scroll {
+				background-color: #efeff4;
+			}
+			.mui-page.mui-transitioning {
+				-webkit-transition: -webkit-transform 300ms ease;
+				transition: transform 300ms ease;
+			}
+			.mui-page-left {
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+			}
+			.mui-ios .mui-page-left {
+				-webkit-transform: translate3d(-20%, 0, 0);
+				transform: translate3d(-20%, 0, 0);
+			}
+			.mui-navbar {
+				position: fixed;
+				right: 0;
+				left: 0;
+				z-index: 10;
+				height: 44px;
+				background-color: #f7f7f8;
+			}
+			.mui-navbar .mui-bar {
+				position: absolute;
+				background: transparent;
+				text-align: center;
+				background-color: #FFD733 !important;
+			}
+			.mui-android .mui-navbar-inner.mui-navbar-left {
+				opacity: 0;
+			}
+			.mui-ios .mui-navbar-left .mui-left,
+			.mui-ios .mui-navbar-left .mui-center,
+			.mui-ios .mui-navbar-left .mui-right {
+				opacity: 0;
+			}
+			.mui-navbar .mui-btn-nav {
+				-webkit-transition: none;
+				transition: none;
+				-webkit-transition-duration: .0s;
+				transition-duration: .0s;
+			}
+			.mui-navbar .mui-bar .mui-title {
+				display: inline-block;
+				width: auto;
+			}
+			.mui-page-shadow {
+				position: absolute;
+				right: 100%;
+				top: 0;
+				width: 16px;
+				height: 100%;
+				z-index: -1;
+				content: '';
+			}
+			.mui-page-shadow {
+				background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+				background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+			}
+			.mui-navbar-inner.mui-transitioning,
+			.mui-navbar-inner .mui-transitioning {
+				-webkit-transition: opacity 300ms ease, -webkit-transform 300ms ease;
+				transition: opacity 300ms ease, transform 300ms ease;
+			}
+			.mui-page {
+				display: none;
+			}
+			.mui-pages .mui-page {
+				display: block;
+			}
+			.mui-page .mui-table-view:first-child {
+				margin-top: 15px;
+			}
+			.mui-page .mui-table-view:last-child {
+				margin-bottom: 30px;
+			}
+			.mui-table-view {
+				margin-top: 20px;
+			}
+			
+			.mui-table-view span.mui-pull-right {
+				color: #999;
+			}
+			.mui-table-view-divider {
+				background-color: #efeff4;
+				font-size: 14px;
+			}
+			.mui-table-view-divider:before,
+			.mui-table-view-divider:after {
+				height: 0;
+			}
+			.head {
+				height: 40px;
+			}
+			#head {
+				line-height: 40px;
+			}
+			.head-img {
+				width: 40px;
+				height: 40px;
+			}
+			#head-img1 {
+				position: absolute;
+				bottom: 10px;
+				right: 40px;
+				width: 40px;
+				height: 40px;
+			}
+			.update {
+				font-style: normal;
+				color: #999999;
+				margin-right: -25px;
+				font-size: 15px
+			}
+			.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			.mui-ios .mui-navbar .mui-bar .mui-title {
+				position: static;
+			}
+			/*问题反馈在setting页面单独的css*/
+			#feedback .mui-popover{
+				position: fixed;
+			}
+			#feedback .mui-table-view:last-child {
+			    margin-bottom: 0px;
+			}
+			#feedback .mui-table-view:first-child {
+			    margin-top: 0px;
+			}
+			/*问题反馈在setting页面单独的css==end*/
+
+
+		/*消息中心   start*/
+            #news{
+                background-color: white;
+            }
+            #news .ic-slider-indicator {
+                color: #B89D86;
+                height: 44px;
+                border-bottom: 1px solid rgba(0,0,0,.1);
+            }
+			#news-center .ic-red-point{
+				display: none;
+				width: 5px;
+				height: 5px;
+				border-radius: 50%;
+				background-color: red;
+				position: absolute;
+				border: red 1px solid;
+			}
+            #news .ic-slider-indicator .ic-red-point{
+                display: none;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: red;
+                margin-left: -15px;
+                margin-top: 19px;
+                position: absolute;
+                border: red 1px solid;
+            }
+            #news .ic-slider-indicator .mui-control-item{
+                line-height: 44px;
+            }
+            #news .ic-slider-indicator .mui-active{
+                color: #482929;
+                font-weight: 700;
+            }
+            #ic-slider{
+                background-color: white;
+            }
+            #ic-news-content{
+                background-color: white!important;
+            }
+            #ic-news-content .ic-slider-progress-bar{
+                background-color: #FFD733 ;
+                height: 3px;
+                top: -3px;
+            }
+            #ic-news-content .ic-slider-group{
+                position: relative;
+                top: -3px;
+            }
+            #ic-news-content .ic-slider-group .ic-haveNews{
+                position: relative;
+                font-family: PingFangSC-Regular;
+                font-size: 14px;
+                color: #9B9B9B;
+                letter-spacing: 0;
+                transition: all linear 0.5s;
+                display: none;
+            }
+            #ic-news-content .ic-slider-group .ic-haveNews li{
+                line-height: 44px;
+            }
+            #ic-news-content .ic-slider-group .ic-haveNews li .ic-news-one,
+            #ic-news-content .ic-slider-group .ic-haveNews li .ic-content-one{
+                display: inline-block;
+                margin-left: 5%;
+            }
+            #ic-news-content .ic-slider-group .ic-haveNews li .ic-news-two,
+            #ic-news-content .ic-slider-group .ic-haveNews li .ic-content-two{
+                display: none;
+                float: right;
+                /*border: 1px solid red;*/
+                padding: 0 5%;
+            }
+            #ic-news-content .ic-table-view{
+                background-color: white;
+                margin:0;
+            }
+            #ic-news-content .news-title{
+                font-family: PingFangSC-Regular;
+                font-size: 14px;
+                color: #482929;
+                letter-spacing: 0;
+                line-height: 20px;
+                display: block;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                max-width: 336px;
+            }
+            #ic-news-content .news-time{
+                font-family: PingFangSC-Regular;
+                font-size: 12px;
+                color: #9B9B9B;
+                letter-spacing: 0;
+            }
+            #ic-news-content .ic-table-view p{
+                font-family: PingFangSC-Regular;
+                font-size: 16px;
+                color: #482929;
+                letter-spacing: 0;
+            }
+            #ic-news-content .ic-table-view .news-name{
+                font-family: PingFangSC-Semibold;
+                font-size: 16px;
+                color: #6769C9;
+                letter-spacing: 0;
+            }
+            #ic-news-content .news-content{
+                margin-top: 5px;
+                display: block;
+                font-family: PingFangSC-Regular;
+                font-size: 14px;
+                color: #482929;
+                letter-spacing: 0;
+                line-height: 20px;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space: normal;
+                display:-webkit-box;
+                -webkit-box-orient:vertical;
+                -webkit-line-clamp:2;/*规定最多显示两行*/
+            }
+            #ic-news-content .ic-scroll-wrapper{
+                background-color: white;
+            }
+            #ic-news-content .ic-table-view li:after{
+                content: none;
+            }
+            #ic-news-content .ic-table-view li{
+                border-bottom: 0.5px solid rgba(0,0,0,.1);
+            }
+            #ic-news-content .ic-table-view .ic-not-read{
+                background-color: rgb(224,222,236)
+            }
+            #ic-news-content .ic-slider-group .empty-container p{
+                font-family: PingFangSC-Regular;
+                font-size: 16px;
+                color: #6F3400;
+                letter-spacing: 0;
+            }
+		/*消息中心    end*/
+			
+		</style>
+	<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/feedback.css" />
+</head>
+	<body class="mui-fullscreen ic-theme-yellow">
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--单页面开始-->
+		<div id="setting" class="mui-page">
+			<!--页面标题栏开始-->
+			<header class="mui-navbar-inner mui-bar mui-bar-nav ic-header-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>设置
+				</button>
+				<h1 class="mui-center mui-title ic-collapse-title">设置</h1>
+			</header>
+			<!--页面标题栏结束-->
+			<!--页面主内容区开始-->
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell mui-media">
+								<a class="mui-navigate-right" href="#account">
+									<img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+									<div class="mui-media-body">
+										Hello MUI
+										<p class='mui-ellipsis'>账号:hellomui</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<a href="#account" class="mui-navigate-right">账号与安全</a>
+							</li>
+						</ul>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<a href="#news" class="mui-navigate-right" id="news-center">消息中心<span class="ic-red-point"></span></a>
+							</li>
+						</ul>
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell" style="text-align: center;">
+								<a>退出登录</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--页面主内容区结束-->
+		</div>
+		<!--单页面结束-->
+
+		<div id="news" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left ic-action-back"></a>
+				<p class="mui-center mui-title" style="font-weight:700;font-size: 18px;color: #482929;letter-spacing: 1.12px;">消息中心</p>
+			</div>
+
+            <div class="mui-content" id="ic-news-content">
+                <div class="mui-slider" id="ic-slider">
+                    <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted ic-slider-indicator">
+                        <a class="mui-control-item mui-active" href="#itemOneMobile"><span class="ic-red-point"></span>系统消息</a>
+                        <a class="mui-control-item" href="#itemTwoMobile"><span class="ic-red-point"></span>我的消息</a>
+                    </div>
+                    <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6 ic-slider-progress-bar"></div>
+
+                    <div class="mui-slider-group ic-slider-group">
+
+                        <div id="itemOneMobile" class="mui-slider-item mui-control-content">
+                            <empty>
+                                <div class="empty-container">
+                                    <img src="/Public/Home/images/empty-news.png">
+                                    <p class="text-center">还没有消息啦~</p>
+                                </div>
+                            </empty>
+                            <notempty>
+                                <div class="mui-scroll-wrapper ic-scroll-wrapper">
+                                    <div class="mui-scroll">
+
+                                        <ul class="mui-table-view bg-bread ic-table-view ic-haveNews">
+                                            <li>
+                                                <span class="ic-news-one"><span></span>个新消息</span>
+                                                <span class="ic-news-two" id="ic-news-two">标为已读</span>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="mui-table-view bg-bread ic-table-view">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </notempty>
+                        </div>
+
+                        <div id="itemTwoMobile" class="mui-slider-item mui-control-content">
+                            <empty>
+                                <div class="empty-container">
+                                    <img src="/Public/Home/images/empty-news.png">
+                                    <p class="text-center">还没有提问过呢~</p>
+                                </div>
+                            </empty>
+                            <notempty>
+                                <div class="mui-scroll-wrapper ic-scroll-wrapper">
+                                    <div class="mui-scroll">
+
+                                        <ul class="mui-table-view bg-bread ic-table-view ic-haveNews">
+                                            <li>
+                                                <span class="ic-content-one"><span></span>个新消息</span>
+                                                <span class="ic-content-two" id="ic-content-two">标为已读</span>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="mui-table-view bg-bread ic-table-view">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </notempty>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+		</div>
+
+		<include file="Public/footer_nav_academy" />
+	<script src="/Public/Mobile/js/mui.min.js "></script>
+	<script src="/Public/Mobile/js/mui.view.js "></script>
+	<script src='/Public/Mobile/js/feedback.js'></script>
+	<script src='/Public/Mobile/js/app.js'></script>
+    <script src='/Public/Home/js/jquery.js'></script>
+	<script>
+		mui.init();
+		//初始化单页view
+		var viewApi = mui('#app').view({
+			defaultPage: '#setting'
+		});
+		//初始化单页的区域滚动
+		mui('.mui-scroll-wrapper').scroll();
+		var view = viewApi.view;
+		(function($) {
+			//处理view的后退与webview后退
+			var oldBack = $.back;
+			$.back = function() {
+				if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+					viewApi.back();
+				} else { //执行webview后退
+					oldBack();
+				}
+			};
+			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+			view.addEventListener('pageBeforeShow', function(e) {
+				//				console.log(e.detail.page.id + ' beforeShow');
+			});
+			view.addEventListener('pageShow', function(e) {
+				//				console.log(e.detail.page.id + ' show');
+			});
+			view.addEventListener('pageBeforeBack', function(e) {
+				//				console.log(e.detail.page.id + ' beforeBack');
+			});
+			view.addEventListener('pageBack', function(e) {
+				//				console.log(e.detail.page.id + ' back');
+			});
+		})(mui);
+
+
+        $(document).ready(function() {
+            var tempSySMess = 0;//未读系统新消息个数
+            var tempSySMyMess = 0;//未读我的提问新消息个数
+            var okRight = true;  //中间变量
+            var okLeft = true;
+
+            getmessage();
+            function getmessage(){   //后台传输数据接口
+                $.ajax({
+                    url : '/index/getmessage',
+                    type : 'post',
+                    dataType:'json',
+                    success : function(data){
+                    }
+                })
+            }
+
+
+            $.ajax({   //获取系统消息接口
+                type : "post",
+                url : "/index/message",//路径
+                async : true,
+                // dataType:'json',
+                success : function(data) { //返回数据根据结果进行相应的处理
+                    var dataToli = data;
+                    console.log("系统总数："+dataToli.length);
+                    if(dataToli.length==0){
+                        $('empty').eq(0).css('display','block');
+                        $('notempty').eq(0).css('display','none');
+                    }else{
+                        $('empty').eq(0).css('display','none');
+                        for (var i = 0; i < dataToli.length; i++) {
+                            $('#itemOneMobile').find('ul').eq(1).append('<li class="mui-table-view-cell"> <a href="' + dataToli[i].url + '\"> <p><span class="news-title">' + dataToli[i].content + '</span></p> <span class="news-time">' + dataToli[i].datetime + '</span> </a> </li>');
+                            if (dataToli[i].isread == '0') {
+                                tempSySMess++;
+                                $('#itemOneMobile').find('ul').eq(1).find('li').eq(i).addClass('ic-not-read');
+                            }
+                        }
+                        console.log("系统未读数"+tempSySMess);
+                        if(tempSySMess>0) {
+                            $('.ic-news-one').find('span').html(tempSySMess);
+                            $('#itemOneMobile').find('ul').eq(0).animate({height: 44}, 100);
+                            $('#ic-news-two').css('display', 'inline-block');
+                        }
+						$('#itemOneMobile').find('ul').eq(1).find('li').each(function(){
+							mui(this).on("tap",'a',function(){
+								var which = $(this).parent('li').index();
+								console.log('点击了第'+$(this).parent('li').index()+'个系统消息');
+//                                console.log($(this).attr('class'));
+								if($(this).parent('li').hasClass('ic-not-read')){
+									console.log('并且点击的消息是没有读过的');
+									$(this).parent('li').removeClass('ic-not-read');
+									tempSySMess--;
+									$('.ic-news-one').find('span').html(tempSySMess);
+									if(tempSySMess == 0){
+										$('#itemOneMobile').find('ul').eq(0).animate({height:0},100);
+										$('#ic-news-two').css('display','none');
+									}
+									dataToli[which].isread = '0';
+									$.ajax({   //********************************************************************************点击某条我的消息接口
+										type: "POST",
+										url: "/index/receivemessage",
+										data: dataToli[which],
+										success: function (message) {
+											console.log('成功读过一条消息');
+										},
+										error: function (message) {
+											// console.log('读一条消息出错');
+										}
+									});
+								}else{
+									console.log('并且点击的消息是已经读的');
+								}
+							});
+						});
+                    }
+                },
+                error: function (message) {
+                     console.log('左边错误了');
+                }
+            });
+
+            $.ajax({    //***************************************************************************************获取我的消息接口
+                type : "post",
+                url : "/index/mymessage",//路径
+                async : true,
+                // dataType:'json',
+                success : function(data) {
+                    var dataToli = data;
+                    console.log("提问总数"+dataToli.length);
+                    if(dataToli.length == 0){
+                        $('empty').eq(1).css('display','block');
+                        $('notempty').eq(1).css('display','none');
+                    }else{
+                        $('empty').eq(1).css('display','none');
+                        for (var i = 0; i < dataToli.length; i++) {
+                            $('#itemTwoMobile').find('ul').eq(1).append('<li class="mui-table-view-cell"><a href="'+dataToli[i].url+'\"><p><span class="news-name">'+dataToli[i].nickname+'</span> 回复了你:</p><span class="news-content">'+dataToli[i].content+'</span><span class="news-time">'+dataToli[i].datetime+'</span></a> </li>');
+                            if (dataToli[i].isread == '1') {
+                                tempSySMyMess++;
+                                $('#itemTwoMobile').find('ul').eq(1).find('li').eq(i).addClass('ic-not-read');
+                            }
+                        }
+                        console.log("提问未读数"+tempSySMyMess);
+                        if(tempSySMyMess>0){
+                            $('.ic-content-one').find('span').html(tempSySMyMess);
+                            $('#itemTwoMobile').find('ul').eq(0).animate({height:44}, 100);
+                            $('#ic-content-two').css('display','inline-block');
+                        }
+                        $('#itemTwoMobile').find('ul').eq(1).find('li').each(function(){
+                            mui(this).on("tap",'a',function(){
+                                var which = $(this).parent('li').index();
+                                console.log('点击了第'+$(this).parent('li').index()+'个我的消息');
+//                                console.log($(this).attr('class'));
+                                if($(this).parent('li').hasClass('ic-not-read')){
+                                    console.log('并且点击的消息是没有读过的');
+                                    $(this).parent('li').removeClass('ic-not-read');
+                                    tempSySMyMess--;
+                                    $('.ic-content-one').find('span').html(tempSySMyMess);
+                                    if(tempSySMyMess == 0){
+                                        $('#itemTwoMobile').find('ul').eq(0).animate({height:0},100);
+                                        $('#ic-content-two').css('display','none');
+                                    }
+                                    dataToli[which].isread = '0';
+                                    $.ajax({   //********************************************************************************点击某条我的消息接口
+                                        type: "POST",
+                                        url: "/index/receivemessage",
+                                        data: dataToli[which],
+                                        success: function (message) {
+                                             console.log('成功读过一条消息');
+                                        },
+                                        error: function (message) {
+                                            // console.log('读一条消息出错');
+                                        }
+                                    });
+                                }else{
+                                    console.log('并且点击的消息是已经读的');
+                                }
+                            });
+                        });
+                    }
+                },
+                error: function (message) {
+                    console.log('右边错误了');
+                }
+            });
+
+
+            $.ajax({   //判断红点是否显示接口
+                url : '/index/querySpotStatus',
+                type : 'post',
+                dataType:'json',
+                // data:传递totalspot为1表示icon被点击过;   0表示未点击
+                success : function(data){
+                    console.log(data);
+                    if (data.totalspot == '1') {   ///////////////////////////////////////////////////////////////////////////////这里添加总红点
+                        console.log('总红点不存在');
+                        total_point();
+                    }else if (data.totalspot == '0') {
+                        console.log('总红点存在');
+                        $('#news-center').find('span').css('display','inline-block');
+                        total_point();
+                    }
+                    if (data.leftspot == '1') {
+                        console.log('系统消息红点不存在');
+                        $('.mui-control-item').eq(0).children('.ic-red-point').eq(0).css('display','none');
+                    }else if (data.leftspot == '0') {
+                        console.log('系统新消息红点存在');
+                        $('.mui-control-item').eq(0).children('.ic-red-point').eq(0).css('display','inline-block');
+                        slid_left();
+                    }
+                    if (data.rightspot == '1') {
+                        console.log('我的消息红点不存在');
+                        $('.mui-control-item').eq(1).children('.ic-red-point').eq(0).css('display','none');
+                    }else if (data.rightspot == '0') {
+                        console.log('我的消息红点存在');
+                        $('.mui-control-item').eq(1).children('.ic-red-point').eq(0).css('display','inline-block');
+                        slid_right();
+                    }
+                }
+            });
+
+
+            function slid_left(){
+                console.log('监听消除左侧红点。。。。。。');
+                if($('.ic-slider-indicator').find('a').eq(0).hasClass('mui-active')){
+                    console.log("左侧——if");
+                    $.ajax({    //************************************************************************清除左侧栏系统消息红点接口
+                        url : '/index/leftSpotCancel',
+                        type : 'post',
+                        dataType:'json',
+                        // data:传递leftspot为1   表示icon被点击过;   0表示未点击
+                        success : function(data){
+                            console.log('leftSpotCancel');
+                        }
+                    });
+                    if($('.mui-control-item').eq(0).children('.ic-red-point').eq(0).css('display')!='none') {
+                        setTimeout(function () {
+                            $('.mui-control-item').eq(0).children('.ic-red-point').eq(0).css('display', 'none')
+                        }, 1000);
+                    }
+                    $.ajax({
+                        url:'/index/totalSpotCancel',
+                        type:'post',
+                        dataType:'json',
+                        success:function(data){
+                            console.log('总红点消失');
+                        }
+                    });
+                    $('#news-center').find('span').css('display','none');
+                }else if($('.mui-control-item').eq(0).children('.ic-red-point').eq(0).css('display')!='none'){
+                    console.log("左侧——else if");
+                    if(okLeft){
+                        console.log('okLeft is true');
+                        document.querySelector('.mui-slider').addEventListener('slide', SliderLeft);
+                        console.log('okLeft is true end');
+                    }
+                }
+            }
+
+            var SliderLeft = function(){
+                if($('.mui-control-item').eq(0).hasClass('mui-active')){
+                    console.log('刚刚是显示右侧页标识');
+                    $.ajax({
+                        url : '/index/leftSpotCancel',
+                        type : 'post',
+                        dataType:'json',
+                        // data:传递leftspot为1   表示icon被点击过;   0表示未点击
+                        success : function(data){
+                            console.log('leftSpotCancel');
+                        }
+                    });
+                    setTimeout(function(){$('.mui-control-item').eq(0).children('.ic-red-point').eq(0).css('display','none')},1000);
+                    $.ajax({
+                        url:'/index/totalSpotCancel',
+                        type:'post',
+                        dataType:'json',
+                        success:function(data){
+                            console.log('总红点消失');
+                        }
+                    });
+                    $('#news-center').find('span').css('display','none');
+                    okLeft = false;
+                    document.getElementById('ic-slider').removeEventListener("slide",SliderLeft);
+                }
+            }
+
+
+            function slid_right(){
+                console.log('监听消除右侧红点。。。。。。');
+                if($('.ic-slider-indicator').find('a').eq(1).hasClass('mui-active')){
+                    console.log("右侧——if");
+                    $.ajax({    //************************************************************************清除右侧栏我的消息红点接口
+                        url : '/index/rightSpotCancel',
+                        type : 'post',
+                        dataType:'json',
+                        // data:传递rightspot为1   表示icon被点击过;   0表示未点击
+                        success : function(data){
+                            console.log('rightSpotCancel');
+                        }
+                    });
+                    if($('.mui-control-item').eq(1).children('.ic-red-point').eq(0).css('display')!='none'){
+                        setTimeout(function(){$('.mui-control-item').eq(1).children('.ic-red-point').eq(0).css('display','none')},1000);
+                    }
+                    $.ajax({
+                        url:'/index/totalSpotCancel',
+                        type:'post',
+                        dataType:'json',
+                        success:function(data){
+                            console.log('总红点消失');
+                        }
+                    });
+                    $('#news-center').find('span').css('display','none');
+                }else if($('.mui-control-item').eq(1).children('.ic-red-point').eq(0).css('display')!='none'){
+                    console.log("右侧——else if");
+                    if(okRight){
+                        document.getElementById('ic-slider').addEventListener('slide',SliderRight);
+                    }
+                }
+            }
+
+            var SliderRight = function(){
+                console.log('刚刚是显示左侧页标识');
+                $.ajax({
+                    url : '/index/rightSpotCancel',
+                    type : 'post',
+                    dataType:'json',
+                    // data:传递rightspot为1   表示icon被点击过;   0表示未点击
+                    success : function(data){
+                        console.log('rightSpotCancel');
+                    }
+                });
+                setTimeout(function(){$('.mui-control-item').eq(1).children('.ic-red-point').eq(0).css('display','none')},1000);
+                $.ajax({
+                    url:'/index/totalSpotCancel',
+                    type:'post',
+                    dataType:'json',
+                    success:function(data){
+                        console.log('总红点消失');
+                    }
+                });
+                $('#news-center').find('span').css('display','none');
+                okRight = false;
+                document.getElementById('ic-slider').removeEventListener("slide",SliderRight);
+            }
+
+
+			function total_point(){
+                console.log('总红点点击监听事件');
+                mui($('#news-center').parent('.mui-table-view-cell')).on("tap",'a',function(){
+                    console.log('总红点被点击');
+                    if($('#news-center').find('span').css('display')!='none'){
+                        $.ajax({
+                            url:'/index/totalSpotCancel',
+                            type:'post',
+                            dataType:'json',
+                            success:function(data){
+                                console.log('总红点消失');
+                            }
+                        });
+                        $('#news-center').find('span').css('display','none');
+                    }
+                });
+			}
+
+
+            $('#ic-news-two').click(function(){
+                $.ajax({   //*********************************************************************系统消息全标记为已读接口
+                    type: "POST",
+                    url: "/index/receivemessage",
+                    // data: {
+                    // 	'SysType' : 1,
+                    // },
+                    data: {
+                        'SysType' : 1
+                    },
+                    dataType : 'json',
+                    success: function (message) {
+                        console.log(message);
+                    },
+                    error: function (message) {
+                    }
+                });
+                mui.toast('标记为已读成功',{ duration:'500', type:'div' });
+                $('.mui-control-item').eq(0).children('.ic-red-point').eq(0).css('display','none');
+                for(var i=0;i<$('#itemOneMobile').find('ul').eq(1).find('li').length;i++){
+                    if($('#itemOneMobile').find('ul').eq(1).find('li').eq(i).css('background-color')!='white'){
+                        $('#itemOneMobile').find('ul').eq(1).find('li').eq(i).removeClass('ic-not-read');
+                    }else{
+                        break;
+                    }
+                }
+                $('#itemOneMobile').find('ul').eq(0).animate({height:0}, 100);
+                $('#ic-news-two').css('display','none');
+            });
+
+            $('#ic-content-two').click(function(){
+                $.ajax({   //*********************************************************************************************我的消息全标记为已读接口
+                    type: "POST",
+                    url: "/index/receivemessage",
+                    data: {
+                        'MyType' : 1
+                    },
+                    dataType : 'json',
+                    success: function (message) {
+                        // console.log('成功Sys');
+                    },
+                    error: function (message) {
+                        // console.log('错误了');
+                    }
+                });
+                mui.toast('标记为已读成功',{ duration:'500', type:'div' });
+                $('.mui-control-item').eq(1).children('.ic-red-point').eq(0).css('display','none');
+                for(var i=0;i<$('#itemTwoMobile').find('ul').eq(1).find('li').length;i++){
+                    if($('#itemTwoMobile').find('ul').eq(1).find('li').eq(i).css('background-color')!='white'){
+                        $('#itemTwoMobile').find('ul').eq(1).find('li').eq(i).removeClass('ic-not-read');
+                    }else{
+                        break;
+                    }
+                }
+                $('#itemTwoMobile').find('ul').eq(0).animate({height:0},100);
+                $('#ic-content-two').css('display','none');
+            });
+
+        });
+
+    </script>

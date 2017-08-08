@@ -1,0 +1,97 @@
+<include file="Public/header" />
+<include file="Public/top_nav_company" />
+	<div class="mui-content mui-scroll-wrapper">
+		<input type="hidden" name="loginStatus" value="{$isLogin}" >
+		<input type="hidden" name="collect" value="true" >
+		<div id="slider" class="ic-slider mui-slider mui-fullscreen ic-slider-border">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<!-- <a id="trigger-overlay" href="javasricpt:;" class="trigger-overlay trigger-company"><i class="nc-icon-glyph design_bullet-list-68"></i>{$ctitle['title']|default="全部行业"}</a> -->
+					<div class="mui-scroll ic-collect-select mui-row" style="width: 100%;">
+						<a class="mui-control-item mui-col-xs-4 mui-active" href="/company/myreferral" open-type="common">内推</a>
+						<a class="mui-control-item mui-col-xs-4 " href="/company/collect" open-type="common">全职({$ftcount})</a>
+						<a class="mui-control-item mui-col-xs-4" href="/company/collect#item2mobile" open-type="common">实习({$ptcount})</a>
+					</div>
+				</div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+								<notempty name="list">
+								<div class="mui-scroll">
+								 <div class="card-list clearfix">
+				                    <volist name="list" id="li">
+				                    <section class="card-item">
+				                      <div class="referral-forward" rid="{$li.id}">
+				                        <div class="inner-box clearfix">
+				                          <div class="pull-left img" style="background-image:url('{$li.logo}')"></div>
+				                          <h4 class="title">{$li.name}</h4>
+				                          <p class="">内推名额<span class="text-taro">{$li.quota}</span>个</p>
+				                          <p class="">职位数量<span class="text-taro">{$li.p_num}</span>个</p> 
+				                       
+				                          <div>
+				                            <if condition="stripos($li['company_type'],'1') nheq false"><span class="label-solid label-whiteyellow border-rclr">实习</span></if>
+				                            <if condition="stripos($li['company_type'],'2') nheq false"><span class="label-solid label-whitegreen border-rclr">全职</span></if>
+				                          </div>
+				                        </div>
+				                        <div class="card-item-label">
+				                        <if condition="stripos($li['direct_type'],'1') nheq false"><span class="label-border label-brown">直通面试</span></if>
+				                        <if condition="stripos($li['direct_type'],'2') nheq false"> <span class="label-border label-taro">直通笔试</span></if>
+				                        </div>
+				                         <div class="card-item-bottom">
+				                        <span class="time pull-right">截止日：{$li.deadline}</span>
+				                        <p class="slogan ft14">{$li.slogan}</p><if condition="$li.exchange_status eq 1"><a class="btn btn-taro" href="{:U('/company/referraldetail?id='.$li.id)}">查看内推方式</a></if>
+				                        </div>
+				                      </div>
+				                      <if condition="$li.show_status eq 2">
+				                        <div class="item-overlay"></div>
+				                        <span class="change-over">已兑换完</span>
+				                      <elseif condition="$li.show_status eq 3"/>
+				                        <div class="item-overlay"></div>
+				                        <span class="change-over">已截止</span>
+				                      </if> 
+				                    </section>
+				                    </volist>
+				                  </div>
+							
+								</div>
+								</notempty>
+								<empty name="list">
+								<div class="empty-container-center">
+									<p>暂无收藏。</p>
+								</div>
+								</empty>
+							
+						</div>
+						<input type="hidden" name="fullajax" data-cid="{$cid|default=''}" data-num="40" data-type="fulltime" data-order="{$order|default=''}" data-collect="true">
+					</div>
+				</div>
+			</div>
+	</div>
+	<div id="fav-cb" class="fav-cb animated"><span>+1</span></div>
+	<div id="overlay-container" class="overlay-container overlay-sideup hideNav dn">
+		<i id="overlay-close" class="overlay-close nc-icon-glyph ui-1_simple-remove ftbold"></i>
+		<nav class="nav-list ">
+			<ul>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq ''">class="active"</if> href="/company/collect/"><i class="nc-icon-outline design-2_microsoft"></i>全部<i class="nc-icon-outline ui-1_check-small check"></i></a> </li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '1'">class="active"</if> href="/company/collect/cid/1"> <i class="nc-icon-outline business_globe"></i>互联网<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '41'">class="active"</if> href="/company/collect/cid/41"> <i class="nc-icon-outline business_building"></i>房地产/建筑<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '40'">class="active"</if> href="/company/collect/cid/40"> <i class="nc-icon-outline business_coins"></i>金融 <i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '63'">class="active"</if> href="/company/collect/cid/63"> <i class="nc-icon-outline education_atom"></i>电子/通信<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '42'">class="active"</if> href="/company/collect/cid/42"> <i class="nc-icon-outline shopping_cart-modern"></i>消费品<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '203'">class="active"</if> href="/company/collect/cid/203"> <i class="nc-icon-outline objects_spaceship"></i>其他<i class="nc-icon-outline ui-1_check-small check"></i></a></li> 
+	        </ul>
+		</nav>
+	</div>
+	<div class="ic-alert-success" style="top:20%">
+		<span class="ic-alert-box"><i class="nc-icon-glyph ui-1_check-bold"></i>删除成功</span>
+	</div>
+	<div class="ic-alert-error" style="top:20%">
+		<span class="ic-alert-box"><i class="nc-icon-glyph  ui-2_fat-remove"></i>修改失败</span>
+	</div>
+<include file="Public/footer_nav_company" />
+<include file="Public/redirect" />
+<include file="Public/footer" />
+<script src="/Public/Mobile/js/mui.pullToRefresh.js"></script>
+<script src="/Public/Mobile/js/mui.pullToRefresh.material.js"></script>
+<script type="text/javascript" src="{:stamp('Public/Mobile/js/triggermeun.js')}"></script>
+<!-- <script type="text/javascript" src="{:stamp('Public/Mobile/js/company.js')}"></script> -->
+

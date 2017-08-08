@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>白熊求职</title>
+    <meta charset="utf-8" />
+    <title>白熊求职</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../../assets/css/mui.min.css" />
+    <link rel="stylesheet" href="../../assets/css/sass/app.css" />
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/nucleo-glyph.css" />
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/nucleo-outline.css" />
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/list.css" />
+    <link rel="stylesheet" href="../../assets/css/sass/module/baike.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/sass/module/company.css" />
+    </head>
+<body>
+ <header class="mui-bar mui-bar-nav ic-header-nav">
+        <!-- <h1 class="mui-title ic-collapse-title"><a id="icon-menu" class="mui-action-menu ">白熊学院</a></h1> -->
+        <h1 class="mui-title ic-collapse-title">
+          <a id="icon-menu" class="mui-action-menu ">
+            <img class="mlogo" src="/Public/Mobile/images/assets/mlogo.png" />白熊百科
+            <i class="nc-icon-outline arrows-1_minimal-down"></i></a>
+        </h1>
+      </header>
+      <div id="menu-wrapper" class="menu-wrapper hidden">
+        <div id="menu" class="menu ">
+          <ul class="mui-table-view mui-table-view-inverted ic-topdropnav mui-row">
+            <li class=" mui-col-xs-4">
+              <a href="http://bbs.icebear.me/forum-1.htm" open-type="common">
+                <span class="">
+                  <i class="nc-icon-outline ui-3_chat-46"></i>
+                </span>白熊论坛</a>
+            </li>
+            <li class=" mui-col-xs-4">
+              <a href="/company/" open-type="common">
+                <span class="">
+                  <i class="nc-icon-outline business_briefcase-24"></i>
+                </span>白熊求职</a>
+            </li>
+            <!-- <li class=" mui-col-xs-4">
+            <a href="/baike" open-type="common"><span class=""><i class="nc-icon-outline business_books"></i></span>百科</a></li> -->
+            <li class="mui-col-xs-4">
+              <a href="/academy" open-type="common">
+                <span class="">
+                  <i class="nc-icon-outline media-1_player"></i>
+                </span>白熊学院</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="menu-backdrop" class="menu-backdrop"></div>
+	<input type="hidden" name="loginStatus" value="{$isLogin}" >
+	<div class="mui-content mui-scroll-wrapper">
+		<div id="slider" class="ic-slider mui-slider mui-fullscreen ic-slider-border">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a id="trigger-overlay" href="javasricpt:;" class="trigger-overlay trigger-company"><i class="nc-icon-glyph design_bullet-list-68"></i>全部行业</a>
+					<div class="mui-scroll ic-slider-select">
+						<a class="mui-control-item mui-active" href="#item1mobile">全职</a>
+						<a class="mui-control-item" href="#item2mobile">实习</a>
+					</div>
+				</div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<notempty name="infofull">
+							<div class="mui-scroll">
+								<ul class="ic-company-table mui-table-view">
+								<volist name="infofull" id="full">
+									<li class="mui-table-view-cell">
+										<a href="{$full.url_link}" open-type="common" ><img class="company-img" src="{$full['path']}"/><span class="company-name" ><?php echo mb_substr($full['company_name'],0,8,'utf-8').((mb_substr($full['company_name'],0,8,'utf-8') == $full['company_name'])?"":"…");  ;?><if condition="$full.spring_recruit eq 1"><i class="spring-recruit"></i></if></span></a>
+										<if condition="$full.openstatus eq 1">
+			                          <if condition="$full.timeflag eq 1">
+			                              <span class="ic-time">未开始 <if condition="$full.start_time neq null">({$full.start_time} 开始)</if> </span>
+			                           <elseif condition="$full.timeflag eq 2"/>
+			                              <span class="ic-time start">已开始 <if condition="$full.end_time neq null">({$full.end_time } 截止)</if> </span>
+			                            <elseif condition="$full.timeflag eq 3"/>
+			                              <span class="ic-time">已结束 <if condition="$full.end_time neq null">({$full.end_time} 截止)</if> </span>  
+			                           <elseif condition="$full.timeflag eq 4"/>
+			                              <span class="ic-time start">已开始 <if condition="$full.end_time neq null">{($full.end_time } 截止)</if></span>
+			                          </if>
+			                        <elseif condition="$full.openstatus eq 0"/>
+			                          <span class="ic-time">未开始 <if condition="$full.start_time neq null">({$full.start_time} 开始)</if> </span>
+                        			</if>
+										
+										<if condition="$isLogin eq 1">
+				                          <if condition="$full.keepcid neq null">
+				                           <span class="ic-icon-fav collected text-taro" cid='{$full.id}' kid={$full.kid}><i class="nc-icon-glyph ui-2_favourite-31 icon-favourite"></i></span>
+				                           <elseif condition="$full.keepcid eq null"/>
+				                           <span class="ic-icon-fav jobCollection text-grey" cid='{$full.id}'><i class="nc-icon-outline  ui-2_favourite-31 icon-favourite"></i></span>
+				                           </if>
+				                        <else/>
+				                          <span class="ic-icon-fav text-grey"><a href="/user/login" open-type="common"><i class="nc-icon-outline  ui-2_favourite-31 icon-favourite"></i></a></span>
+				                        </if> 
+									</li>
+								</volist>
+								</ul>
+							</div>
+							</notempty>
+							<empty name="infofull">
+							<div class="empty-container-center">
+								<p>暂无公司。</p>
+							</div>
+							</empty>
+						</div>
+						<input type="hidden" name="fullajax" data-cid="{$cid|default=''}" data-num="40" data-type="fulltime" data-order="{$order|default=''}" >
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<notempty name="infopart">
+							<div class="mui-scroll">
+								<ul class="ic-company-table mui-table-view">
+								<volist name="infopart" id="part">
+									<li class="mui-table-view-cell">
+										<a href="{$part.url_link}" open-type="common" ><img class="company-img" src="{$part['path']}"/><span class="company-name" ><?php echo mb_substr($part['company_name'],0,8,'utf-8').((mb_substr($part['company_name'],0,8,'utf-8') == $part['company_name'])?"":"…");  ;?><if condition="$part.spring_recruit eq 1"><i class="spring-recruit"></i></if></span></a>
+										<if condition="$part.openstatus eq 1">
+				                          <if condition="$part.timeflag eq 1">
+				                              <span class="ic-time">未开始 <if condition="$part.start_time neq null">({$part.start_time} 开始)</if> </span>
+				                           <elseif condition="$part.timeflag eq 2"/>
+				                              <span class="ic-time start">已开始 <if condition="$part.end_time neq null">({$part.end_time } 截止)</if> </span>
+				                            <elseif condition="$part.timeflag eq 3"/>
+				                              <span class="ic-time">已结束 <if condition="$part.end_time neq null">({$part.end_time} 截止)</if> </span>  
+				                           <elseif condition="$part.timeflag eq 4"/>
+				                              <span class="ic-time start">已开始 <if condition="$part.end_time neq null">{($part.end_time } 截止)</if></span>
+				                          </if>
+				                        <elseif condition="$part.openstatus eq 0"/>
+				                          <span class="ic-time">未开始 <if condition="$part.start_time neq null">({$part.start_time} 开始)</if> </span>
+	                        			</if>
+										
+										<if condition="$isLogin eq 1">
+				                          <if condition="$part.keepcid neq null">
+				                           <span class="ic-icon-fav collected text-taro" cid='{$part.id}' kid={$part.kid}><i class="nc-icon-glyph ui-2_favourite-31 icon-favourite"></i></span>
+				                           <elseif condition="$part.keepcid eq null"/>
+				                           <span class="ic-icon-fav jobCollection text-grey" cid='{$part.id}'><i class="nc-icon-outline  ui-2_favourite-31 icon-favourite"></i></span>
+				                           </if>
+				                        <else/>
+			                          <span class="ic-icon-fav text-grey"><a href="/user/login" open-type="common"><i class="nc-icon-outline  ui-2_favourite-31 icon-favourite"></i></a></span>
+			                        </if> 
+									</li>
+								</volist>
+								</ul>
+							</div>
+							</notempty>
+							<empty name="infopart">
+							<div class="empty-container-center">
+								<p>暂无公司。</p>
+							</div>
+							</empty>
+						</div>
+						<input type="hidden" name="partajax" data-cid="{$cid}" data-num="40" data-type="fulltime" data-order="{$order}" >
+					</div>
+				
+				</div>
+			</div>
+	</div>
+	<div id="fav-cb" class="fav-cb animated"><span>+1</span></div>
+
+	<div id="overlay-container" class="overlay-container overlay-sideup hideNav dn">
+		<i id="overlay-close" class="overlay-close nc-icon-glyph ui-1_simple-remove ftbold"></i>
+		<nav class="nav-list ">
+			<ul>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq ''">class="active"</if> href="/company/companylist/"><i class="nc-icon-outline design-2_microsoft"></i>全部<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '1'">class="active"</if> href="/company/companylist/cid/1"> <i class="nc-icon-outline business_globe"></i>互联网<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '41'">class="active"</if> href="/company/companylist/cid/41"> <i class="nc-icon-outline business_building"></i>房地产/建筑<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '40'">class="active"</if> href="/company/companylist/cid/40"> <i class="nc-icon-outline business_coins"></i>金融 <i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '63'">class="active"</if> href="/company/companylist/cid/63"> <i class="nc-icon-outline education_atom"></i>电子/通信<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '42'">class="active"</if> href="/company/companylist/cid/42"> <i class="nc-icon-outline shopping_cart-modern"></i>消费品<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '203'">class="active"</if> href="/company/companylist/cid/203"> <i class="nc-icon-outline objects_spaceship"></i>其他<i class="nc-icon-outline ui-1_check-small check"></i></a></li> 
+	        </ul>
+		</nav>
+	</div>
+	<include file="Public/footer_nav_company" />
+
+	 <script src="../../../assets/js/jquery-1.8.2.min.js"></script>
+    <script src="../../../assets/js/cookie.js"></script>
+    <script src="../../assets/js/mui.js"></script>
+    <script src="../../assets/js/app.js"></script>
+    <script src="../../assets/js/mui.pullToRefresh.js"></script>
+	<script src="../../assets/js/mui.pullToRefresh.material.js"></script>
+    <script type="text/javascript" src="../../../assets/js/jquery.1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/triggermeun.js"></script>
+    <script type="text/javascript" src="../../assets/js/company.js"></script>
+</body>
+</html>

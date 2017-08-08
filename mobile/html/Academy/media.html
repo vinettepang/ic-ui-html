@@ -1,0 +1,650 @@
+<include file="Public/header" />
+<include file="Public/var" />
+<include file="Public/top_nav_academy" />
+<if condition="$purchased_n_unlock_all eq 1">
+<style type="text/css">
+	.ic-academy-video .mui-control-content ,
+	.ic-academy-video .mui-control-content .mui-scroll, 
+	.ic-detail .mui-control-content ,
+	.ic-detail .mui-control-content .mui-scroll{
+        min-height: calc(100vh - 88px) !important;
+        min-height: -webkit-calc(100vh - 88px) !important;
+    } 
+</style>
+<else/>
+<style type="text/css">
+	.ic-academy-video .mui-control-content ,
+	.ic-academy-video .mui-control-content .mui-scroll, 
+	.ic-detail .mui-control-content ,
+	.ic-detail .mui-control-content .mui-scroll{
+        min-height: calc(100vh - 148px) !important;
+        min-height: -webkit-calc(100vh - 148px) !important;
+    } 
+</style>
+</if>
+
+	<div class="mui-content mui-scroll-wrapper ic-academy-video">
+	    <!-- video-->
+		<div id="infovid"></div>
+		<input type="hidden" value="{$info.vid}" id="currentvid">
+		<input type="hidden" name="isPurchased" value="{$is_purchased}"><!--是否购买-->
+		<input type="hidden" name="isLocaked" value="{$ever_locked}"><!--是否解过锁-->
+		<input type="hidden" name="myCredit" value="{$credits}"><!--我的积分-->
+		<input type="hidden" name="cid" value="{$cid}">
+		<input type="hidden" name="lockNeedCredit" value="{$thisChapter.lockNeedCredit}">
+		<div id="slider" class="mui-slider ic-slider">
+			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<a class="mui-control-item mui-active" href="#item1mobile">内容</a>
+				<a class="mui-control-item" href="#item2mobile">目录</a>
+				<a class="mui-control-item" href="#item3mobile">问答</a>
+			</div>
+			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+			<div class="mui-slider-group">
+				<div id="item1mobile" class="mui-slider-item mui-control-content  mui-active">
+					<div id="scroll1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<div class="ic-inner-content">
+								<section class="mui-col ic-academy-content ic-course-intro">
+								   <if condition="$extra_work.brief neq null OR $extra_work.brief neq ''"><p>{$extra_work.brief} </p><else/><p>{$info.title}</p></if>
+								   <p>请添加客服微信号：icebear003，加入「白熊互联网交流群」，和小伙伴们一起准备校招吧！</p>
+								</section>
+							
+							    <notempty name="extra_work['afterworkh5']">
+								    <section class="mui-col ic-academy-content">	
+									<h4 class="sec-title"><i></i>课后作业</h4>
+										{$extra_work['afterworkh5']}
+									</section>
+							    </notempty>
+							    <notempty name="extra_work['extrareadh5']">
+								    <section class="mui-col ic-academy-content">	
+									<h4 class="sec-title"><i></i>相关链接</h4>
+										{$extra_work['extrareadh5']}
+									</section>
+							    </notempty>
+								<!-- <section class="mui-col ic-academy-content">	
+								<h4 class="sec-title"><i></i>相关链接</h4>
+									 <ul class="mui-table-view ic-border-list">
+										<li class="mui-table-view-cell">协作软件工具tower官网</li>
+								        <li class="mui-table-view-cell">修图软件polarr泼辣修图官网 </li>
+									</ul>
+								</section> -->
+							</div>
+							<include file="Public/copyright" />
+						</div>
+					</div>
+				</div>
+				<div id="item2mobile" class="mui-slider-item mui-control-content">
+					<div id="scroll2" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<div class="ic-inner-content">
+								<section class="mui-col ic-academy-content">
+									<volist name="videoList" id="videoData">
+                                    <div class="ic-dashed-list ic-ellipsis-label ic-chapter-{$key}">   
+                                    	<input type="hidden" name="lockedStatus" value="{$unlock_today}">
+                                        <h4 class="sec-title"><i></i>{$videoData[0]['title']}</h4>
+                                        <if condition="$videoData[1][0] eq ''">
+                                        	<if condition="$videoData[0]['lockStatus'] eq 0 || $videoData[1]['is_locked'] eq 0 || $videoData[1]['free'] eq true || $is_purchased eq true">
+	                                        	<a class="ic-dashed-item " open-type="common" href="{:U('/media/'.$videoData[1]['vid'].'/cid/'.$cid.'')}">
+	                                        	<if condition="$videoData[1]['view_status'] eq 2">
+	                                        		<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        	<elseif condition="$videoData[1]['view_status'] eq 1" />
+	                                        		<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        	<else/><p class='mui-ellipsis'></if>{$videoData[1]['title']}</p></a>
+											<else />
+                                            	<a class="ic-dashed-item ic-lockcourse-trigger" data-href="{$videoData[1]['vid']}"><if condition="$videoData[1]['view_status'] eq 2">
+	                                        		<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        	<elseif condition="$videoData[1]['view_status'] eq 1" />
+	                                        		<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        	<else/><p class='mui-ellipsis'></if>{$videoData[1]['title']}</p>
+	                                            <i class=" nc-icon-outline ui-1_lock icon-islocked"></i></a>
+                                            </if>
+                                        <else/>
+                                            <volist name="videoData[1]" id="v">
+        									<if condition="$videoData[0]['lockStatus'] eq 0 || $v['is_locked'] eq 0 || $v['free'] eq true || $is_purchased eq true">
+	                                        	<a class="ic-dashed-item" open-type="common" href="{:U('/media/'.$v['vid'].'/cid/'.$cid.'')}">
+	                                        	<if condition="$v['view_status'] eq 2">
+	                                        		<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        	<elseif condition="$v['view_status'] eq 1" />
+	                                        		<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        	<else/><p class='mui-ellipsis'></if>{$v['title']}</p></a>
+                                            <else /> 
+                                            	<a class="ic-dashed-item ic-lockcourse-trigger" data-href="{$v['vid']}"><if condition="$v['view_status'] eq 2">
+	                                        		<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        	<elseif condition="$v['view_status'] eq 1" />
+	                                        		<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        	<else/><p class='mui-ellipsis'></if>{$v['title']}</p>
+	                                            <i class=" nc-icon-outline ui-1_lock icon-islocked"></i></a>
+                                            </if>
+                                            </volist>
+                                        </if>
+                                    </div>
+                                    </volist>
+	                            </section>        
+							</div><!--inner-content-->
+							<include file="Public/copyright" />
+						</div>
+					</div>
+				</div>
+				<div id="item3mobile" class="mui-slider-item mui-control-content ic-comment-scroll">
+					<div id="scroll3" class="mui-scroll-wrapper">
+						<div class="mui-input-row ic-input-comment mui-row">	
+							<div class="ic-input-responsive">
+								<input class="comment-text" type="text" placeholder="对此课程有疑问，开始提问吧">
+								<input type="hidden" name="vid" value="{$info.vid}"><!--视频的id"-->
+				                <input type="hidden" name="pid" value="0"><!--pid初始默认为0"-->
+				                <input type="hidden" name="uid" value="{$uid}"><!--登录用户id(ucenter_memter表)"-->
+							</div>
+							<a class="ic-btn ic-btn-purple ic-btn-course-commnet">发送</a>
+						</div>
+						<div class="mui-scroll ic-course-comment-list">
+							<section class="ic-videocomment-wrapper">
+								
+								<div class="empty-container" <notempty name="commentList">style="display: none"</notempty>>
+									<img src="/Public/Mobile/images/academy/empty.png">
+								</div>
+								
+								<div <empty name="commentList">style="display:none" </empty> class="ic-card" id="ic-course-comment-list">
+									<volist name="commentList" id="v">
+									<div class="ic-card-content <neq name="v.pid" value="0">deep</neq>">
+								        <div class="img-user" style="background-image: url({$v.head});"><!-- <img src="{$v.head}" alt="{$v.author}"> --></div>
+								        <div class="ic-comment-wrapper">
+								        	 <!--当用户状态为管理员时能看到所有评论的回复和删除-->
+			                                <if condition="($gid egt 1) AND ($gid elt 5) AND ($gid neq null)">
+			                                <!-- <a class="comment-delete" data-cid="{$v.cid}" data-vid="{$v.vid}">删除</a>-->
+			                                <a class="ic-delete-trigger" data-cid="{$v.cid}" data-vid="{$v.vid}">删除</a>
+			                                <a class="add-comment-reply" data-uid="{$v.uid}" data-pid="{$v.cid}" data-vid="{$v.vid}">&nbsp;回复&nbsp;</a>
+			                                </if>
+									        <span class="comment-like"><em class="like-count">{$v.agree}</em>
+									        <if condition=" $isvote[$v['cid']] && $isvote[$v['cid']]['vote'] eq '1' ">
+											<i class="agree nc-icon-glyph ui-3_heart action-like" data-cid="{$v.cid}" data-vote="1" ></i>
+				                              <else/>
+				                              <i class="agree nc-icon-outline ui-3_heart action-unlike" data-cid="{$v.cid}" data-vote="1"></i>
+				                            </if>
+								        	</span>
+								        	<if condition="($v.pauthor eq null)"><p class="comment-title">{$v.author}<if condition="$v.userlevel eq 3"><i class="ic-icon ic-icon-badge ic-icon-middle ic-icon-badge-orange"></i><elseif condition="$v.userlevel eq 4"/><i class="ic-icon ic-icon-badge ic-icon-middle ic-icon-badge-orange"></i></if></p><else /><p class="comment-title">{$v.author}<span class="black">回复</span>{$v.pauthor}</p>
+				                          	</if><p class="comment-time">{$v.time|date="Y/m/d",###}</p><div class="comment-content"><pre>{$v.content|reFace}</pre></div>
+								        </div>
+									</div>
+									</volist>		
+								</div><!-- card-end-->
+								
+							
+							</section><!--inner-content-->
+							<include file="Public/copyright" />
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!--content-->
+	<div class="ic-alert-success">
+		<span class="ic-alert-box"><i class="nc-icon-glyph ui-1_check-bold"></i>解锁成功</span>
+	</div>
+	<div class="ic-alert-error">
+		<span class="ic-alert-box"><i class="nc-icon-glyph  ui-2_fat-remove"></i>解锁失败</span>
+	</div>
+	<div class="ic-dialog ic-dialog-delete"  style=" height: 180px; padding-top: 54px;" >
+		<i class="nc-icon-outline ui-1_simple-remove ic-dialog-close"></i>
+		<p>确认删除该评论？</p>
+		<div class="btn-group clearfloat">
+			<a class="ic-btn ic-btn-brown width120 pull-left ic-dialog-btn-close">取消</a>
+			<a class="ic-btn ic-btn-brown width120 pull-right comment-delete" data-loading-text="删除中">确认</a>
+		</div>
+	</div>
+	<div class="ic-dialog ic-dialog-locked"  style=" height: 180px; padding-top: 54px;" >
+		<i class="nc-icon-outline ui-1_simple-remove ic-dialog-close"></i>
+		<p>当前积分：<span class="ic-mycredit text-taro">{$credits}分</span>。确认解锁？</p>
+		<div class="btn-group clearfloat">
+			<a class="ic-btn ic-btn-brown width120 pull-left ic-dialog-btn-close">取消</a>
+			<a class="ic-btn ic-btn-brown width120 pull-right ic-chapter-unlocked" data-loading-text="解锁中">确认</a>
+		</div>
+	</div>
+
+	<div class="ic-dialog ic-dialog-buycourse" style=" height: 180px; padding-top: 54px;">
+		<i class="nc-icon-outline ui-1_simple-remove ic-dialog-close"></i>
+		<p>积分不够解锁，当前积分：<span class="ic-mycredit text-taro">{$credits}分</span></p>
+		<div class="btn-group clearfloat">
+			<a class="ic-btn ic-btn-brown width120 pull-left" href="/academy/setting#myCredit" open-type="common" >赚积分</a>
+			<a class="ic-btn ic-btn-brown width120 pull-right" href="{:U('/academy/buy/cid/'.$cid)}" open-type="common" data-loading-text="购买中">买课￥<span class="discount-price">{$discount}</span> </a>
+		</div>
+		<p class="center mgtop12 ftnormal">（解锁过的课程不计入总价）</p>
+	</div>
+
+	<div class="ic-alert-success">
+		<span class="ic-alert-box"><i class="nc-icon-glyph ui-1_check-bold"></i>解锁成功</span>
+	</div>
+	<div class="ic-alert-error">
+		<span class="ic-alert-box"><i class="nc-icon-glyph  ui-2_fat-remove"></i>解锁失败</span>
+	</div>
+
+	<div class="ic-dialog ic-dialog-unlocked">
+		<img src="/Public/Mobile/images/locked_code.png">
+		<p>扫码添加客服：icebear_kc ，加入学员内部交流群，领取学习礼包，还有更多权益在等你。</p>
+		<i class="nc-icon-glyph ui-1_simple-remove ic-dialog-unlocked-close"></i>
+	</div>
+	<if condition="$purchased_n_unlock_all neq 1">
+	<div class="footer-nav mui-bar mui-bar-tab ic-academy-detail" class="footer" style="height: 60px">
+				<div class="mui-row">
+					<div class="mui-col-xs-12 offer-container">
+						<div class="ic-lockcourse-trigger ic-lockcourse-container ic-btn ic-btn-sm-block btn-square ic-btn-primary btn-noshadow " style="height: 60px">
+							<p class="text-left absolutemiddle ic-lock-tips">积分解锁课程<!-- <i class="nc-icon-outline arrows-1_minimal-up"></i> --></p>
+							<div class="ic-lock-bottom" style="display: none;">
+								<i class="nc-icon-outline arrows-1_minimal-down close-bottom"></i>
+								<h3 class="ic-lock-bottom-title unlock-chapter">{$thisChapter.chapterName}</h3> 
+								<p class="ic-lock-bottom-sectitle">25 积分 x <span class="unlock-section">{$thisChapter.itemNum}</span> 节 = <span class="unlock-total-credit">{$thisChapter.lockNeedCredit}</span> 积分</p>
+								<div class="btn-group">
+									<a class="ic-btn ic-btn-sm-block btn-square ic-btn-brown btn-noshadow ic-buycourse-trigger" href=""><p>积分解锁整章<br/><span class="unlock-total-credit">{$thisChapter.lockNeedCredit}</span> 积分</p></a><a class="ic-btn ic-btn-sm-block btn-square ic-btn-white btn-noshadow" href="{:U('/academy/buy/cid/'.$cid)}" open-type="common"><p>直接购买全部<br/><if condition="$ever_locked eq 1 && $is_purchased neq true && $is_unlock_all neq true"><span class="line-through through-white">¥ {$courseprice}</span><span class="discount-price">¥ {$discount}</span><elseif condition="$ever_locked neq 1 && $is_purchased neq true && $is_unlock_all neq true"/><span class="courseprice">¥ {$courseprice}</span><span class="discount-price"></span><else/></if>
+									</p></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</if>
+	<script src="/Public/Home/js/jquery-1.8.2.min.js"></script>
+	<script src="https://player.polyv.net/script/polyvplayer.min.js"></script>
+	<script src="/Public/Mobile/js/mui.min.js"></script>
+	<script src="/Public/Mobile/js/app.js"></script>
+	<script src="{:stamp('Public/Mobile/js/academy.js')}"></script>
+	<script src="/Public/Mobile/js/analytics.js"></script>
+	<include file="Public/redirect" />
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<!-- 引入微信分享脚本 -->
+	<script type="text/javascript">
+		var currenturl = window.location.href;
+		wx.config({
+    		debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    		appId: '<?php echo $wx_sharepar['appid'];?>', // 必填，公众号的唯一标识
+    		timestamp: '<?php echo $wx_sharepar['timestamp'];?>', // 必填，生成签名的时间戳
+    		nonceStr: '<?php echo $wx_sharepar['nonceStr'];?>', // 必填，生成签名的随机串
+    		signature: '<?php echo $wx_sharepar['signature'];?>',// 必填，签名，见附录1
+    		jsApiList: [
+   				'checkJsApi',
+   				'onMenuShareTimeline',
+   				'onMenuShareAppMessage'
+    		]// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+		});
+		wx.ready(function(){
+			wx.onMenuShareTimeline({
+				title: '<?php echo $share_title;?>', // 分享标题
+				link: currenturl, // 分享链接
+				imgUrl: '<?php echo $share_img;?>', // 分享图标
+				success: function () { 
+				},
+			cancel: function () {
+				}
+			});
+			wx.onMenuShareAppMessage({
+				title: '<?php echo $share_title;?>', // 分享标题
+				desc: 'icebear.me', // 分享描述
+				link: currenturl, // 分享链接
+				imgUrl: '<?php echo $share_img;?>', // 分享图标
+				type: '', // 分享类型,music、video或link，不填默认为link
+				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+				success: function () { 
+    			// 用户确认分享后执行的回调函数
+				},
+			cancel: function () { 
+    			// 用户取消分享后执行的回调函数
+				}
+			});
+
+	});
+</script>
+	<script>
+      var player = polyvObject('#infovid').videoPlayer({
+          'width': '100%',
+          'height': '0',
+          'vid': '{$info.vid}',
+          'ts' : '<?php echo $aeskey["ts"]; ?>',
+          'sign' : '<?php echo $aeskey["hash"]; ?>',
+      });
+    </script>
+	<script type="text/javascript"> 
+		function getLocalTime(nS) { 
+		return new Date(parseInt(nS) * 1000).toLocaleDateString().replace(/年|月/g, "-").replace(/日/g, " "); 
+		} 
+	</script>
+	<script type="text/javascript">
+	
+		jquery(function() {
+			jquery(".ic-dashed-item").each(function(){
+				if(jquery(this).hasClass('active')){
+					var a =jquery(this).parent().offset().top-305;
+					console.log(jquery(this).parent().offset().top-305);
+					jquery(this).parent().parent().parent().parent().css('transform','translate3d(0px, -'+a+'px, 0px)');
+					return false;
+				}
+			});
+		});
+		 function nextVideo() {
+	        player.changeVid("02bfeb00e27ff92a76364b16af2f115e_0");
+	    }
+	    function once(func) {
+	        var ran,
+	            result;
+	        if (!isFunction(func)) {
+	          throw new TypeError(funcErrorText);
+	        }
+	        return function() {
+	          if (ran) {
+	            return result;
+	          }
+	          ran = true;
+	          result = func.apply(this, arguments);
+	          // clear the `func` variable so the function may be garbage collected
+	          func = null;
+	          return result;
+	        };
+	   	}
+	    //发送播放进度
+ 	    function render() {
+	        if (player != undefined && player.j2s_getCurrentTime != undefined && player.j2s_getDuration != undefined) {
+	        	var sec2 = player.j2s_getCurrentTime();
+	            var sec3 = player.j2s_getDuration();
+	            if(sec2 == 15) recordstart();
+	            if(sec2 + 15 == sec3) changestate();
+	        }
+	    }
+
+	    function recordstart(){
+	      var vid = document.getElementById('currentvid').value;
+	      var time = Date.parse(new Date())/1000;
+	    jquery.ajax({
+	      type : 'POST',
+	      url : '/academy/recordstart',
+	      data : {
+	        'vid' : vid,
+	        'time' : time,
+	      },
+	      success : function(data){
+	        //alert(data.status);
+	      return;
+	      }
+	      })
+	    }
+	    function changestate(){
+	      var vid = jquery("#currentvid").val();
+	      var time = Date.parse(new Date())/1000;
+	    jquery.ajax({
+	      type : 'POST',
+	      url : '/academy/changestatus',
+	      data : {
+	        'vid' : vid,
+	        'time' : time,
+	      },
+	      success : function(data){
+	      //  alert(data.status);
+	      }
+	      })
+	    }
+	    var interval = setInterval("render()", 500);
+
+
+		mui('.ic-input-comment').on('tap', '.ic-btn-course-commnet', function(e) {
+			var _comment ,_pid ,_vid ,_uid ,_length;
+			 _comment =document.querySelector('.ic-input-comment input.comment-text').value;
+			 _pid =document.querySelector('.ic-input-comment input[name="pid"]').value;
+			 _vid =document.querySelector('.ic-input-comment input[name="vid"]').value;
+			 _uid =document.querySelector('.ic-input-comment input[name="uid"]').value;
+			 _length = _comment.length;
+			 console.log(_length);
+			if ( 300 >= _length && _length > 0) {
+				document.querySelector('.ic-input-comment input.comment-text').value = '';
+				//mui.toast(_length);
+				mui.post(ctx + "Academy/addComment",{
+					comment:_comment,pid:_pid,vid:_vid,uid:_uid
+					},function(data){
+						console.log(data);
+						videoCommentListCb(data);
+						mui.toast('发送成功');
+					},'json'
+				);
+			}else if (_length > 300){
+				mui.toast('字数超出300个字符!');
+			}else{
+				mui.toast('提问内容不能为空!');
+			}
+			return false;
+		});
+
+		mui('body').on('tap', '.ic-delete-trigger', function(event) {
+			var _cid =this.getAttribute('data-cid'),
+			_vid =this.getAttribute('data-vid');
+			jquery('.ic-dialog.ic-dialog-delete').fadeIn();
+			jquery('.ic-dialog.ic-dialog-delete').find('.comment-delete').attr({'data-cid': _cid,'data-vid': _vid})
+		});
+
+		mui('.ic-dialog.ic-dialog-delete').on('tap', '.comment-delete', function(e) {
+			var _uid ,_pid ,_vid;
+			 _cid =this.getAttribute('data-cid');
+			 _vid =this.getAttribute('data-vid');
+
+			mui.post(ctx + "Academy/delComment",{
+				cid:_cid,vid:_vid
+				},function(data){
+					console.log(data);
+					videoCommentListCb(data);
+					jquery('.ic-dialog.ic-dialog-delete').fadeOut();
+					mui.toast('删除成功');
+				},'json'
+			);
+		}); 
+
+		mui('.ic-course-comment-list').on('tap', '.add-comment-reply', function(e) {
+			var _uid ,_pid ,_vid,_htmlString;
+			_pid =this.getAttribute('data-pid');
+			_vid =this.getAttribute('data-vid');
+			_uid =this.getAttribute('data-uid');
+			
+			_htmlString = '<div class="ic-comment-reply-container"><textarea class="ic-comment-reply"></textarea><button class="ic-btn btn-comment-reply ic-btn-primary " data-pid="'+_pid+'" data-uid="'+_uid+'" data-vid="'+_vid+'" ">提交</button></div>';
+			//ic-comment-reply-container
+			if (this.classList.contains('open')) {
+				var nextC = this.parentNode.nextElementSibling;
+				this.classList.remove('open');
+				this.parentNode.nextElementSibling.removeChild;
+				nextC.parentNode.removeChild(nextC);
+			}else{
+				this.classList.add('open');
+				this.parentNode.insertAdjacentHTML('afterend', _htmlString);
+			}
+		});
+
+		mui('.ic-course-comment-list').on('tap', '.btn-comment-reply', function(e) {
+			var _uid ,_pid ,_vid,_raplycon;
+			_raplycon =document.querySelector('.ic-comment-reply').value;
+			if (_raplycon) {
+				document.querySelector('.ic-comment-reply').value ='';
+				_uid =this.getAttribute('data-uid');
+				_pid =this.getAttribute('data-pid');
+				_vid =this.getAttribute('data-vid');
+				mui.post(ctx + "Academy/addComment",{
+					pid:_pid,vid:_vid,uid:_uid,comment:_raplycon
+					},function(data){
+						console.log(data);
+						videoCommentListCb(data);
+						mui.toast('回复成功');
+					},'json'
+				);
+			}else{
+				mui.toast('回复不能为空!');
+			}
+			 
+		});
+
+		mui('.ic-course-comment-list').on('tap', '.agree', function(e) {
+			var _uid ,_vote ,_cid,_obj;
+			_obj = this;
+			_vote =this.getAttribute('data-vote');
+			_cid =this.getAttribute('data-cid');
+			
+			mui.post(ctx + "Academy/addAgree",{
+				vote: _vote,cid: _cid,
+				},function(data){
+					console.log(data);
+					switch (data['status']) {
+			          case '1':
+			          	_obj.classList.remove('nc-icon-outline');
+			          	_obj.classList.remove('action-unlike');
+			          	_obj.classList.add('nc-icon-glyph');
+			          	_obj.classList.add('action-like');
+			          	 _obj.previousElementSibling.innerHTML = data['count']>99 ? '99+' : data['count'];
+			            break;
+			          case '0':
+			            _obj.classList.add('nc-icon-outline');
+			          	_obj.classList.add('action-unlike');
+			          	_obj.classList.remove('nc-icon-glyph');
+			          	_obj.classList.remove('action-like');
+			            _obj.previousElementSibling.innerHTML = data['count']>99 ? '99+' : data['count'];
+			            break;
+			          default: '';
+			        }
+				},'json'
+			);
+
+			
+		}); 
+
+		function videoCommentListCb(_a) {
+			var b='',_deep='',_adminAction='',_like='',_author,_content,_head,_time;
+			if (_a['data'].length) {
+				for (c = 0; c < _a['data'].length; c++) {
+					_head = "background-image: url('" + _a['data'][c].head + "');";
+					_deep = _a['data'][c].pid != 0? 'deep' : '';
+					if (1<=_a['gid'] && _a['gid'] <=5 && _a['gid']!=0) {
+					_adminAction = '<a class="ic-delete-trigger" data-cid="' +_a['data'][c].cid+'" data-vid="'+_a['data'][c].vid+'">删除</a><a class="add-comment-reply" data-uid="{$uid}" data-pid="' +_a['data'][c].cid+'" data-vid="'+_a['data'][c].vid+'">回复&nbsp;</a>';
+					}
+					//var date = new Date();      
+					_time = getLocalTime(_a['data'][c].time);
+					//_time = _time.Format("yyyy/MM/dd");
+					_like = _a['data'][c].vote == '1' ? 'nc-icon-glyph action-like' : 'nc-icon-outline action-unlike';
+					_author = _a['data'][c].pauthor == null ?_a['data'][c].author : _a['data'][c].author + '<span class="black"> 回复 </span>' + _a['data'][c].pauthor;
+				
+					b+='<div class="ic-card-content '+_deep+'"> <div class="img-user" style="'+_head+'"></div><div class="ic-comment-wrapper">'+_adminAction+' <span class="comment-like"><em class="like-count">'+_a['data'][c].agree+'</em><i class="agree '+_like+' ui-3_heart" data-uid="'+_a['data'][c].uid+'" data-cid="'+_a['data'][c].cid+'" data-vote="1" ></i></span><p class="comment-title">'+_author+'</p><p class="comment-time">'+_time+'</p><pre class="comment-content">'+_a['data'][c].content+'</pre></div></div>';
+				}
+				console.log(b);
+				document.querySelector('.empty-container').style.display = 'none';
+				document.getElementById("ic-course-comment-list").style.display = '';
+				document.getElementById("ic-course-comment-list").innerHTML=b;
+			}else{
+				document.getElementById("ic-course-comment-list").style.display = 'none';
+				document.querySelector('.empty-container').style.display = '';
+				document.getElementById("ic-course-comment-list").innerHTML=b;
+			}
+		}
+		
+		mui('body').on('tap', '.ic-credit-unlocked', function(event) {
+		var _unlockedNum = jquery('input[name="unlockedNum"]').val(),
+		_self = jquery(this),
+		cid = jquery('input[name="cid"]').val();
+		 mui(_self).button('loading');
+		jquery.ajax({
+			type: 'POST',
+			url: '/academy/lockCourse',
+			data: {
+				'cid': cid,
+				'unlockedNum':_unlockedNum,
+			},
+			success: function(data) {
+				console.log(data);
+				//mui(_self).button('reset');
+				if (data.status) {
+					jquery('.ic-alert-success').fadeIn();
+					setTimeout("jquery('.ic-alert-success').fadeOut();", 3000);
+					//积分值
+					jquery('.ic-mycredit').html(data.mycredit+'分');
+					jquery('input[name="myCredit"]').val(data.mycredit);
+					//价格
+					jquery('.discount-price').html(data.discount);
+					//最多能解锁的课
+					jquery('.ic-step-numbox .mui-numbox').attr('data-numbox-max', data.coursemax);
+					mui('.ic-step-numbox .mui-numbox').numbox().setOption('max',data.coursemax);
+					//alert
+					jquery('.ic-dialog-locked').fadeOut('700', function() {
+						jquery('.ic-alert-success').fadeIn();
+						setTimeout("jquery('.ic-alert-success').fadeOut();", 3000);
+					});
+					videoListCb(data.videodata,cid);
+				} else {
+					jquery('.ic-alert-error').fadeIn();
+					setTimeout("jquery('.ic-alert-error').fadeOut();", 3000);
+				}
+				mui(_self).button('reset');
+			}
+		})
+	});
+
+	function videoListCb(_a,_cid) {
+		if (_a.length) {
+			for (c = 0; c < _a.length; c++) {
+				var obj = "a.ic-dashed-item[data-href="+_a[c]+"]"
+				//console.log(jquery(obj));
+				jquery(obj).removeClass('ic-buycourse-trigger').attr({'open-type': 'common','href': '/media/'+_a[c]+'/cid/'+_cid});;
+				jquery(obj).find('i.icon-islocked').remove();
+			}
+			//console.log(_a);
+		}
+	}
+	//解锁弹窗 积分解锁
+	mui('body').on('tap', '.ic-chapter-unlocked', function(event) {
+		var _self = jquery(this),
+		cid = jquery('input[name="cid"]').val();
+		mui(_self).button('loading');
+		jquery.ajax({
+			type: 'POST',
+			url: '/academy/unlockCourseBychapter',
+			data: {
+				'cid': cid,
+				'videoData':<?php echo $videoData?>,
+			},
+			success: function(data) {
+				console.log(data);
+				//mui(_self).button('reset');
+				if (data.status) {
+					var thisChapter = data.thisChapter;
+					jquery('.ic-alert-success').fadeIn();
+					setTimeout("jquery('.ic-alert-success').fadeOut();", 3000);
+					//积分值
+					jquery('.ic-mycredit').html(data.mycredit+'分');
+					jquery('input[name="myCredit"]').val(data.mycredit);
+					//价格
+					jquery('.discount-price').html(data.discount);
+					jquery('span.courseprice').addClass('line-through through-white');
+					//alert
+					jquery('.ic-dialog-locked').fadeOut('700', function() {
+						jquery('.ic-alert-success').fadeIn();
+						setTimeout("jquery('.ic-alert-success').fadeOut();", 3000);
+					});
+					jquery('.ic-chapter-'+thisChapter.id+' a.ic-dashed-item').each(function(){
+					 	var href = jquery(this).attr('data-href');
+					    jquery(this).find('i.icon-islocked').remove();
+					    jquery(this).removeClass('ic-lockcourse-trigger').attr({'open-type': 'common','href': '/media/'+href+'/cid/'+cid});
+					});
+					if (data.crouseStatus == -1) {
+						jquery('.footer-nav.ic-academy-detail').css('display', 'none');
+					}else{
+						jquery('.unlock-chapter').html(data.nextChapter.chapterName);
+						jquery('.unlock-section').html(data.nextChapter.itemNum);
+						jquery('.unlock-total-credit').html(data.nextChapter.lockNeedCredit);
+						var height = jquery(window).height();
+						jquery('.ic-detail .mui-control-content').css('height', height-88);
+						jquery('.ic-detail .mui-control-content').css('min-height', height-88);
+					}
+				} else {
+					jquery('.ic-dialog').fadeOut();
+					jquery('.ic-alert-error').fadeIn();
+					setTimeout("jquery('.ic-alert-error').fadeOut();", 3000);
+				}
+				mui(_self).button('reset');
+			}
+		})
+	});
+	</script>
+	
+	
+	
+    </div>
+    </body>
+    </html>

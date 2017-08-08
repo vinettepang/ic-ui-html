@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>白熊求职</title>
+	<php>
+	if(isset($info['title'])){
+		$title = $info['title'].' - 白熊学院 | 白熊求职';
+	}elseif(isset($courseData[0]['title'])  && !isset($isindex)){
+		$title = $courseData[0]['title'];
+	}else{
+		$title = '白熊学院';
+	}
+	if(isset($courseData[0]['description'])){
+		$description = $courseData[0]['description'];
+	}else{
+		$description = '招聘信息，求职技巧，尽在白熊求职。';
+	}
+	</php>
+	<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="/Public/Mobile/css/mui.min.css">
+	<link rel="stylesheet" href="{:stamp('Public/Mobile/css/sass/app.css')}">
+	<link rel="stylesheet" type="text/css"  href="/Public/Home/css/nucleo-glyph.css" />
+	<link rel="stylesheet" type="text/css"  href="/Public/Home/css/nucleo-outline.css" />
+	<script type="text/javascript">
+	var _vds = _vds || [];
+	window._vds = _vds;
+	(function(){
+		_vds.push(['setAccountId', '810ea91474e570ba']);
+		(function() {
+		  var vds = document.createElement('script');
+		  vds.type='text/javascript';
+		  vds.async = true;
+		  vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+		  var s = document.getElementsByTagName('script')[0];
+		  s.parentNode.insertBefore(vds, s);
+		})();
+	})();
+	</script>

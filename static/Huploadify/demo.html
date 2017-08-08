@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>H5uploadify</title>
+<link rel="stylesheet" type="text/css" href="Huploadify.css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.Huploadify.js"></script>
+<style type="text/css">
+    .uploadify-button{
+        display:inline-block;
+        background-color: #707070;
+        line-height:20px;
+        border:0;
+        border-radius:0;
+        padding: 8px 15px 7px 15px;
+        margin-top: 18px;
+        margin-left: 19px;
+        font-size: 14px;
+        font-weight: normal;
+        font-family: '';
+        color: #6f3400;
+        background-color: #ffd733;
+        cursor:pointer;
+        text-decoration:none;
+    }
+    .uploadify-button:hover{
+        background-color: #f1a42e;
+    }
+</style>
+<script type="text/javascript">
+$(function(){
+	$('#upload').Huploadify({
+		auto:true,
+		fileTypeExts:'*.jpg;*.png;*.exe',
+		multi:true,
+		formData:{key1:123456,key2:'vvvv'},
+		fileSizeLimit:9999,
+		showUploadedPercent:true,//是否实时显示上传的百分比，如20%
+		showUploadedSize:true,
+		removeTimeout:9999999,
+		uploader:'upload.php',
+		onUploadStart:function(){
+			//alert('开始上传');
+			},
+		onInit:function(){
+			//alert('初始化');
+			},
+		onUploadComplete:function(file, xhr){
+            var data = JSON.parse(xhr);
+            console.log(data);
+            $("#imgID").attr('src',data);
+        },
+		onDelete:function(file){
+			console.log('删除的文件：'+file);
+			console.log(file);
+		}
+		});
+	});
+</script>
+</head>
+
+<body>
+<div id="upload"></div>
+<img id="imgID" src="">
+</body>
+</html>

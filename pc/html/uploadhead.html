@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/reset.css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/external.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../assets/css/popup.css"/>
+<link rel="stylesheet" type="text/css" href="../../static/Huploadify/Huploadify.css"/>
+<script type="text/javascript" src="../../assets/js/jquery.1.10.1.min.js"></script>
+<script type="text/javascript" src="../../assets/js/core.min.js"></script>
+<script type="text/javascript" src='../../static/Huploadify/jquery.Huploadify.js'></script>
+<style type="text/css">
+    .setting-content #head{
+        background: url("../../assets/images/missing_face.png") no-repeat center;
+        background-size: cover;
+    }
+</style>
+<div class="alert-container" <?php if(!$isbind) echo 'style="display:none"'?>>该微信号已绑定其他白熊账号，你可以使用微信登录白熊，在“设置”页面解除绑定。</div>
+<div class="setting-container">
+<div class="container">  
+    <div class="row">
+          <div class="span3 nav-switch-container">
+          
+            <p class="nav-switch-title">个人中心</p>
+            <ul class="nav nav-switchtab">
+                <li class="active">
+                    <a href="#" ><i class="nc-icon-outline ui-1_settings-gear-63"></i>我的设置</a>
+                </li>
+             	<li>
+                    <a  href="/user/mycredit"><i class="nc-icon-outline business_coins"></i>我的积分</a>
+                </li>
+            </ul>
+          </div>
+          <div class="span9 tab-content" >
+          <div class="tab-pane fade in active setting-content" id="plugin">
+          <div class="st-block">
+              <p class="st-title">基本设置</p>
+                <div class="head-container headUpload row">
+                    <div id="head">
+                        <div class="head-tigger head-cover"></div>
+                        <a class="head-tigger head-cover-text change-head"> 更换头像</a>
+                    </div>
+                    
+                    <div class="span9 upload-action">
+                        <p class="upload-tips">支持文件PNG、JPG、 JPEG，大小不超过600KB</p>
+                        <span class="upload-error error" style="margin: 0;display: none;" id="updatehead_beError">上传失败！支持文件PNG、JPG、 JPEG，大小不超过600KB</span>
+                        <a id="upload"><input type="hidden" name="path" id="path" value="" /></a>
+                        <input  class="btn updateheadsubmit" id="updateheadsubmit" type="submit" value="保存" />
+                        <a class="btn cancel-head cancel-change-head">取消</a>
+                       
+                    </div>
+                </div>
+                <table class="setting-tb">
+                    <tr>
+                        <td>昵称</td>
+                        <td> <input type="text" class="mynick" name="oldnickname" id="oldnickname" value="{$info.nickname}"><span class="error" style="display:none;" id="resetname_beError"> </span></td>
+                        <td> <input type="button" class="btn st-submit" id="resetnicknamesubmit" value="保存"/>  </td>
+                    </tr>
+                </table>
+          </div>
+              <div class="st-block">  
+                <p class="st-title">密码设置</p>
+                <div class="st-content">
+                <form class="registerform" name="forms">
+                    <table class="setting-tb">
+                        <tr>
+                            <td >当前密码</td>
+                            <td> <input type="password" class="myipt" name="oldpassword" id="oldpassword" placeholder="请输入当前密码"/>
+                            <div id="ueditpw"><a class="icon-user offpw changeps"></a></div>
+                                <span id="updatePwd_beError" style="" class="error"></span>
+                            </td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td >新密码</td>
+                            <td><input type="password" id="newpassword" class="myipt" name="newpassword"  placeholder="请输入新密码"/>
+                                <div id="ueditpw"><a class="icon-user offpw changeps1"></a></div>
+                                <span class="error" style="display:none;" id="resetpw_beError"> </span>
+                            </td>
+                            <td><input type="button" class="btn st-submit" id="resetpswsubmit" value="保存"/></td>
+                        </tr>
+
+                    </table>
+                
+                 </form>
+                </div>
+                </div>
+                  <div class="st-block"> 
+                    <p class="st-title">绑定设置</p> 
+                    <div class="st-content">
+                    <div class="bound-container bound-login">
+                        <ul class="bound-list">
+                        <!-- 手机未绑定 -->
+                            <li style="display: none">
+                                <span class="st-icon st-phone"><i class="nc-icon-glyph design_phone"></i></span>
+                                <span class="st-type"></span>
+                                <a class="phonebound-pop" href="#phonebound-pop">绑定</a>
+                            </li>
+                            <li>
+                                <span class="st-icon st-phone"><i class="nc-icon-glyph design_phone"></i></span>
+                                <span class="st-type" id="bindingPhone">{$info.mobile}</span>
+                                <a id="unbound-phone" href="#phonebound-pop" class="popup-trigger hover-phone-unbound">已绑定</a>
+                            </li>
+                            <li <?php if($unionid) echo 'style="display:none"'?>>
+                                <span class="st-icon "><i class="icon-wechat-gr"></i></span>
+                                <span class="st-type">微信</span>
+                                <a class="bound-account">绑定</a>
+                            </li>
+                            
+                            <li <?php if(!$unionid) echo 'style="display:none"'?>>
+                                <span class="st-icon "><i class="icon-wechat-gn"></i></span>
+                                <span class="st-type">{$info.wx_nickname|default='微信'}</span>
+                                <a id="confirm-unbound" href="#confirm-unbounding" class="popup-trigger hover-wechat-unbound">已绑定</a>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                  
+                  </div>
+            </div>
+           <div class="tab-pane fade setting-content" id="web">
+               <p class="st-title">我的积分</p>
+
+           </div>
+          </div>
+    </div>
+</div>  
+
+<div style="display: none">
+    <div id="phonebound-pop" style="width:460px;min-height:490px;overflow:auto; position: relative; overflow: hidden;">
+    <div class="login-container">
+        <p class="ft14 reg-tip"><span class="tip-light"><i ></i></span><span class="tip-text">白熊账号升级啦，之前用邮箱注册的用户都需绑定手机号，手机号可以作为账号直接登录啦。<i class="icon-kiss"></i></span></p>
+        <div class="tab-content">
+                <form id="boundphone" autocomplete="off" class="loginForm" >
+                    <div class="loginform-container">
+                       
+                        <div class="input-group">
+                            <input type="text" name="boundphone"  placeholder="手机号" value=""/>
+                            <p class="icon-tips"><i class="nc-icon-outline ui-1_check"></i><i class="nc-icon-outline ui-1_simple-remove"></i></p>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="boundverify" value="" placeholder="" autocomplete="off" />
+                            <img class="verifyimg reloadverify" alt="点击切换" src="{:U('User/verify')}" style="cursor:pointer;">
+                            <div class="verifyimgtip">
+                                <i class="tiptri"></i>看不清？换一张</div>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" autocomplete="off" name="boundphoneverify"   placeholder="验证码"/>
+                            <a id="boundphoneverify" class="sendverify ">发送验证码</a>
+                                <!-- <img  class="verifyimg reloadverify" alt="点击切换" src="{:U('verify')}" style="cursor:pointer;"> -->
+                        </div>
+                    
+                        <div id="reg-cb-error" class="cb-error"></div>
+                        <div class="login-btn-group">
+                            <input type="submit" class="login-btn btn btn-secondary" value="绑定" />
+                        </div>
+                       <!--  <input type="submit" id="submitReg" class="login-btn btn btn-secondary" value="注册" /> -->
+                        <a class="ft14 tab-to-login" href="http://wpa.qq.com/msgrd?v=3&uin=2535357251&site=qq&menu=yes" target="_blank">无法绑定？</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>   
+</div>
+
+<div style="display: none;">
+    <div id="confirm-unbounding" style="width:320px;height:160px;overflow:auto; position: relative; overflow: hidden;">
+        <div class="unbound-container">
+            <p>解除微信后你将无法使用微信登录白熊，你确定要解绑吗？</p>
+            <div class="btn-group">
+                <a class="btn-cancel">取消</a> <a class="btn-confirm" uid="{$info.uid}">确认</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="save_ok">
+    <i class="save_ok_icon"></i>
+    <span class="save_ok_content">修改成功</span>
+</div>
+<div class="setting-pop">
+    <p class="text">
+        <i class="nc-icon-glyph ui-1_check-circle-08"></i><span>保存成功</span>
+    </p>
+</div>
+
+<script type="text/javascript">
+    jQuery(function($){   
+        // $(".phonebound-pop").fancybox({
+        //     'closeBtn' : false,
+        //     helpers : {
+        //         overlay : {
+        //           closeClick: false,
+        //             css : {
+        //                  'frameWidth': 300,
+        //                 'frameHeight': 82,
+        //                 'background' : 'rgba(255, 215, 50, 0.9)',
+        //                 'overlayOpacity'    : 0.9
+        //             }
+        //         }
+
+        //     }
+        // });
+        /* 判断是否没有绑定过手机号自动弹窗 */
+        // var phonebound = {$first_bind_mobile};
+        // if(phonebound) {
+        //     $('.phonebound-pop').click();
+        // }
+
+        $('#unbound-phone').click(function(event) {
+            /* Act on the event */
+            $('.reg-tip span.tip-text').text('注意：更换手机号后，登录账号会替换成新的手机号，原来的手机号就不能作为登录账号使用了唷。');
+            $('input[name="boundphone"]').attr('placeholder','新手机号');
+        });
+
+        $('.hover-wechat-unbound').hover(function() {
+            $(this).text('解绑').addClass('bound-blue');
+        }, function() {
+            $(this).text('已绑定').removeClass('bound-blue');
+        });
+        $('.hover-phone-unbound').hover(function() {
+            $(this).text('更换号码').addClass('bound-blue');
+        }, function() {
+            $(this).text('已绑定').removeClass('bound-blue');
+        });
+
+        $(".head-container #head").hover(function(){
+            $('.head-tigger').animate({opacity:0.6},300);
+            $('.head-cover-text').animate({opacity:1},200);
+        },function(){
+             $('.head-tigger').animate({opacity:0});
+        });
+
+        $('.change-head').click(function(event) {
+            $("#head").addClass('active').animate({right:'20px',left:'0'});
+            $('#updatehead_beError').css('display', 'none');
+            $('.upload-tips').css('display', 'block').text('支持文件PNG、JPG、 JPEG，大小不超过600KB');
+            $('.upload-action').fadeIn('300');
+            $('.upload-action #upload').css('display', 'inline-block');
+            $('#updateheadsubmit').css('display', 'none');
+            $('#head').children().hide();
+        });
+
+        $('.cancel-change-head').click(function(event) {
+            var head = $('.head-container #head');
+            head.css("backgroundImage","url({:($info['head']=='')?'/Public/images/missing_face.png':$info['head']})");
+            head.children().show();
+            $('.upload-action').fadeOut('300');
+            head.animate({left:'120px',right:'0'});
+        });
+
+    });
+</script>
+
+<!-- ==================== 弹窗  ==================== -->
+
+<!-- 修改密码成功 -->
+<div style="display:none;">
+ <!--    <script type="text/javascript" src="../../assets/js/setting.js"></script>
+    <script type="text/javascript" src="../../assets/js/reset.js"></script> -->
+    <div id="updatePassword" class="popup" style="overflow:hidden">
+        <h3>修改密码成功，请重新登录</h3>
+        <h4><span>5</span>秒后将自动退出</h4>
+        <a href="/user/logout" class="btn mybtn1">直接退出</a>
+    </div>
+</div>
+
+<script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script> 
+
+<script type="text/javascript">
+/*上传头像*/
+    $(function(){
+        $('#upload').Huploadify({
+            auto:true,
+            fileTypeExts:'*.png;*.PNG;*.jpg;*.JPG;*.jpeg;*.JPEG', //由于该插件对大小写敏感区分
+            method:'post',
+            multi:false,
+            formData:{},
+            fileObjName:'download',
+            fileSizeLimit:600, //文件大小限制为600kb
+            showUploadedPercent:true,//是否实时显示上传的百分比，如20%
+            showUploadedSize:true,
+            buttonText:'上传头像',
+            removeTimeout:1,
+            uploader:"{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+            onUploadStart:null,//上传开始时的动作,你给我动一下啊！同步啊！！
+            onUploadSuccess:null,//上传成功的动作
+            onUploadComplete:function(file, xhr){
+                var data = $.parseJSON(xhr);
+                //console.log(data);
+                if(1 == data.status){
+                    $('.head-container #head').css("backgroundImage","url("+data.path+")");
+                    $('#path').val(data.path);
+                    $('.upload-tips').text('上传成功！').removeClass('error');
+                    //$('#updateheadsubmit').trigger("click");
+                    $('#updateheadsubmit').css('display','inline-block');
+                    $('#upload').css('display','none');
+                    $('.head-container .error').css('display', 'none');
+                } else {
+                    $('.upload-tips').text('上传失败！支持文件PNG、JPG、 JPEG，大小不超过600KB').addClass('error');
+                }
+            },
+            onUploadError:function(){ alert('头像上传失败');}
+        });
+    });
+    var changesessionobj = {
+        sessionajax : function(path){
+            $.ajax({
+                type : 'post',
+                url : '/user/cgsession',
+                data : {
+                    'path' : path,
+                },
+                success : function(data){
+                    data = JSON.parse(data);
+                    if(data.status){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                },
+            })
+        }
+    }
+</script>
+
+<!--<script>
+/*图片裁剪*/
+    function DrawImage(ImgD,s_width,s_height) {
+        var   image = new   Image();
+        var   iwidth   =   s_width;     //定义允许图片宽度
+        var   iheight   =   s_height;     //定义允许图片高度
+        console.log(ImgD);
+        image.src=ImgD.url;
+        //console.log(image.src);
+        if(image.width>0 && image.height>0)
+        {
+            if(image.width/image.height >= iwidth/iheight) {
+                if(image.width>iwidth) {
+                    ImgD.width=iwidth;
+                    ImgD.height=(image.height*iwidth)/image.width;
+                }
+                else {
+                    ImgD.width=image.width;
+                    ImgD.height=image.height;
+                }
+                ImgD.alt=image.width+"×"+image.height;
+            }
+            else {
+                if(image.height>iheight) {
+                    ImgD.height=iheight;
+                    ImgD.width=(image.width*iheight)/image.height;
+                }
+                else {
+                    ImgD.width=image.width;
+                    ImgD.height=image.height;
+                }
+                ImgD.alt=image.width+"×"+image.height;
+            }
+        }
+    }
+</script>-->
+
+<include file="Public/footer" />
+
+</body>
+</html>

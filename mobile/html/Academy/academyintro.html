@@ -1,0 +1,130 @@
+<include file="Uitest/header" />
+<div class="ic-theme-yellow">
+	<header class="mui-bar mui-bar-nav ic-header-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title ic-collapse-title">课程介绍</h1>
+	</header>
+	<div class="mui-content mui-scroll-wrapper">
+	<div class="ic-banner">
+		
+	</div>
+		<div id="slider" class="mui-slider">
+			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<a class="mui-control-item" href="#item1mobile">
+			通用课程
+		</a>
+				<a class="mui-control-item" href="#item2mobile">
+			行业课程
+		</a>
+				<a class="mui-control-item" href="#item3mobile">
+			全部公文
+		</a>
+			</div>
+			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+			<div class="mui-slider-group">
+				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+					<!-- <div id="scroll1" class="mui-scroll-wrapper"> -->
+					<div id="scroll1" >
+						<!-- <div class="mui-scroll"> -->通用课程
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell" >
+							<a href="/App/Home/View/mobile/uitest/academy-media.html" open-type="common" class="" > <img src="/Public/Home/images/mobile/academy/jianli.png" /><span class="title">简历制作</span></a>
+							
+							</li>
+								<li class="mui-table-view-cell">
+									<a><img src="" /></a>
+								<span>简历投递</span>
+								</li>
+								<li class="mui-table-view-cell">
+									<a><img src="" /></a>
+								<span>笔试课程</span>
+								</li>
+								<li class="mui-table-view-cell">
+									<a><img src="" /></a>
+								<span>面试课程</span>
+								</li>
+							</ul>
+						<!-- </div> -->
+					</div>
+				</div>
+				<div id="item2mobile" class="mui-slider-item mui-control-content">
+					<div id="scroll2" >行业课程
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+							<a href="academy-media.html" open-type="common"> <img src="" /></a>
+							<span>简历制作</span>
+							</li>
+							<li class="mui-table-view-cell">
+								<a><img src="" /></a>
+							<span>简历投递</span>
+							</li>
+							<li class="mui-table-view-cell">
+								<a><img src="" /></a>
+							<span>笔试课程</span>
+							</li>
+							<li class="mui-table-view-cell">
+								<a><img src="" /></a>
+							<span>面试课程</span>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div id="item3mobile" class="mui-slider-item mui-control-content">
+					<div id="scroll3" >全部公文
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+							<a href="academy-media.html" open-type="common"> <img src="" /></a>
+							<span>简历制作</span>
+							</li>
+							<li class="mui-table-view-cell">
+								<a><img src="" /></a>
+							<span>简历投递</span>
+							</li>
+							<li class="mui-table-view-cell">
+								<a><img src="" /></a>
+							<span>笔试课程</span>
+							</li>
+							<li class="mui-table-view-cell">
+								<a><img src="" /></a>
+							<span>面试课程</span>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+				
+
+	</div>
+
+<script src="/App/Home/View/mobile/uitest/js/mui.min.js"></script>
+<script type="text/javascript">
+	(function($) {
+		$('.mui-scroll-wrapper').scroll({
+			indicators: true //是否显示滚动条
+		});
+        
+		// var item2 = document.getElementById('item2mobile');
+		// //var item3 = document.getElementById('item3mobile');
+		// document.getElementById('slider').addEventListener('slide', function(e) {
+		// 	if (e.detail.slideNumber === 1) {
+		// 		if (item2.querySelector('.mui-loading')) {
+		// 			setTimeout(function() {
+		// 				//item2.querySelector('.mui-scroll').innerHTML = html2;
+		// 			}, 500);
+		// 		}
+		// 	} 
+		// });
+		// var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
+		// $('.mui-input-group').on('change', 'input', function() {
+		// 	if (this.checked) {
+		// 		sliderSegmentedControl.className = 'mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-' + this.value;
+		// 		sliderProgressBar.setAttribute('style', sliderProgressBar.getAttribute('style'));
+		// 	}
+		// });
+	})(mui);
+
+</script>
+<include file="Uitest/footer-academy" />

@@ -1,0 +1,198 @@
+<include file="Public/header" />
+<include file="Public/top_nav_company" />
+<!-- <style type="text/css">
+	.ic-theme-yellow.ic-company, .ic-theme-yellow .mui-content{
+		padding-top: 0 !important;
+	}
+</style> -->
+	<div class="mui-content bg-white">
+	<input type="hidden" name="kid" value="{$data.kid}">
+		<ul class="ic-table-input-view bg-white">
+			<li class="ic-table-input company-intro">
+				<img class="company-img" src="{$data['path']}"><a href="{$data['link']}" target="_blank" open-type="common"><span class="company-name"><?php echo mb_substr($data['company_name'],0,8,'utf-8').((mb_substr($data['company_name'],0,8,'utf-8') == $data['company_name'])?"":"…");  ;?></span></a> 
+				<switch name="$data['openstatus']">
+					<case value="1" break="1"></case>
+					<default/>
+					<if condition="$data.timeflag eq 1">
+	                  <span class="ic-time">未开始 <if condition="$data.start_time neq null">({$data.start_time} 开始)</if> </span>
+	              	<elseif condition="$data.timeflag eq 2"/>
+	                  <span class="ic-time start">已开始 <if condition="$data.end_time neq null">({$data.end_time } 截止)</if> </span>
+	                <elseif condition="$data.timeflag eq 3"/>
+	                  <span class="ic-time">已结束 <if condition="$data.end_time neq null">({$data.end_time} 截止)</if> </span>  
+	               	<elseif condition="$data.timeflag eq 4"/>
+	                  <span class="ic-time start">已开始 <if condition="$data.end_time neq null">{($data.end_time } 截止)</if></span>
+	              	</if>  
+              	</switch>
+			</li>
+			<li class="ic-table-input">
+	<!-- 	<div class="drop-btn-container "><input class="drop-btn trigger-drop-btn long" type="text" name="deliver_status" placeholder="请选择" /><i class="nc-icon-outline arrows-1_minimal-down"></i></div> -->
+				<if condition="$data.deliver_status neq null"><span class="label-left">投递状态：</span><div class="drop-btn-container text-taro drop-btn trigger-drop-btn long"><span>{$data.deliver_status}<i class="nc-icon-outline arrows-1_minimal-down"></i></span></div><else/><span class="label-left">投递状态: </span><div class="drop-btn-container drop-btn trigger-drop-btn long"><span style="font-weight: bold;">请选择<i class="nc-icon-outline arrows-1_minimal-down"></i></span></div></if><div class="drop-list" style="display: none; z-index: 999;position: relative;"><ul class="deliver-status"><li <if condition="$data.deliver_status eq '已投递'">class="active"</if>>已投递</li><li <if condition="$data.deliver_status eq '已笔试'">class="active"</if>>已笔试</li><li <if condition="$data.deliver_status eq '已面试'">class="active"</if>>已面试</li><li <if condition="$data.deliver_status eq '已终面'">class="active"</if>>已终面</li><li <if condition="$data.deliver_status eq '已拿offer'">class="active"</if>>已拿offer</li></ul></div><input type="hidden" name="deliver_status" value="{$data.deliver_status}"></li>
+			<li class="ic-table-input"><span class="label-left">工作城市：</span><input class="text-taro long" type="text" name="location" value="{$data.location}" onkeyup="words_deal(this,12)"/></li>
+			<li class="ic-table-input"><span class="label-left">部门：</span><input class="text-taro" type="text" name="department" value="{$data.department}" onkeyup="words_deal(this,12)"/></li>
+			<li class="ic-table-input"><span class="label-left">岗位：</span><input class="text-taro" type="text" name="post" value="{$data.post}" onkeyup="words_deal(this,12)"/></li>
+			<li class="ic-table-input"><span class="label-left">备注：</span><input class="text-taro" type="text" name="mark" value="{$data.mark}" onkeyup="words_deal(this,84)"/></li>
+		</ul>
+		<div class="btn-group" style="padding: 30px 20px">
+			
+	        <div class="mui-button-row clearfloat">
+	        	<a class="mui-action-back ic-btn ic-btn-md ic-btn-primary mui-pull-left">取消</a>
+		        <button  type="button" class="ic-btn ic-btn-md ic-btn-primary mui-pull-right" data-loading-text="保存中..." data-loading-icon="" id="savecollect" value="保存">保存</button>
+		    </div>
+		    <a class="pdtop12 block" href="javasricpt:;" id="deleteFav">删除此收藏</a>
+	    </div>
+	    
+	</div>
+	
+    <div class="delete-pop collect-delete-pop dn" >
+	    <div class="left-tips">
+	      <p>确定删除？</p>
+	      <div class="checkboxCheck">
+	        <input type="checkbox" name="delCollect" value="delCollect" id="delCollect">
+	        <label for="delCollect"><span class="for_check">下次不再提醒</span></label>
+	       </div>
+	    </div>
+	    <div class="btn-group">
+	      <a class="ic-btn ic-btn-brown width110 pull-left close-pop">取消</a><a href="" class="ic-btn ic-btn-brown width110 pull-right collect-del-ok">确认</a>
+	    </div>
+	 </div>
+	 <div class="ic-alert-success" style="top:20%">
+		<span class="ic-alert-box"><i class="nc-icon-glyph ui-1_check-bold"></i>保存成功</span>
+	</div>
+<include file="Public/footer_nav_company" />
+<include file="Public/redirect" />
+<include file="Public/footer" />
+<script src="/Public/Mobile/js/mui.pullToRefresh.js"></script>
+<script src="/Public/Mobile/js/mui.pullToRefresh.material.js"></script>
+<script type="text/javascript" src="{:stamp('Public/Mobile/js/triggermeun.js')}"></script>
+<script type="text/javascript" src="{:stamp('Public/Mobile/js/company.js')}"></script>
+
+<script>
+	mui.init();
+	mui(document).on('tap', '.close-pop', function() {
+		jquery('#deleteFav').removeClass('active');
+		jquery('.delete-pop').addClass('dn');
+	});
+	mui(document).on('tap', '#savecollect', function() {
+		mui(savecollect).button('loading');
+		console.log(jquery('input[name="deliver_status"]').val());
+		jquery.ajax({
+            type: "post", //数据提交的类型（post或者get）
+            url: "/company/keepSave", //数据提交得地址
+            data: {
+				"deliver_status": jquery('input[name="deliver_status"]').val(),
+				"location": jquery('input[name="location"]').val(),
+				"department": jquery('input[name="department"]').val(),
+				"post": jquery('input[name="post"]').val(),
+				"mark": jquery('input[name="mark"]').val(),
+				"kid":jquery('input[name="kid"]').val()
+			}, //提交的数据(自定义的一些后台程序需要的参数)
+            dataType: "json", //返回的数据类型
+            success: function(data) {
+                console.log(data);
+                if (data.status == 1) {
+                	document.querySelector('.ic-alert-success').style.display = 'block';
+					setTimeout(function() {
+						document.querySelector('.ic-alert-success').style.display = 'none';
+					}, 1500);
+					setTimeout(function() {
+						window.location.href = '/company/collect';
+					}, 1600);
+
+                }
+         		mui(savecollect).button('reset');
+            },
+            error:function(xhr,type,errorThrown){
+				alert('服务器开小差了，请稍后重试');
+				mui(savecollect).button('reset');
+			}
+        });
+	});
+	
+	mui(document).on('tap', '#deleteFav', function() {
+		this.classList.add('active');
+		if (jquery.cookie('ic_delCollect') == null || localStorage.getItem('ic_delCollect') == null) {
+			jquery('.delete-pop.collect-delete-pop').removeClass('dn');
+		}else{
+			var btn = document.querySelector(".collect-del-ok");
+			mui.trigger(btn,'tap');
+		}
+	});
+	mui(document).on('tap', '.collect-del-ok', function() {
+		if (jquery('input[name="delCollect"]').is(':checked')) {
+	        jquery.cookie("ic_delCollect", "true", {expires: 10000});
+	        localStorage.setItem("ic_delCollect", 'true');
+	    }
+		jquery.ajax({
+            type: "post", //数据提交的类型（post或者get）
+            url: "/company/cancelKeep", //数据提交得地址
+            data: {
+				"kid":jquery('input[name="kid"]').val()
+			}, //提交的数据(自定义的一些后台程序需要的参数)
+            dataType: "json", //返回的数据类型
+            success: function(data) {
+                console.log(data);
+                if (data = 1) {
+                	window.location.href = '/company/collect?delete=success';
+                }else{
+                	alert('服务器开小差了，请稍后重试');
+                }
+            },
+            error:function(xhr,type,errorThrown){
+				alert('服务器开小差了，请稍后重试');
+			}
+        });
+	});
+	mui(document).on('tap', '.trigger-drop-btn', function() {
+		b = jquery(".drop-list"),
+        c = b.is(":hidden"),
+        jquery(".drop-list").hide(),
+        c ? b.show() : b.css('display', 'none');
+	});
+	mui('.drop-list').on('tap', 'li', function() {
+		// val = this.innerHTML;
+		// jquery('.drop-list li').siblings().removeClass('active');
+		// this.classList.add('active');
+		// //jquery('.drop-btn-container i').remove();
+		// jquery('.trigger-drop-btn').addClass('text-taro');
+		// jquery('input[name="deliver_status"]').val(val);
+  		//jquery(".drop-list").hide();
+  		val = this.innerHTML;
+		jquery('.drop-list li').siblings().removeClass('active');
+		this.classList.add('active');
+		//jquery('.drop-btn-container i').remove();
+		//jquery('.trigger-drop-btn').addClass('text-taro');
+		jquery('input[name="deliver_status"]').val(val);
+		jquery('.trigger-drop-btn').addClass('text-taro').find('span').html(val+'<i class="nc-icon-outline arrows-1_minimal-down"></i>');
+        jquery(".drop-list").hide();
+	});
+	function words_deal(obj, v) {
+		console.log(obj);
+	    var content = obj.value;
+	    var realLength = 0;
+	    for (var i = 0; i < content.length; i++) {
+	        charCode = content.charCodeAt(i);
+	        if (charCode >= 0 && charCode <= 128)
+	            realLength += 1;
+	        else
+	            realLength += 2;
+	    }
+	    if (realLength > v) {
+	        var num = content.sub(v);
+	        //jquery(obj).addClass('text-error');
+	        jquery(obj).attr("value", num);
+	    } else {
+	    	
+	        jquery(obj).css('color', '#482929');
+	    }
+	}
+	String.prototype.sub = function(n) {    
+		var r = /[^\x00-\xff]/g;    
+		if(this.replace(r, "mm").length <= n) return this;   
+		// n = n - 3;    
+		var m = Math.floor(n/2);    
+		for(var i=m; i<this.length; i++) {    
+		if(this.substr(0, i).replace(r, "mm").length>=n) {    
+			return this.substr(0, i); }    
+		} return this;   
+	};  
+</script>

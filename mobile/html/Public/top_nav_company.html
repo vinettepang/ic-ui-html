@@ -1,0 +1,54 @@
+<link rel="stylesheet" type="text/css" href="{:stamp('Public/Mobile/css/sass/module/company.css')}">
+</head>
+<body>
+<div class="ic-theme-yellow ic-company"><!--theme module-->
+	<if condition="$topNav.company eq 'edit'">
+		<header class="mui-bar mui-bar-nav ic-header-nav">
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" href="/company/collect" open-type="common"></a>
+			<h1 class="mui-title ic-collapse-title">编辑备注</h1>
+		</header>
+	<elseif condition="$topNav.company eq 'referraldetail'"/>
+		<header class="mui-bar mui-bar-nav ic-header-nav">
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" href="/company/referral" open-type="common"></a>
+			<h1 class="mui-title ic-collapse-title">公司详情</h1>
+		</header>	
+	<else />	
+	<header class="mui-bar mui-bar-nav ic-header-nav">
+		<h1 class="mui-title ic-collapse-title"><a id="icon-menu" class="mui-action-menu "><img class="mlogo" src="/Public/Mobile/images/assets/mlogo.png" />白熊求职<i class="nc-icon-outline arrows-1_minimal-down"></i></a></h1> <if condition="$topNav.company eq 'index'"> <a class="icon-search"><i class="nc-icon-outline ui-1_zoom"></i></a></if>
+	</header>
+	<header class="mui-bar mui-bar-nav ic-header-nav ic-search-nav <if condition="$searchNav.search neq 'true'"> dn</if>">
+        <div class="icb-search-group mui-input-group">
+            <div class="mui-input-row">
+                <form action="/company/searchlist" onsubmit="false">
+                    <input style="border-radius: 2px !important;" type="search" name="search" class="mui-input-clear icb-search-input" placeholder="搜索" data-input-clear="2" value="{$search}"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+                </form>
+            </div>
+            <if condition="$topNav.company eq 'search' and $searchNav.search eq 'true'"> 
+            	<a class="mui-icon mui-pull-right icon-search-right icon-search-cancel" href="/company/companylist" open-type="common">取消</a>
+           	<elseif condition="$topNav.company neq 'search'"/> 
+           		<a class="mui-icon mui-pull-right icon-search-right icon-search-cancel">取消</a>	
+           	<else/>
+            </if>
+            
+        </div>
+	</header>
+	<div id="menu-wrapper" class="menu-wrapper hidden">
+		<div id="menu" class="menu ">
+			<ul class="mui-table-view mui-table-view-inverted ic-topdropnav mui-row">
+				<li class=" mui-col-xs-4">
+					<a href="http://bbs.icebear.me/forum-1.htm" open-type="common"><span class=""><i class="nc-icon-outline ui-3_chat-46"></i></span>白熊论坛</a>
+				</li>
+				<li class="mui-col-xs-4">
+					<a href="/baike" open-type="common"><span class=""><i class="nc-icon-outline business_books"></i></span>白熊百科</a>
+				</li>
+				<li class="mui-col-xs-4">
+					<a href="/academy"  open-type="common"><span class=""><i class="nc-icon-outline media-1_player"></i></span>白熊学院</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div id="menu-backdrop" class="menu-backdrop"></div>
+	</if>
+	
+
+	

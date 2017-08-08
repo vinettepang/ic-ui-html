@@ -1,0 +1,387 @@
+<include file="Public/header" />
+<include file="Public/top_nav_academy" />
+
+<!-- $is_unlock_all neq true -->
+<if condition="$purchased_n_unlock_all eq 1">
+<style type="text/css">
+	.ic-academy-video .mui-control-content ,
+	.ic-academy-video .mui-control-content .mui-scroll, 
+	.ic-detail .mui-control-content ,
+	.ic-detail .mui-control-content .mui-scroll{
+        min-height: calc(100vh - 88px) !important;
+        min-height: -webkit-calc(100vh - 88px) !important;
+    } 
+</style>
+<else/>
+<style type="text/css">
+	.ic-academy-video .mui-control-content ,
+	.ic-academy-video .mui-control-content .mui-scroll, 
+	.ic-detail .mui-control-content ,
+	.ic-detail .mui-control-content .mui-scroll{
+        min-height: calc(100vh - 148px) !important;
+        min-height: -webkit-calc(100vh - 148px) !important;
+    } 
+</style>
+</if>
+
+	<div class="mui-content ic-detail">
+		<div class="ic-banner">
+			<img src="/Public/Mobile/images/academy/jc.png" />
+			<input type="hidden" name="isPurchased" value="{$is_purchased}"><!--是否购买-->
+			<input type="hidden" name="isLocaked" value="{$ever_locked}"><!--是否解过锁-->
+			<input type="hidden" name="lockedStatus" value="{$unlock_today}"><!--今日是否解过锁-->
+			<input type="hidden" name="myCredit" value="{$credits}"><!--我的积分-->
+			<input type="hidden" name="cid" value="{$courseData[0].id}">
+			<input type="hidden" name="lockNeedCredit" value="{$thisChapter.lockNeedCredit}">
+
+			<h3 class="ic-banner-title">{$courseData[0].coursename}</h3>
+			<!--正常的课程-->
+			<if condition="$ever_locked eq 1 && $is_purchased neq true && $is_unlock_all neq true">
+				<h5 class="ic-banner-sec-title"><span class="line-through">¥ {$courseData[0].courseprice}</span><span class="ic-aca-discount discount-price">¥ {$discount}</span></h5>
+			<elseif condition="$ever_locked neq 1 && $is_purchased neq true && $is_unlock_all neq true"/>	
+				<h5 class="ic-banner-sec-title">¥ {$courseData[0].courseprice}</h5>
+			<else/>		
+			</if>
+			<p class="ic-aca-discount ic-discount-tip">{$current_course_unlock} 人学过</p>
+			
+			<if condition="!is_login()">
+				<a href="{:U('/user/login')}" open-type="common" class="ic-btn ic-btn-sm-block btn-square ic-btn-primary btn-noshadow ic-credit-btn" style="height: 60px; line-height: 60px;"><p class="text-left absolutemiddle" style="font-size: 18px;">登录/注册</p></a>
+			<elseif condition="is_login() && $is_unlock_all neq true"/>
+				<a href="{:U('/academy/setting')}" open-type="common" class="ic-btn ic-btn-sm-block btn-square ic-btn-primary btn-noshadow ic-btn-credit ic-credit-btn" style="height: 60px; line-height: 25px;"><p class="text-left absolutemiddle" >如何赚取积分？<br/><span>我的积分：<span class="ic-mycredit">{$credits} 分</span></span></p></a>
+			<else/>	
+			</if>
+		</div>
+		<div id="slider" class="mui-slider ic-slider animated">
+			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<a class="mui-control-item" href="#item1mobile">介绍</a>
+				<a class="mui-control-item mui-active" href="#item2mobile">目录</a>
+				<a class="mui-control-item" href="#item3mobile">评价</a>
+			</div>
+			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+			<div class="mui-slider-group ic-course-detail">
+				<div id="item1mobile" class="mui-slider-item mui-control-content">
+					<div id="scroll1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<if condition="$courseData[0]['iscamp'] eq 1"> 
+						        <div class="academy-camp-banner">
+						          <h3 class="title">{$courseData[0].camptitle}</h3>
+						          <a open-type="common" class="ic-btn btn-white btn-circle" href="{$courseData[0].campurl}" target="_blank">了解更多</a>
+						        </div>
+							</if>
+							<div class="ic-inner-content <if condition="$courseData[0]['iscamp'] eq 1"> circle-corner</if>">
+								{$courseData[0].coursenewintroh5} 
+								<!-- 左右两边banner -->
+								<!-- <if condition="$courseData[0]['iscamp'] eq 1">
+								<section class="mui-col ic-academy-service clear">	
+								<h4 class="sec-title"><i></i>课程服务</h4>
+									 <ul class="mui-table-view ic-border-list clear">
+										<li><img src="/Public/Mobile/images/academy/service@2x.png" class="maxw140"></li>
+										<li><img src="/Public/Mobile/images/academy/camp_service@2x.png" class="maxw140"></li>
+									</ul>
+								</section>
+								<else/>
+								<section class="mui-col ic-academy-service">	
+								<h4 class="sec-title"><i></i>课程服务</h4>
+									<img src="/Public/Mobile/images/academy/m_service@2x.png" style="max-width: 100%; max-width: 400px;">
+								</section>
+								</if> -->
+								
+								<section class="mui-col ic-academy-service clear">	
+								<h4 class="sec-title"><i></i>课程服务</h4>
+									<if condition="I('flag') eq '' or I('flag') eq 'chanpingyunying' or I('flag') eq 'xinmeiti' or I('flag') eq 'shichangxilieke' or I('flag') eq 'chanpinjinglijichuke'">
+						            	<img src="/Public/Mobile/images/academy/m_service@2x.png" style="display: block; margin: 0 auto; max-width: 100%; max-width: 400px;">
+						            <else/>
+						            	<img src="/Public/Mobile/images/academy/m_service-simple@2x.png" style="display: block; margin: 0 auto;max-width: 100%; max-width: 400px;">
+						            </if>
+									
+									<if condition="$courseData[0]['iscamp'] eq 1">
+										<img src="/Public/Mobile/images/academy/camp_service_4@2x.png" style="display: block; margin: 0 auto;max-width: 100%; max-width: 400px;">
+									</if>
+								</section>
+								
+								<notempty name="silkinfo">
+								<section class="mui-col ic-academy-content">	
+								<h4 class="sec-title"><i></i>配套资料<!-- <span class="backup">(请用PC在官网下载)</span> --></h4>
+									 <ul class="mui-table-view ic-border-list">
+									 <volist name="silkinfo" id="vo">
+									 <if condition="!is_login()">
+										<li class="mui-table-view-cell"><a href="/user/login" open-type="common" >{$vo.name}</a></li>
+									<else/>
+										<li data-id="{$vo.id}" data-type="{$vo.type}" data-yun-code="{$vo.yun_code}" data-size="{$vo.size}" class="mui-table-view-cell ic-download-trigger">{$vo.name}</li>
+									</if>	
+								       </volist>
+									</ul>
+								</section>
+								</notempty>
+							</div>
+							<include file="Public/copyright" />
+						</div>
+					</div>
+				</div>
+				<div id="item2mobile" class="mui-slider-item mui-control-content mui-active">
+					<div id="scroll2" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<if condition="$courseData[0]['iscamp'] eq 1"> 
+						        <div class="academy-camp-banner">
+						          <h3 class="title">{$courseData[0].camptitle}</h3>
+						          <a open-type="common" class="ic-btn btn-white btn-circle" href="{$courseData[0].campurl}" target="_blank">了解更多</a>
+						        </div>
+							</if>
+							<div class="ic-inner-content <if condition="$courseData[0]['iscamp'] eq 1"> circle-corner</if>">
+                      	
+									<section class="mui-col ic-academy-content">
+									<if condition="I('flag') eq 'shichangxilieke'">
+										<p style="background: #F6EBD6;width: 100%;padding: 10px 12px;text-align: justify;">"市场系列课将在8.7合并至互联网运营基础课"</p>
+									<else/>
+										<p style="background: #F6EBD6;width: 100%;padding: 10px 12px;text-align: justify;">(课程最近更新，如遇问题请联系白熊课程小助手微信：Icebear_kc)</p>
+									</if>
+                                    <volist name="videoData" id="videoData">
+                                    <div class="ic-dashed-list ic-ellipsis-label ic-chapter-{$key}">   
+                                    	
+                                        <h4 class="sec-title"><i></i>{$videoData[0]['title']}</h4>
+                                  		 <!--  <p>{$videoData[0]['brief']}</p>  -->
+                        
+                                        <if condition="$videoData[1][0] eq ''">
+											<if condition="is_login() eq true">
+												<if condition="$videoData[0]['lockStatus'] eq 0 || $videoData[1]['free'] eq true || $is_purchased eq true">
+													<a class="ic-dashed-item " open-type="common" href="{:U('/media/'.$videoData[1]['vid'].'/cid/'.$courseData[0]['id'].'')}">
+	                                        		<if condition="$videoData[1]['view_status'] eq 2">
+	                                        			<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        		<elseif condition="$videoData[1]['view_status'] eq 1" />
+	                                        			<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        		<else/><p class='mui-ellipsis'></if>{$videoData[1]['title']}</p></a>
+	                                        	<else />
+	                                        		<a class="ic-dashed-item ic-lockcourse-trigger" data-href="{$videoData[1]['vid']}">
+	                                        		<if condition="$videoData[1]['view_status'] eq 2">
+	                                        			<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        		<elseif condition="$videoData[1]['view_status'] eq 1" />
+	                                        			<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        		<else/><p class='mui-ellipsis'>
+	                                        		</if>{$videoData[1]['title']}</p>
+	                                            		<i class=" nc-icon-outline ui-1_lock icon-islocked"></i></a>
+												</if>
+											<else />
+												<if condition="$videoData[1]['free'] eq false">
+													<a class="ic-dashed-item" open-type="common" href="/user/login">{$videoData[1]['title']}
+													<i class=" nc-icon-outline ui-1_lock icon-islocked"></i></a>
+												<else />
+													<a class="ic-dashed-item" open-type="common" href="/user/login">{$videoData[1]['title']}</a>
+												</if>
+											</if>
+                                        <else/>
+                                            <volist name="videoData[1]" id="v">
+                                            	<if condition="is_login() eq true">
+                                            		<if condition="$videoData[0]['lockStatus'] eq 0 || $v['free'] eq true || $is_purchased eq true">
+                                            			<a class="ic-dashed-item" open-type="common" href="{:U('/media/'.$v['vid'].'/cid/'.$courseData[0]['id'].'')}">
+	                                        			<if condition="$v['view_status'] eq 2">
+	                                        				<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        			<elseif condition="$v['view_status'] eq 1" />
+	                                        				<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        			<else/>
+	                                        				<p class='mui-ellipsis'>
+	                                        			</if>{$v['title']}</p></a>
+                                            		<else />
+                                            			<a class="ic-dashed-item ic-lockcourse-trigger" data-href="{$v['vid']}" href="javascript:;">
+                                            			<if condition="$v['view_status'] eq 2">
+	                                        				<p class='mui-ellipsis'><i class="nc-icon-outline ui-1_check-circle-08 text-grey"></i>
+	                                        			<elseif condition="$v['view_status'] eq 1" />
+	                                        				<p class='mui-ellipsis text-green'><i class="nc-icon-outline ui-2_time "></i>
+	                                        			<else/><p class='mui-ellipsis'>
+	                                        			</if>{$v['title']}</p><i class=" nc-icon-outline ui-1_lock icon-islocked"></i></a>
+                                            		</if>
+                                            	<else />
+                                            		<if condition="$v['free'] eq false">
+                                            			<a class="ic-dashed-item " open-type="common" href="/user/login">{$v['title']}
+                                            			<i class=" nc-icon-outline ui-1_lock icon-islocked"></i></a>
+                                            		<else />
+                                            			<a class="ic-dashed-item " open-type="common" href="/user/login">{$v['title']}
+                                            		</if>
+                                            	</if>
+                                            </volist>
+
+                                        </if>
+                             
+                                    </div>
+                                    </volist>
+								</section>
+							</div><!--inner-content-->
+							<include file="Public/copyright" />
+						</div>
+					</div>
+
+				</div>
+				<div id="item3mobile" class="mui-slider-item mui-control-content">
+					<div id="scroll3" class="mui-scroll-wrapper">
+						<div class="mui-scroll ic-course-comment">
+							<if condition="$courseData[0]['iscamp'] eq 1"> 
+						        <div class="academy-camp-banner">
+						          <h3 class="title">{$courseData[0].camptitle}</h3>
+						          <a open-type="common" class="ic-btn btn-white btn-circle" href="{$courseData[0].campurl}" target="_blank">了解更多</a>
+						        </div>
+							</if>
+							<empty name="courseData[0].evaluationh5">
+								<div class="empty-container">
+									<p class="text-center">暂无评论~</p>
+								</div>
+							</empty>
+							<notempty>
+								<section>
+									{$courseData[0].evaluationh5}
+								</section><!--inner-content-->
+							</notempty>
+							
+							<include file="Public/copyright" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!--content-->
+
+	<div class="ic-dialog ic-dialog-locked"  style=" height: 180px; padding-top: 54px;" >
+		<i class="nc-icon-outline ui-1_simple-remove ic-dialog-close"></i>
+		<p>当前积分：<span class="ic-mycredit text-taro">{$credits}分</span>。确认解锁？</p>
+		<div class="btn-group clearfloat">
+			<a class="ic-btn ic-btn-brown width120 pull-left ic-dialog-btn-close">取消</a>
+			<a class="ic-btn ic-btn-brown width120 pull-right ic-chapter-unlocked" data-loading-text="解锁中">确认</a>
+		</div>
+	</div>
+
+	<div class="ic-dialog ic-dialog-buycourse" style=" height: 180px; padding-top: 54px;">
+		<i class="nc-icon-outline ui-1_simple-remove ic-dialog-close"></i>
+		<p>积分不够解锁，当前积分：<span class="ic-mycredit text-taro">{$credits}分</span></p>
+		<div class="btn-group clearfloat">
+			<a class="ic-btn ic-btn-brown width120 pull-left" href="/academy/setting#myCredit" open-type="common" >赚积分</a>
+			<a class="ic-btn ic-btn-brown width120 pull-right" href="{:U('/academy/buy/cid/'.$courseData[0]['id'])}" open-type="common" data-loading-text="购买中">买课￥<span class="discount-price">{$discount}</span> </a>
+		</div>
+		<p class="center mgtop12 ftnormal">（解锁过的课程不计入总价）</p>
+	</div>
+
+	<div class="ic-alert-success">
+		<span class="ic-alert-box"><i class="nc-icon-glyph ui-1_check-bold"></i>解锁成功</span>
+	</div>
+	<div class="ic-alert-error">
+		<span class="ic-alert-box"><i class="nc-icon-glyph  ui-2_fat-remove"></i>解锁失败</span>
+	</div>
+
+	<div class="ic-dialog ic-dialog-unlocked">
+		<img src="/Public/Mobile/images/locked_code.png">
+		<p>扫码添加客服：icebear_kc ，加入学员内部交流群，领取学习礼包，还有更多权益在等你。</p>
+		<i class="nc-icon-glyph ui-1_simple-remove ic-dialog-unlocked-close"></i>
+	</div>
+	<div class="ic-dialog ic-dialog-downloadfile"></div>
+	
+<include file="Public/footer_nav_academy" />
+<include file="Public/redirect" />
+<include file="Public/footer" />
+<script src="{:stamp('Public/Mobile/js/academy.js')}"></script>
+<script type="text/javascript">
+
+	mui('body').on('tap', '.open-hidden-over', function(event) {
+		var _this = jquery(this),
+		a = _this.prev('.intro-list').hasClass('hidden-over');
+		console.log(a);
+		a ?(_this.prev('.intro-list').removeClass('hidden-over'),_this.html('点击收起')):(_this.prev('.intro-list').addClass('hidden-over'),_this.html('查看更多'));
+	});
+	//第一次解锁提示关闭
+	mui('body').on('tap', '.ic-dialog-unlocked .ic-dialog-unlocked-close', function(event) {
+		jquery('.ic-dialog-unlocked').fadeOut();
+		jQuery.cookie("ic_dialog_unlocked", "true",{ expires: 10000 , path: '/'});
+		localStorage.setItem("ic_dialog_unlocked", 'ic_dialog_unlocked');
+	});
+	//资料下载提示提示关闭
+	mui('body').on('tap', '.ic-dialog-downloadfile .ic-dialog-downloadfile-close', function(event) {
+		jquery('.ic-dialog-downloadfile').fadeOut();
+	});
+	//资料下载触发弹窗
+	mui('body').on('tap', '.ic-download-trigger', function(event) {
+		var dialogDownObj = jquery('.ic-dialog-downloadfile');
+		var _this =jquery(this),
+		dataId = _this.attr('data-id'),
+		dataType = _this.attr('data-type'),
+		dataCode = _this.attr('data-yun-code'),
+		dataSize = _this.attr('data-size'),
+		cid = jquery('input[name="cid"]').val(),
+		//是否购买或解过锁
+		isbuy = jquery('input[name="isPurchased"]').val(),
+		islocaked = jquery('input[name="isLocaked"]').val(),
+		objHtml ='';
+		//console.log('isbuy'+isbuy);
+		//console.log('islocaked'+islocaked);
+		if (isbuy || islocaked == 1) {
+			if (dataType == 1) {
+				//网盘
+				dialogDownObj.removeClass('pt42');
+				objHtml = '<p class="ic-download-title">提取码：<span class="code">'+dataCode+'</span></p><p class="ic-download-tip">（长按提取码复制）</p><i class="nc-icon-glyph ui-1_simple-remove ic-dialog-downloadfile-close"></i><a class="ic-btn ic-btn-brown-block ic-btn-block" href="/academypackage/download/id/'+dataId+'/type/'+dataType+'" open-type="common" data-loading-text="跳转中">前往网盘下载</a>' ;
+			}else if(dataType == 2){
+				//本地
+				dialogDownObj.addClass('pt42');
+				objHtml = '<p>文件大小 <span class="file-size">'+dataSize+'</span> ，确认下载？</p><a class="ic-btn ic-btn-brown pull-left ic-dialog-downloadfile-close" href="javascript:;">取消</a><a class="ic-btn ic-btn-brown pull-right" href="/academypackage/download/id/'+dataId+'/type/'+dataType+'" open-type="common">确认</a>' ;
+			}
+		}else{
+			//未购买或解锁的
+			dialogDownObj.addClass('pt42');
+			objHtml = '<p>购买或解锁课程后可获取配套资料包。</p><a class="ic-btn ic-btn-brown pull-left ic-dialog-downloadfile-close" href="javascript:;">取消</a><a class="ic-btn ic-btn-brown pull-right" href="/academy/buy/cid/'+cid+'" open-type="common">购买课程</a>';
+		}
+		jquery('.ic-dialog-downloadfile').html(objHtml);
+		jquery('.ic-dialog-downloadfile').fadeIn();
+	});
+	
+	
+	//解锁弹窗 积分解锁
+	mui('body').on('tap', '.ic-chapter-unlocked', function(event) {
+		var _self = jquery(this),
+		cid = jquery('input[name="cid"]').val();
+		mui(_self).button('loading');
+		jquery.ajax({
+			type: 'POST',
+			url: '/academy/unlockCourseBychapter',
+			data: {
+				'cid': cid,
+				'videoData':<?php echo $videoData?>,
+			},
+			success: function(data) {
+				console.log(data);
+				//mui(_self).button('reset');
+				if (data.status) {
+					var thisChapter = data.thisChapter;
+					jquery('.ic-alert-success').fadeIn();
+					setTimeout("jquery('.ic-alert-success').fadeOut();", 3000);
+					//积分值
+					jquery('.ic-mycredit').html(data.mycredit+'分');
+					jquery('input[name="myCredit"]').val(data.mycredit);
+					//价格
+					jquery('.discount-price').html(data.discount);
+					jquery('span.courseprice').addClass('line-through through-white');
+					//alert
+					jquery('.ic-dialog-locked').fadeOut('700', function() {
+						jquery('.ic-alert-success').fadeIn();
+						setTimeout("jquery('.ic-alert-success').fadeOut();", 3000);
+					});
+					jquery('.ic-chapter-'+thisChapter.id+' a.ic-dashed-item').each(function(){
+					 	var href = jquery(this).attr('data-href');
+					    jquery(this).find('i.icon-islocked').remove();
+					    jquery(this).removeClass('ic-lockcourse-trigger').attr({'open-type': 'common','href': '/media/'+href+'/cid/'+cid});
+					});
+					if (data.crouseStatus == -1) {
+						jquery('.footer-nav.ic-academy-detail').css('display', 'none');
+					}else{
+						jquery('.unlock-chapter').html(data.nextChapter.chapterName);
+						jquery('.unlock-section').html(data.nextChapter.itemNum);
+						jquery('.unlock-total-credit').html(data.nextChapter.lockNeedCredit);
+						var height = jquery(window).height();
+						jquery('.ic-detail .mui-control-content').css('height', height-88);
+						jquery('.ic-detail .mui-control-content').css('min-height', height-88);
+					}
+				} else {
+					jquery('.ic-dialog').fadeOut();
+					jquery('.ic-alert-error').fadeIn();
+					setTimeout("jquery('.ic-alert-error').fadeOut();", 3000);
+				}
+				mui(_self).button('reset');
+			}
+		})
+	});
+	mui('body').on('tap', '.ic-chapter-unlocked', function(event) {
+	});
+</script>

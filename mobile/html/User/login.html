@@ -1,0 +1,80 @@
+<include file="Public/header" />
+<include file="Public/var" />
+<link type="text/css" rel="stylesheet" href="{:stamp('Public/Mobile/css/sass/login.css')}"/>
+<!-- <link type="text/css" rel="stylesheet" href="{:stamp('Public/Home/css/intlTelInput.css')}"/> -->
+</head>
+<body>
+<div class="ic-login-container">
+    <div class="mui-content mui-scroll-wrapper ">
+        <div class="mui-content-padded">
+            <div class="ic-logo">
+                <a href="/">
+                    <img src="/Public/Mobile/images/loginicon.png" /></a>
+            </div>
+            <div id="slider" class="mui-slider ic-slider-login">
+                <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                    <a class="mui-control-item mui-active" href="#loginContainer">登录</a>    
+                    <a class="mui-control-item" href="#regContainer">注册</a>
+                </div>
+                <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+                <div class="mui-slider-group">
+                    <div id="loginContainer" class="mui-slider-item mui-control-content mui-active">
+                        <div id="scroll1">
+                            <form id="loginForm" class="mui-input-group ic-login-form">
+                                <div class="mui-input-row">
+                                    <input type="text" value="" autocomplete="off" name="loginphone" placeholder="手机或邮箱">
+                                    <p class="icon-tips"><i class="nc-icon-outline ui-1_check"></i><i class="nc-icon-outline ui-1_simple-remove"></i></p>
+                                </div>
+                               
+                                <div class="mui-input-row mui-password">
+                                    <input type="password" value="" autocomplete="off"  name="loginpassword" placeholder="密码" class="mui-input-password">
+                                </div>
+                                <span class="false cb-error" id="login-cb-error"></span>
+                            </form>
+                            <div class="mui-button-row">
+                                <button id="ic-btn-login" type="button" class="mui-btn ic-btn-block ic-btn-primary mui-btn-block" data-loading-text="登录中" data-loading-icon-position="right">登录</button>
+                            </div>
+                            <a href="/user/findpasswordphone" open-type="common" class="" >忘记密码？</a>                          
+                        </div>
+                    </div>
+                    <div id="regContainer" class="mui-slider-item mui-control-content">
+                        <div id="scroll2" >
+                            <form id="regForm" class="mui-input-group ic-login-form">
+                                <div class="mui-input-row">
+                                    <input type="text" value="" autocomplete="off" name="nickname" placeholder="昵称">
+                                    <p class="icon-tips"><i class="nc-icon-outline ui-1_check"></i><i class="nc-icon-outline ui-1_simple-remove"></i></p>
+                                </div>
+                                <div class="mui-input-row">
+                                    <!-- <input id="country-code" class="country-code" type="tel" readOnly="true"  name="countrycode"> -->
+                                    <input type="text" value=""  autocomplete="off" name="phone" placeholder="手机号">
+                                    <p class="icon-tips"><i class="nc-icon-outline ui-1_check"></i><i class="nc-icon-outline ui-1_simple-remove"></i></p>
+                                </div>
+                                <div class="mui-input-row">
+                                    <input type="text" value="" autocomplete="off" name="verify">
+                                    <img class="verifyimg reloadverify" alt="点击切换" src="{:U('verify')}" style="cursor:pointer;">
+                                    <div class="verifyimg-tip dn">
+                                        <i class="tip-triangle"></i>看不清？换一张</div>
+                                </div>
+                               <div class="mui-input-row">
+                                    <input type="text" value="" autocomplete="off" name="phoneverify" placeholder="验证码">
+                                    <button class="sendverify phoneverify">发送验证码</button>
+                                </div>
+                                <div class="mui-input-row mui-password">
+                                    <input type="password" value="" autocomplete="off"  name="password" placeholder="设置密码" class="mui-input-password">
+                                </div>
+                                <span class="false cb-error" id="reg-cb-error"></span>
+                            </form>
+                            <div class="mui-button-row">
+                                <button id="ic-btn-reg" type="button" class="mui-btn ic-btn-block ic-btn-primary mui-btn-block" data-loading-text="注册中" data-loading-icon-position="right">注册</button>
+                            </div>
+                            <a class="login-tab" data-link="login">已有帐号？</a>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>    
+
+<include file="Public/footer-login" />
+<!-- <script src="/Public/Home/js/intlTelInput.js"></script> -->

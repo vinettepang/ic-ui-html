@@ -1,0 +1,30 @@
+
+	<if condition="$footerNav.company eq 'edit' ">
+	<else/>		
+		<nav id="footer-nav" class="mui-bar mui-bar-tab">
+			<a open-type="common" class="mui-tab-item  <if condition="$footerNav.company eq 'index'">mui-active</if>" href="/company/referral" >
+				<span class="mui-icon ic-nav-icon nc-icon-outline ui-2_like"></span>
+				<span class="mui-icon ic-nav-icon-select nc-icon-glyph ui-2_like"></span>
+				<span class="mui-tab-label">内推</span>
+			</a>
+			<a open-type="common" class="mui-tab-item  <if condition="$footerNav.company eq 'company'">mui-active</if>" href="/company/companylist" >
+				<span class="mui-icon ic-nav-icon nc-icon-outline ui-2_menu-square"></span>
+				<span class="mui-icon ic-nav-icon-select nc-icon-glyph ui-2_menu-square"></span>
+				<span class="mui-tab-label">校招/实习</span>
+			</a>
+			<a open-type="common" class="mui-tab-item <if condition="$footerNav.company eq 'collect'">mui-active</if>" href="/company/collect">
+				<span class="mui-icon ic-nav-icon nc-icon-outline files_folder-star"></span>
+				<span class="mui-icon ic-nav-icon-select nc-icon-glyph files_folder-star"></span>
+				<span class="mui-tab-label">我的求职</span>
+			</a>
+			<a open-type="common" class="mui-tab-item <if condition="$footerNav.company eq 'setting'">mui-active</if>" href="/company/setting">
+				<span class="mui-icon ic-nav-icon nc-icon-outline users_circle-10"><span class="ic-red-point"></span></span>
+				<span class="mui-icon ic-nav-icon-select nc-icon-glyph users_circle-10"><span class="ic-red-point"></span></span>
+				<span class="mui-tab-label">个人中心</span>
+			</a>
+		</nav>	
+	</if>
+	
+
+	
+

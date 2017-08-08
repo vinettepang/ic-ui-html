@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="Cache-Control" content="max-age=7200" />
+<meta http-equiv="Expires" content="date" />
+<!-- 取消统一设置title等 -->
+<!-- <title><php>if($page_title) echo $page_title;else echo C('WEB_SITE_TITLE');</php> </title>
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}">
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}"> -->
+<!-- <title>{:MENU_CURRENT}</title> -->
+<php>
+$menu_id = MENU_CURRENT;
+$menuinfo = getcurrentmenuinfo($menu_id);
+if(isset($info['title'])){
+	echo '<title>'.$info['title'].' - 白熊学院 | 白熊求职</title>';
+}elseif(isset($courseData[0]['title'])){
+	echo '<title>'.$courseData[0]['title'].'</title>';
+}elseif(isset($list[0]['title'])){
+	echo '<title>'.$list[0]['title'].'</title>';
+}elseif(isset($menuinfo[0]['title'])){
+	echo '<title>'.$menuinfo[0]['title'].'</title>';
+}elseif($page_title){
+	echo '<title>$page_title</title>';
+}else{
+	echo "<title>".C('WEB_SITE_TITLE')."</title>";
+}
+if(isset($courseData[0]['keywords'])){
+	echo '<meta name="keywords" content="'.$courseData[0]['keywords'].'">';
+}elseif(isset($list[0]['keywords'])){
+	echo '<meta name="keywords" content="'.$list[0]['keywords'].'">';
+}elseif(isset($menuinfo[0]['keyword'])){
+	echo '<meta name="keywords" content="'.$menuinfo[0]['keywords'].'">';
+}else{
+	echo '<meta name="keywords" content="'.C('WEB_SITE_KEYWORD').'">';
+}
+if(isset($courseData[0]['description'])){
+	echo '<meta name="description" content="'.$courseData[0]['description'].'">';
+}elseif(isset($list[0]['description'])){
+  echo '<meta name="description" content="'.$list[0]['description'].'">';
+}elseif(isset($menuinfo[0]['description'])){
+  echo '<meta name="description" content="'.$menuinfo[0]['description'].'">';
+}else{
+  echo '<meta name="description" content="'.C('WEB_SITE_DESCRIPTION').'">';
+}
+</php>
+<!-- <meta name="baidu-site-verification" content="Rq9674oWTi" /> -->
+<!-- <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
+<link rel="apple-touch-icon" type="image/ico" href="/favicon-apple.png"> -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#482929">
+<meta name="theme-color" content="#ffffff">
+
+<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1, user-scalable=no">
+<link type="text/css" rel="stylesheet" href="{:stamp('Public/Home/css/common.css')}"/>
+<link rel="stylesheet" type="text/css"  href="/Public/Home/css/reset.css" />
+<link rel="stylesheet" type="text/css"  href="/Public/Home/css/nucleo-glyph.css" />
+<link rel="stylesheet" type="text/css"  href="/Public/Home/css/nucleo-outline.css" />
+<!-- websocket -->
+<link href="/Public/Home/css/main.css" rel="stylesheet" type="text/css" />
+<!-- 暂时取消socket -->
+<!-- <script src='//cdn.bootcss.com/socket.io/1.3.7/socket.io.js'></script> -->
+
+<script type="text/javascript" src="/Public/Home/js/jquery.1.10.1.min.js" ></script>
+<script type="text/javascript" src="/Public/Home/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/jquery.lib.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/time.js"></script>
+<script type="text/javascript" src="/Public/Home/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/Public/Home/js/cookie.js"></script>
+<script type="text/javascript" src="{:stamp('Public/Home/js/function.js')}"></script>
+
+<!-- mess-->
+<script type="text/javascript" src="{:stamp('Public/Home/js/headerFormess.js')}"></script>
+
+<!-- <link rel="stylesheet" type="text/css"  href="/Public/Home/css/sass/style.css" /> -->
+<link rel="stylesheet" type="text/css"  href="{:stamp('Public/Mobile/css/sass/style.css')}" />
+<!--New delete-->
+<link rel="stylesheet" type="text/css"  href="/Public/Home/css/external.min.css" />
+
+<!-- 暂时取消websocket -->
+<!-- <script src='/Public/Home/js/notify.js'></script> -->
+
+<script type="text/javascript" src="/Public/Home/js/jquery.fancybox.pack.js"></script> 
+<link type="text/css" rel="stylesheet" href="/Public/Home/css/jquery.fancybox.css" />
+
+<script type="text/javascript" src="{:stamp('Public/Home/js/company/jobs.js')}"></script>        
+<script type="text/javascript" src="{:stamp('Public/Home/js/company/company.js')}"></script>         
+<script type="text/javascript" src="/Public/Home/js/core.min.js"></script> 
+<script type="text/javascript" src="{:stamp('Public/Home/js/popup.js')}"></script> 
+
+<!--New delete-->
+<script type='text/javascript'>
+  var PUBLIC = '__PUBLIC__';
+  var ROOT = '__ROOT__';
+  var uploadUrl = '{:U("common/uploadface")}';
+  var sid = '{:session_id()}'
+</script>
+<include file="Public/var"/>
+<?php $user = session('user_auth');?>
+
+<script type='text/javascript'>
+  var _vds = _vds || [];
+  window._vds = _vds;
+  (function(){
+    _vds.push(['setAccountId', '810ea91474e570ba']);
+    (function() {
+      var vds = document.createElement('script');
+      vds.type='text/javascript';
+      vds.async = true;
+      vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(vds, s);
+    })();
+  })();
+</script>
+</head>
+<body>
+<div id="body">
+<div class="content-container">
+<!-- 暂时取消websocket -->
+<!-- <div class="notification sticky hide">
+    <p id="content"></p>
+    <a class="close" href="javascript:"> <img src="/Public/Home/images/icon-close.png" /></a>
+</div> -->
+<!-- 暂时取消websocket -->
+<div class="wrapper">
+<!-- 暂时取消websocket -->
+<!-- <div style="width:850px;">
+    <script>
+        // 使用时替换成真实的uid，这里方便演示使用时间戳
+        var uid = {$uid};//Date.parse(new Date());
+  </script>
+</div> -->
+<!-- 暂时取消socket -->
+<!-- <script>
+$(document).ready(function () {
+    // 连接服务端
+    var socket = io('http://'+document.domain+':2120');
+    // 连接后登录
+    socket.on('connect', function(){
+      socket.emit('login', uid);
+    });
+    // 后端推送来消息时
+    socket.on('new_msg', function(msg){
+         $('#content').html('收到消息：'+msg);
+         //$('#content').parent().removeClass('hide');
+         $('.notification.sticky').notify();
+    });
+    // 后端推送来在线数据时
+    socket.on('update_online_count', function(online_stat){
+        $('#online_box').html(online_stat);
+    });
+});
+</script> -->
+<style type="text/css">
+  .minihead{
+    position: absolute;
+    top:0;
+    left: 0;
+  }
+</style>
+<!-- <script type="text/javascript" src="/Public/Home/js/headerFormess.js"></script> -->
+<script type='text/javascript'>
+	
+</script>
+<input type="hidden" name="jm_login_uid" class="socket" value="<?php $user = session('user_auth'); echo $user['uid'];?>" />
+<if condition="$show_nav eq 1">
+<div class="num_box row hidden-xs hidden-pro">
+  <div class="num span12" id="num_00">
+      <div class="header {$cur_top.company} {$cur_top.install} {$cur_top.baike} {$cur_top.academy}">
+        <div class="container">
+          <div class="row">
+          <div class="logo ">
+            <a  href="/">
+              <div class="logo icebear-current" ></div>
+              <div class="logo icebear-y" ><img src="/Public/Home/images/logo-y.png" /></div>
+              <div class="logo icebear-p" ><img src="/Public/Home/images/logo-p.png" /></div>
+              <div class="logo icebear-g" ><img src="/Public/Home/images/logo-g.png" /></div>
+              <div class="logo icebear-aca" ><img src="/Public/Home/images/logo-g.png" /></div>
+              <div class="logo icebear-o" ><img src="/Public/Home/images/logo-o.png" /></div>
+              <!-- <div class="logo icebear-bbs" ><img src="/Public/Home/images/logo-b.png" /></div> -->
+            </a>
+          </div>
+              <div class="nav ">
+               <ul class="top_nav">
+                <li class="li_g"><i class="dot"></i><a  href="/academy/">学院</a></li>
+                <li class="li_p"><i class="dot"></i><a href="/company/companylist/">求职</a></li>
+               <!--  <li class="li_aca"><i class="dot"></i><a href="/academy">白熊学院</a></li> -->
+                <li class="li_o"><i class="dot"></i><a  href="/baike/">百科</a></li>
+                <!-- <li class="li_bbs"><i class="dot"></i><a  href="/baike/">论坛</a></li> -->
+              </ul>
+               <!-- <a {$cur_top.plugin} href="/Plugin/plugin.html">功能介绍</a>-->
+              </div>
+              
+           <if condition="is_login()">
+            <div class="login ">
+                <ul class="top-right">
+                    <li class="icous">
+                      <div class="minihead" style="background: url('<?php echo ($user['head']=='')?'/Public/images/users.png':$user['head']?>') no-repeat center;"></div>
+                      <a href="/user/index/" class="username"><?php echo mb_substr($user['nickname'],0,10,'utf-8');?></a>
+                      <div class="inusnav">
+                        <div class="inusnav-cover">
+                          <!-- <em></em> -->
+                          <a  href="/academy/mycourse"><i class="nc-icon-outline business_books"></i><span>我的课程</span></a>
+                          <a  href="/resume/editresume/"><i class="nc-icon-outline education_notepad"></i><span>我的简历</span></a>
+                          <a href="/user/index/"><i class="nc-icon-outline ui-1_settings"></i><span>个人中心</span></a>
+                          <a class="logout" href="{:U('user/logout')}"><i class="nc-icon-outline arrows-4_launch-11"></i><span>退出登录</span></a>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                         <span class="btn-sysmag"><i class="nc-icon-outline ui-1_email-83" id="btnUser"></i><div id="totalRedSpot" class="spot spotpos" style="display:none"></div></span>
+                    </li>
+                    <!-- <li><a href="/user/keep/">我的收藏</a></li> -->
+                    <!-- <li class="icous"><a  href="/resume/editresume/">我的简历</a>
+                      <div class="inusnav">
+                        <div class="inusnav-cover">
+                        <em></em>
+                            <a href="/resume/editresume/">中文简历</a>
+                            <a href="/resumeen/editresumeen/">英文简历</a>
+                        </div>
+                       </div> 
+                    </li> -->
+                </ul>
+                <include file="./App/Home/View/default/Message/newSysBox.html" /> 
+               <div class="clear"></div>
+            </div>
+            <else/>
+              <div class="login">
+                <ul class="top-right">
+                    <!-- <li><a href="#inline1" id="various1">登录</a></li>
+                    <li><a href="/user/register/">注册</a></li> -->
+                    <li><a href="#loginpopup" class="loginpop" data-type="log">登录</a></li>  
+                    <li><a href="#loginpopup" class="loginpop" data-type="reg">注册</a></li>
+                </ul>
+               <div class="clear"></div>
+            </div>
+          </if>          
+         <div class="clr"></div>
+          </div>
+          </div>
+         <!--  <div class="topborder-container">
+            <div class="topber topborder"></div>
+            <div class="topber topborder-y" /></div>
+            <div class="topber topborder-p" /></div>
+            <div class="topber topborder-g" /></div>
+            <div class="topber topborder-aca" /></div>
+            <div class="topber topborder-o" /></div>  
+          </div> -->
+        </div>
+  </div>
+</div>
+
+<include file="./App/Home/View/default/User/loginpop.html" />    
+
+</if>
+</div>
+</body>

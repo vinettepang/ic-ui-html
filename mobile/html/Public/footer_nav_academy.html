@@ -1,0 +1,66 @@
+	
+	<if condition="$footerNavCover.academy eq 'buycourse' ">
+		<switch name="purchased_n_unlock_all" >
+		<case value="1" break="1"></case>
+		<default />	
+			<switch name="courseData[0]['activity']" >
+			<case value="1" break="1">
+			<div class="footer-nav mui-bar mui-bar-tab ic-academy-detail" class="footer" style="height: 60px">
+				<div class="mui-row">
+					<div class="mui-col-xs-12 offer-container">
+						<div class="<if condition="is_login()">ic-lockcourse-trigger</if> ic-lockcourse-container ic-btn ic-btn-sm-block btn-square ic-btn-primary btn-noshadow " style="height: 60px">
+							<if condition="!is_login()"><a style="display: block;width: 100%;height: 100%;" open-type="common" href="/user/login"><p class="text-left absolutemiddle ic-lock-tips">积分解锁课程</p></a><else/><p class="text-left absolutemiddle ic-lock-tips">积分解锁课程<!-- <i class="nc-icon-outline arrows-1_minimal-up"></i> --></p></if>
+							<div class="ic-lock-bottom" style="display: none;">
+								<i class="nc-icon-outline arrows-1_minimal-down close-bottom"></i>
+								<h3 class="ic-lock-bottom-title unlock-chapter">{$thisChapter.chapterName}</h3> 
+								<p class="ic-lock-bottom-sectitle">25 积分 x <span class="unlock-section">{$thisChapter.itemNum}</span> 节 = <span class="unlock-total-credit">{$thisChapter.lockNeedCredit}</span> 积分</p>
+								<div class="btn-group">
+									<a class="ic-btn ic-btn-sm-block btn-square ic-btn-brown btn-noshadow ic-buycourse-trigger" href=""><p>积分解锁整章<br/><span class="unlock-total-credit">{$thisChapter.lockNeedCredit}</span> 积分</p></a><a class="ic-btn ic-btn-sm-block btn-square ic-btn-white btn-noshadow" href="{:U('/academy/buy/cid/'.$courseData[0]['id'])}" open-type="common"><p>直接购买全部<br/><if condition="$ever_locked eq 1 && $is_purchased neq true && $is_unlock_all neq true"><span class="line-through through-white">¥ {$courseData[0].courseprice}</span><span class="discount-price">¥ {$discount}</span><elseif condition="$ever_locked neq 1 && $is_purchased neq true && $is_unlock_all neq true"/><span class="courseprice">¥ {$courseData[0].courseprice}</span><span class="discount-price"></span><else/></if>
+									</p></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</case>
+			<default />	
+			<div class="footer-nav mui-bar mui-bar-tab" class="footer">
+				<div class="mui-row">
+					<div class="mui-col-xs-4">
+						<a class="ic-btn ic-btn-icon btn-square ic-btn-white ic-btn-sm-block btn-noshadow" href="http://wpa.qq.com/msgrd?v=3&uin=2535357251&site=qq&menu=yes" open-type="common"><span class="btn-icon nc-icon-outline ui-3_chat-46"></span>咨询</a>
+					</div>
+					<div class="mui-col-xs-8 offer-container">
+						<if condition="!is_login()">
+							<a id="ic-btn-buycourse" href="{:U('/user/login')}" open-type="common" class="ic-btn ic-btn-sm-block btn-square ic-btn-primary btn-noshadow" data-loading-text="购买中">立即购买</a>
+						<else/>
+							<a id="ic-btn-buycourse" href="{:U('/academy/buy/cid/'.$courseData[0]['id'])}" open-type="common" class="ic-btn ic-btn-sm-block btn-square ic-btn-primary btn-noshadow" data-loading-text="购买中">立即购买</a>
+						</if> 
+					</div>
+				</div>
+			</div>
+			</switch>
+		</switch>
+	<else/>		
+		<nav id="footer-nav" class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item  <if condition="$footerNav.academy eq 'index'">mui-active</if>" href="/academy/index.html">
+				<span class="mui-icon ic-nav-icon nc-icon-outline business_books"></span>
+				<span class="mui-icon ic-nav-icon-select nc-icon-glyph business_books"></span>
+				<span class="mui-tab-label">全部课程</span>
+			</a>
+			<a class="mui-tab-item <if condition="$footerNav.academy eq 'mycourse'">mui-active</if>" href="/academy/mycourse.html">
+				<span class="mui-icon ic-nav-icon nc-icon-outline education_book-bookmark"></span>
+				<span class="mui-icon ic-nav-icon-select nc-icon-glyph education_book-bookmark"></span>
+				<span class="mui-tab-label">我的课程</span>
+			</a>
+			<a class="mui-tab-item <if condition="$footerNav.academy eq 'setting'">mui-active</if>" href="/academy/setting.html">
+				<span class="mui-icon ic-nav-icon nc-icon-outline users_circle-10"><span class="ic-red-point"></span></span>
+				<span class="mui-icon ic-nav-icon-select nc-icon-glyph users_circle-10"><span class="ic-red-point"></span></span>
+				<span class="mui-tab-label">个人中心</span>
+			</a>
+		</nav>	
+	</if>
+	
+
+	
+

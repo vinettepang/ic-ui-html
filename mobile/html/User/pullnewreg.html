@@ -1,0 +1,59 @@
+<include file="Public/header" />
+<include file="Public/var" />
+<link rel="stylesheet" type="text/css"  href="/Public/Mobile/css/sass/login.css" />
+</head>
+<body>
+<div class="ic-login-container">
+    <div class="mui-content mui-scroll-wrapper ">
+        <div class="mui-content-padded">
+            <div class="ic-logo" style="padding: 28px 0 10px 0;">
+                <a href="/"><img src="/Public/Mobile/images/loginicon.png" /></a>
+            </div>
+            <div id="slider" class="mui-slider ic-slider-login">
+                <div class="mui-slider-group">
+                    <div id="regContainer" class="mui-slider-item mui-control-content mui-active">
+                        <div class="stick-tips bg-yellow" style="height: 100px;background: #FFD733; padding: 18px 16px;"><span style="padding-right: 10px; font-size: 15px;">{$nickname}</span>送您白熊求职100积分，注册即可凭积分兑换阿里巴巴、腾讯、百度等「名企校招内推」机会和「求职资料课程」。<!-- 邀请你注册成为白熊求职用户，在这里你可以免费获取热门的「求职资料礼包」和各类「求职课程」。 --></div>
+                        <div id="scroll2" >
+                            <form id="regForm" class="mui-input-group ic-login-form" style="padding: 12px 0 40px 0;">
+                            	<input type="hidden" name="recomid" value="{$encrypt_uid}"/>
+                                <div class="mui-input-row">
+                                    <input type="text" value="" autocomplete="off" name="nickname" placeholder="昵称">
+                                    <p class="icon-tips"><i class="nc-icon-outline ui-1_check"></i><i class="nc-icon-outline ui-1_simple-remove"></i></p>
+                                </div>
+                                <div class="mui-input-row">
+                                    <input type="text" value="" autocomplete="off" name="phone" placeholder="手机号">
+                                    <p class="icon-tips"><i class="nc-icon-outline ui-1_check"></i><i class="nc-icon-outline ui-1_simple-remove"></i></p>
+                                </div>
+                                <div class="mui-input-row">
+                                    <input type="text" value="" autocomplete="off" name="verify">
+                                    <img class="verifyimg reloadverify" alt="点击切换" src="{:U('verify')}" style="cursor:pointer;">
+                                    <div class="verifyimg-tip dn">
+                                        <i class="tip-triangle"></i>看不清？换一张</div>
+                                </div>
+                               <div class="mui-input-row">
+                                    <input type="text" value="" autocomplete="off" name="phoneverify" placeholder="验证码">
+                                    <button class="sendverify phoneverify">发送验证码</button>
+                                </div>
+                                <div class="mui-input-row mui-password">
+                                    <input type="password" value="" autocomplete = 'new-password'  name="password" placeholder="设置密码" class="mui-input-password">
+                                </div>
+                                <span class="false cb-error" id="reg-cb-error"></span>
+                            </form>
+                            <div class="mui-button-row">
+                                <button id="ic-btn-reg" type="button" class="mui-btn ic-btn-block ic-btn-primary mui-btn-block" data-loading-text="注册中" data-loading-icon-position="right">注册</button>
+                            </div>
+                           <!--  <a class="login-tab" data-link="login">已有帐号？</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>    
+<if condition="$is_self eq 'true'">
+<div class="overlay-cover">
+    <div class="over-top"><p class="over-title">
+    发送我的专属邀请链接，每成功邀请一位好友注册，即可获得{$creditconf.invite}积分。<!-- 分享到「朋友圈」或给「你的朋友」，每成功注册一个用户即可获得 {$creditconf.invite} 积分。 --></p><img src="/Public/Mobile/images/assets/arrow.png"></div>
+</div>
+</if>
+<include file="Public/footer-login" />

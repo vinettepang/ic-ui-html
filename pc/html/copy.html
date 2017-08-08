@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<link rel="stylesheet" type="text/css" href="../../assets/css/style.css" />
+
+<style type="text/css">
+.credit-top .head-img{
+    background: url("{:($info['head']=='')?'/Public/images/missing_face.png':$info['head']}") no-repeat center;
+    background-size: cover;
+}
+</style>
+<body >
+<div class="setting-container">
+    <div class="container">  
+        <div class="row">
+              <div class="span3 nav-switch-container"> 
+                <p class="nav-switch-title">个人中心</p>
+                <ul class="nav nav-switchtab">
+                    <li >
+                        <a href="/user/index"><i class="nc-icon-outline ui-1_settings-gear-63"></i>我的设置</a>
+                    </li>
+                    <li class="active">
+                        <a href="#" ><i class="nc-icon-outline business_coins"></i>我的积分</a>
+                    </li>
+                </ul>
+              </div>
+              <div class="span9 tab-content" >
+               <div class="credit-content">
+                   <div class="credit-top">
+                       <div class="head-img"></div>
+                       <div class="credit-point">
+                        <p class="text-bold">我的积分：<span class="text-red">{$userval.credits}</span></p>
+                        <!-- <p class="text-purple ft14"><if condition="$userval.credits egt 700">Lv.2<else />Lv.1</if></p> -->
+                        <p class="text-purple ft14"><if condition="$info.level gt 1">{$info.levelname}</if> </p>
+                       </div>
+                   </div>
+                    <div class="credit-list tab-content">
+                        <ul class="nav nav-switch">
+                            <li class="active">
+                                <a href="#earn-point" data-toggle="tab">如何赚积分</a>
+                            </li>
+                            <li>
+                                <a href="#point-detail" data-toggle="tab">积分明细</a>
+                            </li>
+                           <!--  <li>
+                                <a href="#level-intro" data-toggle="tab">等级说明</a>
+                            </li> -->
+                        </ul>
+                        <section class="tab-pane fade in active " id="earn-point">
+                            <ul class="task-list">
+                                <li>
+                                    <i class="nc-icon-outline users-2_a-add"></i>
+                                    <span class="task">推荐注册</span>
+                                    <span class="getpoint">可获<span class="text-red"> {$creditconf.invite} 积分</span>/每人</span>
+                                    <a class="btn btn-primary btn-sm-3-15 status recommendReg">去完成</a>
+                                </li>
+                                <li>
+                                    <i class="nc-icon-outline business_signature"></i>
+                                    <span class="task">每日签到</span>
+                                    <span class="getpoint">可获<span class="text-red"> {$creditconf.sign} 积分</span></span>
+                                    <if condition="$sign eq 1"><a class="btn btn-noborder btn-sm-3-15 status text-grey" href="#">已完成</a><else />
+                                    <a class="btn btn-primary btn-sm-3-15  status" href="/academy">去完成</a></if>
+                                </li>
+                                <li>
+                                    <i class="nc-icon-outline design-2_html5"></i>
+                                    <span class="task">连续五日签到</span>
+                                    <span class="getpoint">可获<span class="text-red"> {$creditconf.sign_5} 积分</span></span>
+                                    <a class="btn btn-primary btn-sm-3-15  status" href="/academy">去完成</a>
+                                </li>
+                                
+                                <li>
+                                    <i class="nc-icon-outline ui-2_link-72"></i>
+                                    <span class="task">绑定微信</span>
+                                    <span class="getpoint">可获<span class="text-red"> {$creditconf.wechat} 积分</span></span>
+                                    <if condition="$first_bind_wechat eq 0"><a class="btn btn-noborder btn-sm-3-15 status text-grey" href="#">已完成</a><else />
+                                    <a class="btn btn-primary btn-sm-3-15  status" href="/user/index/">去完成</a></if>
+                                </li>
+                                <li>
+                                    <i class="nc-icon-outline nature_panda"></i>
+                                    <span class="task">上传头像</span>
+                                    <span class="getpoint">可获<span class="text-red"> {$creditconf.upload} 积分</span></span>
+                                    <if condition="$first_upload_avatar eq 0"><a class="btn btn-noborder btn-sm-3-15 status text-grey" href="#">已完成</a><else />
+                                        <a class="btn btn-primary btn-sm-3-15  status" href="/user/index/">去完成</a></if>
+                                </li>
+                              <!--   <li>
+                                    <i class="nc-icon-outline education_notepad"></i>
+                                    <span class="task">完善简历</span>
+                                    <span class="getpoint">可获<span class="text-red"> {$creditconf.resume} 积分</span></span>
+                                    <if condition="$isfinishedresume eq 1"><a class="btn btn-noborder btn-sm-3-15 status text-grey" href="#">已完成</a><else />
+                                    <a class="btn btn-primary btn-sm-3-15  status" href="/resume/editresume">去完成</a>
+                                    </if>
+                                </li> -->
+                                
+                                
+                            </ul>
+                            <div style="border-top: dotted 1px #482929;width: 100%; height: 1px;margin: 24px 0;"></div>
+                            <h5 class="ft16" style="margin: 24px 0 18px 84px;">积分可以做什么？</h5>
+                            <ul class="task-list">
+                                <li>
+                                    <i class="nc-icon-outline emoticons_like"></i>
+                                    <span class="task">兑换内推</span>   
+                                    <span class="getpoint">需要<span class="text-red"> <!-- {$creditconf.referral} -->100 </span>分/每次</span>
+                                    <a class="btn btn-taro btn-sm-3-15  status" href="/company/referral">去兑换</a>
+                                    <!-- <button disabled class="btn btn-darkengrey btn-sm-3-15 status" style="width: 72px;text-align: center;padding: 3px 0; opacity: 1;">即将上线</button> -->
+                                </li>
+                                <li>
+                                    <i class="nc-icon-outline education_agenda-bookmark"></i>
+                                    <span class="task">锦囊下载</span>    
+                                    <span class="getpoint">需要<span class="text-red"> <!-- {$creditconf.brochure} -->100 分</span></span>
+                                    <a class="btn btn-taro btn-sm-3-15  status" href="http://bbs.icebear.me/package.htm">去下载</a>
+                                </li>
+                                <li>
+                                    <i class="nc-icon-outline ui-1_edit-75"></i>
+                                    <span class="task">论坛提问</span>
+                                    <span class="getpoint">需要<span class="text-red"> <?php echo str_replace("-", "", $creditconf['thread']);?> 分</span></span>
+                                    <a class="btn btn-taro btn-sm-3-15  status" href="http://bbs.icebear.me/forum-1.htm">去提问</a>
+                                </li>
+                            </ul>
+                        </section>
+                        <section class="tab-pane fade  tab-content" id="point-detail">
+                                <ul class="nav nav-switch sec-nav">
+                                    <li class="active"><i class="dot"> </i><a href="#point-income" data-toggle="tab">收入</a></li>
+                                    <li><i class="dot"> </i><a href="#point-expenditure" data-toggle="tab">支出</a></li>
+                                </ul>
+                                <section class="tab-pane fade in active creditpoint-list" id="point-income">
+                                    <ul>
+                                    <volist name="getcredit" id="g">
+                                    	<li>
+                                    		<span class="time">{$g.time|date='Y/m/d',###}</span>
+                                    		<span class="task">{$g.content}</span>
+                                    		<span class="point">{$g.credits}</span>
+                                    	</li>
+                                    </volist>
+                                    </ul>
+                                    <p class="end-line ft12"><span class="line pull-left"></span>只展示近三个月记录<span class="line pull-right"></span></p>
+                                    <!-- 空数据 -->
+                                    <!-- <ul></ul>
+                                    <p class="end-line ft12"><span class="line pull-left"></span>三个月内没有收入记录<span class="line pull-right"></span></p> -->
+                                </section>
+                                <section class="tab-pane fade creditpoint-list" id="point-expenditure">
+                                    <ul>
+                                    <volist name="paycredit" id="p">
+                                    	<li>
+                                    		<span class="time">{$p.time|date='Y/m/d',###}</span>
+                                    		<span class="task">{$p.content}</span>
+                                    		<span class="point">{$p.credits}</span>
+                                    	</li>
+                                    </volist>
+                                    </ul>
+                                    <p class="end-line ft12"><span class="line pull-left"></span>只展示近三个月记录<span class="line pull-right"></span></p>
+
+                                    <!-- 空数据 -->
+                                    <!-- <ul></ul>
+                                    <p class="end-line ft12"><span class="line pull-left"></span>三个月内没有收入记录<span class="line pull-right"></span></p> -->
+                                    
+                                </section>
+                                
+                        </section>
+                        <!-- <section class="tab-pane fade " id="level-intro">
+                            <div class="level-intro">
+                                <p>活跃等级是白熊求职试运行的一个系统。等级与活跃值挂钩。</p>
+                                <p>活跃值获取方式：每获得1积分即增加1活跃值，消耗积分不减活跃值。</p>
+                                <p>具体等级分布与各等级对应的特权我们正在研究中，先努力攒活跃值吧~</p>
+                                <p>活跃等级是白熊求职试运行的一个系统，目前只分Lv.1和Lv.2。<br/>Lv.2用户可以进入白熊论坛的问答板块进行提问，会有白熊团队和其他老司机进行解答。</p>
+                                <p>活跃值获取方式：每获得1积分即增加1活跃度。700活跃值升级为Lv.2用户。</p>
+                                <p>您当前活跃值为：{$userval.actives}</p>
+                            </div>
+                        </section> -->
+                   </div>
+                   <div class="dialog-container dialog-recommendReg" style="height: 211px;width: 330px;">
+                        <i class="nc-icon-outline ui-1_simple-remove dialog-close"></i>
+                        <!-- <p style=" padding: 46px 40px 12px 40px; font-size: 16px;font-weight: 500;line-height: 1.38;text-align: left;">请在公众号「白熊小助手」点击「每日签到」，在「如何赚积分」中进行此操作。</p>
+                        <a style="width: 250px;margin: 0 40px;padding: 0;height: 40px;line-height: 40px;font-size: 16px;" class="btn btn-secondary btn-dialog-close">好的</a> -->
+                        <ul>
+                            <li style="padding-right:0;">
+                                <a id="copy-trigger" data-src="{$recommend_link}"><img src="/Public/Home/images/assets/share-link.png" alt="" class="img"><p class="share-tip ft14">复制链接</p></a>
+                            </li>
+                            <li>
+                                <a id="wxshare-trigger"><img src="/Public/Home/images/assets/share-wx.png" alt="" class="img"> <p class="share-tip ft14">微信分享</p></a>
+                            </li>
+                        </ul> 
+                        <p class="copy-success">（复制成功，把你的专属推荐链接发给小伙伴吧！）</p>
+                        <p class="copy-error">（复制失败，请稍后再试）</p>
+                    </div>
+                    <div class="dialog-container dialog-share-code" >
+                        <i class="nc-icon-outline ui-1_simple-remove dialog-close"></i>
+                          <img class="img-sharecode" src="/Public/Home/images/index/code_xiaozhushou.png">
+                          <p>扫码打开「白熊小助手」，点击底部「我的邀请卡」即可生成拉新邀请卡。</p>
+                    </div>
+                </div>
+               </div>
+              </div>
+        </div>
+    </div>  
+</div>
+ <script type="text/javascript" src="../../assets/js/jquery.1.10.1.min.js"></script>
+   <script type="text/javascript" src="../../assets/js/scrollspy.js"></script>
+   <script type="text/javascript" src="../../assets/js/affix.js"></script>
+    <script type="text/javascript" src="../../assets/js/cookie.js"></script>
+  <script type="text/javascript" src="../../assets/js/script.js"></script>
+<script type="text/javascript" src="../../assets/js/clipboard.min.js"></script>
+<script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script> 
+<script>
+        var ibbstr = window.location.href;
+        var index = ibbstr.indexOf("=");
+        var ibbstr2 = ibbstr.substring(index+1);
+        if (ibbstr2 == 3) {
+            console.log('binggo');
+            if($('div.tab-content').children('ul:eq(0)').children('li').length == 3){
+                console.log('123');
+                $('div.tab-content').children('ul:eq(0)').children('li').removeClass('active');
+                $('div.tab-content').children('ul:eq(0)').children('li:eq(2)').addClass('active');
+                $('div.tab-content').children('section').removeClass('active')
+                $('div.tab-content').children('section').removeClass('in')
+                $('div.tab-content').children('section:eq(2)').addClass('active')
+                $('div.tab-content').children('section:eq(2)').addClass('in')
+            }
+        }
+
+        var clipboard = new Clipboard('#copy-trigger', {
+            text: function(trigger) {
+                return trigger.getAttribute('data-src');
+            }
+        });
+        clipboard.on('success', function(e) {
+            $('.copy-success').fadeIn();
+            setTimeout('$(".copy-success").fadeOut();', 3000);
+            e.clearSelection();
+        });
+
+        clipboard.on('error', function(e) {
+            $('.copy-error').css('display', 'block');
+        });
+
+        $('.recommendReg').click(function(event) {
+            $('.dialog-recommendReg').fadeIn();
+        });
+        $('#wxshare-trigger').click(function(event) {
+            $('.dialog-recommendReg').fadeOut();
+            $('.dialog-share-code').fadeIn();
+        });
+        $('.btn-dialog-close').click(function(event) {
+            var self = $(this);
+            self.parent().fadeOut();
+        });
+       
+</script>
+
+</body>
+</html>

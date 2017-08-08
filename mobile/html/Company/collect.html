@@ -1,0 +1,198 @@
+<include file="Public/header" />
+<include file="Public/top_nav_company" />
+	<div class="mui-content mui-scroll-wrapper">
+		<input type="hidden" name="loginStatus" value="{$isLogin}" >
+		<input type="hidden" name="collect" value="true" >
+		<div id="slider" class="ic-slider mui-slider mui-fullscreen ic-slider-border">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<!-- <a id="trigger-overlay" href="javasricpt:;" class="trigger-overlay trigger-company"><i class="nc-icon-glyph design_bullet-list-68"></i>{$ctitle['title']|default="全部行业"}</a> -->
+					<div class="mui-scroll ic-collect-select mui-row" style="width: 100%;">
+						<a class="mui-control-item mui-col-xs-4 mui-active" href="#item1mobile">内推</a>
+						<a class="mui-control-item mui-col-xs-4 " href="#item2mobile">校招({$ftcount})</a>
+						<a class="mui-control-item mui-col-xs-4" href="#item3mobile">实习({$ptcount})</a>
+					</div>
+				</div>
+
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper bg-yellow">
+								<notempty name="myReferralList">
+								<div class="mui-scroll">
+								 <div class="card-list clearfix">
+				                    <volist name="myReferralList" id="li">
+				                    <section class="card-item">
+				                      <div class="referral-forward" rid="{$li.id}">
+				                        <div class="inner-box clearfix">
+				                          <div class="pull-left img" style="background-image:url('{$li.logo_path}')"></div>
+				                          <h4 class="title">{$li.name}</h4>
+				                          <p class="">内推名额<span class="text-taro">{$li.quota}</span>个</p>
+				                          <p class="">职位数量<span class="text-taro">{$li.p_num}</span>个</p> 
+				                          <div>
+				                            <if condition="stripos($li['company_type'],'1') nheq false"><span class="label-solid label-whiteyellow border-rclr">实习</span></if>
+				                            <if condition="stripos($li['company_type'],'2') nheq false"><span class="label-solid label-whitegreen border-rclr">全职</span></if>
+				                          </div>
+				                        </div>
+				                        <div class="card-item-label">
+				                        <if condition="stripos($li['direct_type'],'1') nheq false"><span class="label-border label-brown">直通面试</span></if>
+				                        <if condition="stripos($li['direct_type'],'2') nheq false"> <span class="label-border label-taro">直通笔试</span></if>
+				                        <span class="time pull-right">截止日：{$li.deadline|date='Y-m-d',###}</span>
+				                        </div>
+				                        <div class="card-item-bottom">
+				                        
+				                        <p class="slogan ft14">{$li.slogan}</p><a class="btn ic-btn-taro" open-type="common" href="{:U('/company/referraldetail?rid='.$li['id'])}">查看内推方式</a>
+				                        </div>
+				                      </div>
+				                      <if condition="$li.show_status eq 3">
+				                        <div class="item-overlay"></div>
+				                        <span class="change-over">已截止</span>
+				                      </if> 
+				                    </section>
+				                    </volist>
+				                  </div>
+							
+								</div>
+								</notempty>
+								<empty name="myReferralList">
+								<div class="empty-container-center">
+									<p>暂无收藏。</p>
+								</div>
+								</empty>
+							</div>
+						</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div id="scroll1" class="mui-scroll-wrapper">
+								<notempty name="infofull">
+								<div class="mui-scroll">
+								<ul class="ic-company-table  mui-table-view">
+								<volist name="infofull" id="full">
+									<li class="mui-table-view-cell">
+										<div class="companyview">
+										<a href="{$full.url_link}" target="_blank"><img class="company-img" src="{$full['path']}"/><span class="company-name" ><?php echo mb_substr($full['company_name'],0,8,'utf-8').((mb_substr($full['company_name'],0,8,'utf-8') == $full['company_name'])?"":"…");  ;?><if condition="$full.spring_recruit eq 1"><i class="spring-recruit"></i></if></span></a>
+										<if condition="$full.openstatus eq 1">
+				                          <if condition="$full.timeflag eq 1"><span class="ic-time">未开始 <if condition="$full.start_time neq null">({$full.start_time} 开始)</if> </span>
+				                          <elseif condition="$full.timeflag eq 2"/><span class="ic-time start">已开始 <if condition="$full.end_time neq null">({$full.end_time } 截止)</if> </span>
+				                          <elseif condition="$full.timeflag eq 3"/><span class="ic-time">已结束 <if condition="$full.end_time neq null">({$full.end_time} 截止)</if> </span>  
+				                           <elseif condition="$full.timeflag eq 4"/><span class="ic-time start">已开始 <if condition="$full.end_time neq null">{($full.end_time } 截止)</if></span>
+				                          </if>
+					                    <elseif condition="$full.openstatus eq 0"/><span class="ic-time">未开始 <if condition="$full.start_time neq null">({$full.start_time} 开始)</if> </span>
+	                        			</if><a class="ic-btn ic-btn-tiny ic-btn-taro btn-noshadow edit-fav" open-type="common" href="/company/editcollect?kid={$full.kid}"><i class="nc-icon-outline ui-1_edit-74 pd12"> </i>编辑</a>
+										</div>
+											
+				                        <if condition="$full.location neq null or $full.department neq null or $full.post neq null or $full.mark neq null or $full.deliver_status neq null"> 
+				                          <div class="edit-collect-container" >
+					                        <div class="collect-detail">
+					                            <if condition="$full.deliver_status neq null && $full.location neq null" >
+						                          	<ul class="detail">
+						                              <if condition="$full.deliver_status neq null" ><li>投递状态: {$full.deliver_status}</li></if>
+						                              <if condition="$full.location neq null" ><li><span class="ver-line">|</span>城市: {$full.location}</li></if>
+						                            </ul>
+					                            </if> 
+					                            <if condition="$full['department'] neq null && $full['post'] neq null" >
+						                            <ul class="detail">
+						                              <if condition="$full['department'] neq null" ><li>{$full.department}</li></if>
+						                              <if condition="$full['post'] neq null" ><li><span class="ver-line">|</span>{$full.post}</li></if>
+						                            </ul> 
+					                            </if>
+												 <if condition="$full['mark'] neq null" ><p class="backup">备注：{$full.mark}</p></if>
+					                        </div>
+				                          </div>
+				                        </if>
+									</li>
+								</volist>
+								</ul>
+								</div>
+								</notempty>
+								<empty name="infofull">
+								<div class="empty-container-center">
+									<p>暂无收藏。</p>
+								</div>
+								</empty>
+							
+						</div>
+						<input type="hidden" name="fullajax" data-cid="{$cid|default=''}" data-num="40" data-type="fulltime" data-order="{$order|default=''}" data-collect="true">
+					</div>
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							
+								<notempty name="infopart">
+								<div class="mui-scroll">
+								<ul class="ic-company-table mui-table-view">
+									<volist name="infopart" id="part">
+									<li class="mui-table-view-cell">
+										<div class="companyview">
+										<a href="{$part.url_link}" target="_blank"><img class="company-img" src="{$part['path']}"/><span class="company-name" ><?php echo mb_substr($part['company_name'],0,8,'utf-8').((mb_substr($part['company_name'],0,8,'utf-8') == $part['company_name'])?"":"…");  ;?><if condition="$part.spring_recruit eq 1"><i class="spring-recruit"></i></if></span></a>
+										<if condition="$part.openstatus eq 1">
+				                          <if condition="$part.timeflag eq 1"><span class="ic-time">未开始 <if condition="$part.start_time neq null">({$part.start_time} 开始)</if> </span>
+				                          <elseif condition="$part.timeflag eq 2"/><span class="ic-time start">已开始 <if condition="$part.end_time neq null">({$part.end_time } 截止)</if> </span>
+				                          <elseif condition="$part.timeflag eq 3"/><span class="ic-time">已结束 <if condition="$part.end_time neq null">({$part.end_time} 截止)</if> </span>  
+				                           <elseif condition="$part.timeflag eq 4"/><span class="ic-time start">已开始 <if condition="$part.end_time neq null">{($part.end_time } 截止)</if></span>
+				                          </if>
+					                    <elseif condition="$part.openstatus eq 0"/><span class="ic-time">未开始 <if condition="$part.start_time neq null">({$part.start_time} 开始)</if> </span>
+	                        			</if><a class="ic-btn ic-btn-tiny ic-btn-taro btn-noshadow edit-fav" open-type="common" href="/company/editcollect?kid={$part.kid}"><i class="nc-icon-outline ui-1_edit-74 pd12"> </i>编辑</a>
+										</div>
+											
+				                        <if condition="$part.location neq null or $part.department neq null or $part.post neq null or $part.mark neq null or $part.deliver_status neq null"> 
+				                          <div class="edit-collect-container" >
+					                        <div class="collect-detail">
+					                            <if condition="$part.deliver_status neq null or $part.location neq null" >
+						                          	<ul class="detail">
+						                              <if condition="$part.deliver_status neq null" ><li>投递状态: {$part.deliver_status}</li></if>
+						                              <if condition="$part.location neq null" ><li><span class="ver-line">|</span>城市: {$part.location}</li></if>
+						                            </ul>
+					                            </if> 
+					                            <if condition="$part['department'] neq null or $part['post'] neq null" >
+						                            <ul class="detail">
+						                              <if condition="$part['department'] neq null" ><li>{$part.department}</li></if>
+						                              <if condition="$part['post'] neq null" ><li><span class="ver-line">|</span>{$part.post}</li></if>
+						                            </ul> 
+					                            </if>
+												 <if condition="$part['mark'] neq null" ><p class="backup">备注：{$part.mark}</p></if>
+					                        </div>
+				                          </div>
+				                        </if>
+									</li>
+								</volist>
+								</ul>
+								</div>
+								</notempty>
+								<empty name="infopart">
+								<div class="empty-container-center">
+									<p>暂无收藏。</p>
+								</div>
+								</empty>
+							
+						</div>
+						<input type="hidden" name="partajax" data-cid="{$cid}" data-num="40" data-type="fulltime" data-order="{$order}" data-collect="true">
+					</div>	
+				</div>
+			</div>
+	</div>
+	<div id="fav-cb" class="fav-cb animated"><span>+1</span></div>
+	<div id="overlay-container" class="overlay-container overlay-sideup hideNav dn">
+		<i id="overlay-close" class="overlay-close nc-icon-glyph ui-1_simple-remove ftbold"></i>
+		<nav class="nav-list ">
+			<ul>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq ''">class="active"</if> href="/company/collect/"><i class="nc-icon-outline design-2_microsoft"></i>全部<i class="nc-icon-outline ui-1_check-small check"></i></a> </li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '1'">class="active"</if> href="/company/collect/cid/1"> <i class="nc-icon-outline business_globe"></i>互联网<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '41'">class="active"</if> href="/company/collect/cid/41"> <i class="nc-icon-outline business_building"></i>房地产/建筑<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '40'">class="active"</if> href="/company/collect/cid/40"> <i class="nc-icon-outline business_coins"></i>金融 <i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '63'">class="active"</if> href="/company/collect/cid/63"> <i class="nc-icon-outline education_atom"></i>电子/通信<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '42'">class="active"</if> href="/company/collect/cid/42"> <i class="nc-icon-outline shopping_cart-modern"></i>消费品<i class="nc-icon-outline ui-1_check-small check"></i></a></li>
+	            <li class="nav-item"><a open-type="common" <if condition="$cid eq '203'">class="active"</if> href="/company/collect/cid/203"> <i class="nc-icon-outline objects_spaceship"></i>其他<i class="nc-icon-outline ui-1_check-small check"></i></a></li> 
+	        </ul>
+		</nav>
+	</div>
+	<div class="ic-alert-success" style="top:20%">
+		<span class="ic-alert-box"><i class="nc-icon-glyph ui-1_check-bold"></i>删除成功</span>
+	</div>
+	<div class="ic-alert-error" style="top:20%">
+		<span class="ic-alert-box"><i class="nc-icon-glyph  ui-2_fat-remove"></i>修改失败</span>
+	</div>
+<include file="Public/footer_nav_company" />
+<include file="Public/redirect" />
+<include file="Public/footer" />
+<script src="/Public/Mobile/js/mui.pullToRefresh.js"></script>
+<script src="/Public/Mobile/js/mui.pullToRefresh.material.js"></script>
+<script type="text/javascript" src="{:stamp('Public/Mobile/js/triggermeun.js')}"></script>
+<script type="text/javascript" src="{:stamp('Public/Mobile/js/company.js')}"></script>
+<script src="/Public/Mobile/js/referral.js"></script>
